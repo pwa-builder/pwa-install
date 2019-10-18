@@ -1,4 +1,4 @@
-#pwa-install
+# pwa-install
 
 `<pwa-install />`
 
