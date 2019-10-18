@@ -1,0 +1,20 @@
+{
+  "name": "pwb-install",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/pwb-install.js",
+  "module": "dist/pwb-install.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc --watch",
+    "build": "tsc"
+  },
+  "author": "PWABuilder Team",
+  "license": "ISC",
+  "dependencies": {
+    "lit-element": "^2.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  }
+}
