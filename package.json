@@ -1,9 +1,9 @@
 {
-  "name": "pwb-install",
+  "name": "pwa-install",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/pwb-install.js",
-  "module": "dist/pwb-install.js",
+  "main": "dist/pwa-install.js",
+  "module": "dist/pwa-install.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc --watch",

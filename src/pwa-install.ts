@@ -2,8 +2,8 @@ import {
   LitElement, html, customElement, property, css
 } from 'lit-element';
 
-@customElement('pwb-install')
-export class pwbinstall extends LitElement {
+@customElement('pwa-install')
+export class pwainstall extends LitElement {
 
   @property() deferredPrompt: any;
   @property() manifestPath: string;
