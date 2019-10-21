@@ -16,10 +16,10 @@ export class pwainstall extends LitElement {
      #installModal {
       background: white;
       position: fixed;
-      top: 6em;
-      bottom: 12em;
-      left: 16em;
-      right: 16em;
+      bottom: 4em;
+      top: 4em;
+      left: 14em;
+      right: 14em;
       font-family: sans-serif;
       box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
       border-radius: 10px;
@@ -145,8 +145,13 @@ export class pwainstall extends LitElement {
       color: #3C3C3C;
      }
 
+     #screenshots {
+      display: flex;
+      justify-content: flex-end;
+     }
+
      #screenshots img {
-      height: 12em;
+      height: 200px;
       margin-right: 12px;
      }
 
@@ -247,13 +252,6 @@ export class pwainstall extends LitElement {
           <div>
             <h1>${this.manifestData.name}</h1>
 
-            ${this.manifestData.categories ? html`<div id="tagsDiv">
-              ${this.manifestData.categories.map((tag) => {
-          return html`
-                  <span>${tag}</span>
-                `
-        })}
-            </div>` : null}
 
             <p id="desc">
               ${this.manifestData.description}
@@ -262,8 +260,25 @@ export class pwainstall extends LitElement {
         </div>
 
         <div id="contentContainer">
-          <h3>Description</h3>
-          <p>${this.manifestData.description}</p>
+
+          ${this.manifestData.screenshots ?
+            html`
+            <div id="screenshotsContainer">
+              <div id="screenshots">
+                ${
+              this.manifestData.screenshots.map((screen) => {
+                return html`
+                        <img src="${screen.src}">
+                      `
+              })}
+              </div>
+            </div>
+            ` : null}
+
+          <div>
+            <h3>Description</h3>
+            <p>${this.manifestData.description}</p>
+          </div>
         </div>
 
         <div id="buttonsContainer">
