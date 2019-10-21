@@ -1,18 +1,28 @@
 <html>
-  <head>
 
-  </head>
+<head>
 
-  <body>
+  <link rel="manifest" href="manifest.json" />
 
-    <header>
-      <h1>PWA install</h1>
-    </header>
+</head>
 
-    <pwa-install></pwa-install>
+<body>
 
-    <script type="module">
-      import '../dist/pwa-install.js';
-      </script>
-  </body>
+  <header>
+    <h1>PWA install</h1>
+  </header>
+
+  <pwa-install iconPath="https://cdn.glitch.com/ad1b5386-7113-477b-8f34-c42ff6178d99%2Ficon-512x512.png?v=1565728638958"></pwa-install>
+
+  <script type="module">
+    import '../dist/pwa-install.js';
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</body>
+
 </html>

@@ -6,7 +6,7 @@ import {
 export class pwainstall extends LitElement {
 
   @property() deferredPrompt: any;
-  @property() manifestPath: string;
+  @property() manifestPath: string = "manifest.json";
   @property() iconPath: string;
   @property() manifestData: any;
   @property() openModal: boolean = false;
@@ -20,10 +20,12 @@ export class pwainstall extends LitElement {
       bottom: 12em;
       left: 16em;
       right: 16em;
-      padding: 2em;
-      padding-top: 1em;
       font-family: sans-serif;
-      box-shadow: 0 28px 48px rgba(0, 0, 0, .4);
+      box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
 
       animation-name: opened;
       animation-duration: 250ms;
@@ -55,7 +57,8 @@ export class pwainstall extends LitElement {
       bottom: 0;
       left: 0;
       right: 0;
-      background: #7b7b7ba6;
+      background: #e3e3e3b0;
+      backdrop-filter: blur(5px);
 
       animation-name: fadein;
       animation-duration: 250ms;
@@ -63,15 +66,25 @@ export class pwainstall extends LitElement {
 
      #headerContainer {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      margin: 40px;
+     }
+
+     #headerContainer h1 {
+       font-size: 34px;
+       color: #3C3C3C;
+       margin-top: 20px;
+       margin-bottom: 7px;
      }
 
      #headerContainer img {
-      height: 6em;
-      margin-right: 1em;
+      height: 122px;
+      width: 122px;
       background: lightgrey;
       border-radius: 10px;
       padding: 12px;
+      border-radius: 24px;
+      margin-right: 24px;
      }
 
      #buttonsContainer {
@@ -79,7 +92,14 @@ export class pwainstall extends LitElement {
       justify-content: flex-end;
       position: relative;
       bottom: -4em;
-      right: -1em;
+      height: 100px;
+
+      background:#dedede75;
+      margin-top: auto;
+      margin-bottom: 63px;
+      width: 100%;
+      right: 0em;
+      border-radius: 0px 0px 12px 12px;
      }
 
      #openButton, #installButton {
@@ -88,8 +108,6 @@ export class pwainstall extends LitElement {
       align-self: center;
       vertical-align: middle;
       justify-self: flex-end;
-      max-width: 90px;
-      min-width: 90px;
       line-height: 200%;
       flex: 0 0 auto;
       display: inline-block;
@@ -99,17 +117,32 @@ export class pwainstall extends LitElement {
       border: solid 1px rgba(0, 0, 0, 0);
      }
 
-     #cancelButton {
-      background: #ee1111;
-      color: white;
-      max-width: 90px;
-      min-width: 90px;
-      line-height: 200%;
-      margin-right: 10px;
-      outline: none;
-      border: solid 1px rgba(0, 0, 0, 0);
-      cursor: pointer;
-      margin-left: 10px;
+     #installButton {
+      min-width: 130px;
+      margin-right: 30px;
+      background: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      padding-top: 10px;
+      padding-bottom: 9px;
+     }
+
+     #contentContainer {
+       margin-left: 40px;
+       margin-right: 40px;
+     }
+
+     #contentContainer h3 {
+      font-size: 22px;
+      color: #3C3C3C;
+      margin-bottom: 12px;
+     }
+
+     #contentContainer p {
+      font-size: 14px;
+      color: #3C3C3C;
      }
 
      #screenshots img {
@@ -124,6 +157,11 @@ export class pwainstall extends LitElement {
 
      #desc {
       width: 34em;
+      font-size: 14px;
+      color: #7E7E7E;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
      }
 
       #tagsDiv span {
@@ -141,7 +179,6 @@ export class pwainstall extends LitElement {
   }
 
   async firstUpdated(): Promise<void> {
-
     if (this.manifestPath) {
       await this.getManifestData();
     }
@@ -225,25 +262,12 @@ export class pwainstall extends LitElement {
         </div>
 
         <div id="contentContainer">
-          ${this.manifestData.screenshots ?
-            html`
-            <div>
-              <h3>Screenshots</h3>
-              <div id="screenshots">
-                ${
-              this.manifestData.screenshots.map((screen) => {
-                return html`
-                        <img src="${screen.src}">
-                      `
-              })}
-              </div>
-            </div>
-            ` : null}
+          <h3>Description</h3>
+          <p>${this.manifestData.description}</p>
         </div>
 
         <div id="buttonsContainer">
-          <button id="installButton" @click="${() => this.install()}">Install</button>
-          <button id="cancelButton"  @click="${() => this.cancel()}">Cancel</button>
+          <button id="installButton" @click="${() => this.install()}">Install ${this.manifestData.short_name}</button>
         </div>
           </div>
         `

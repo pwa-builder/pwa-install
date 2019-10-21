@@ -6,7 +6,8 @@
   "module": "dist/pwa-install.js",
   "scripts": {
     "test": "npx es-dev-server --open www",
-    "start": "concurrently \"tsc --watch\" \"npx es-dev-server --open www\"",
+    "start": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
+    "dev": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
     "build": "tsc"
   },
   "author": "PWABuilder Team",
