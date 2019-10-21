@@ -68,6 +68,7 @@ export class pwainstall extends LitElement {
       display: flex;
       align-items: flex-start;
       margin: 40px;
+      margin-bottom: 32px;
      }
 
      #headerContainer h1 {
@@ -145,6 +146,32 @@ export class pwainstall extends LitElement {
       color: #3C3C3C;
      }
 
+     #featuresScreenDiv {
+      display: flex;
+      justify-content: space-between;
+      margin-right: 90px;
+     }
+
+     #featuresScreenDiv h3 {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 225%;
+     }
+
+     #keyFeatures ul {
+      padding-inline-start: 22px;
+      margin-block-start: 12px;
+     }
+
+     #featuresScreenDiv #keyFeatures li {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 29px;
+      color: rgba(51, 51, 51, 0.72);
+     }
+
      #screenshots {
       display: flex;
       justify-content: flex-end;
@@ -180,6 +207,13 @@ export class pwainstall extends LitElement {
         margin-right: 12px;
         padding-top: 1px;
       }
+
+    @media(min-width: 1290px) {
+      #installModal {
+        top: 6em;
+        bottom: 6em;
+      }
+    }
     `;
   }
 
@@ -261,6 +295,17 @@ export class pwainstall extends LitElement {
 
         <div id="contentContainer">
 
+        <div id="featuresScreenDiv">
+
+          <div id="keyFeatures">
+            <h3>Key Features</h3>
+            <ul>
+              <li>Microsoft Graph</li>
+              <li>Geolocation</li>
+              <li>Bluetooth</li>
+            </ul>
+          </div>
+
           ${this.manifestData.screenshots ?
             html`
             <div id="screenshotsContainer">
@@ -274,6 +319,7 @@ export class pwainstall extends LitElement {
               </div>
             </div>
             ` : null}
+          </div>
 
           <div>
             <h3>Description</h3>
