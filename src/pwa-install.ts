@@ -21,6 +21,10 @@ export class pwainstall extends LitElement {
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
      }
 
+     button {
+       outline: none;
+     }
+
      #installModal {
       background: white;
       position: fixed;
@@ -124,6 +128,7 @@ export class pwainstall extends LitElement {
       color: #ffffff;
       cursor: pointer;
       border: solid 1px rgba(0, 0, 0, 0);
+      outline: none;
      }
 
      #installButton {
@@ -136,6 +141,7 @@ export class pwainstall extends LitElement {
       line-height: 21px;
       padding-top: 10px;
       padding-bottom: 9px;
+      outline: none;
      }
 
      #closeButton {
