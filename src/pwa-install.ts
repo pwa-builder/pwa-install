@@ -350,6 +350,12 @@ export class pwainstall extends LitElement {
       // Stash the event so it can be triggered later.
       this.deferredprompt = e;
     });
+
+    document.onkeyup = (e) => {
+      if (e.key === "Escape") {
+        this.cancel();
+      }
+    }
   }
 
   async getManifestData() {
