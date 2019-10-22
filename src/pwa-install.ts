@@ -16,6 +16,9 @@ export class pwainstall extends LitElement {
   static get styles() {
     return css`
 
+     :host {
+       --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+     }
 
      #installModal {
       background: white;
@@ -125,7 +128,7 @@ export class pwainstall extends LitElement {
      #installButton {
       min-width: 130px;
       margin-right: 30px;
-      background: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+      background: var(--install-button-color);
       border-radius: 20px;
       font-weight: 600;
       font-size: 14px;
