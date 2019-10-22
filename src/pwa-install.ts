@@ -7,11 +7,12 @@ import 'infinite-carousel-wc/dist/esm/infinite-carousel-wc.min.js';
 @customElement('pwa-install')
 export class pwainstall extends LitElement {
 
-  @property() deferredPrompt: any;
-  @property() manifestPath: string = "manifest.json";
-  @property() iconPath: string;
-  @property() manifestData: any;
-  @property() openModal: boolean = false;
+  @property() deferredprompt: any;
+  @property() manifestpath: string = "manifest.json";
+  @property() iconpath: string;
+  @property() manifestdata: any;
+  @property({type: Boolean }) openmodal: boolean;
+  @property({type: Boolean }) showopen: boolean;
 
   static get styles() {
     return css`
@@ -110,7 +111,7 @@ export class pwainstall extends LitElement {
       border-radius: 0px 0px 12px 12px;
      }
 
-     #installButton {
+     #openButton, #installButton {
       text-align: center;
       align-content: center;
       align-self: center;
@@ -119,10 +120,13 @@ export class pwainstall extends LitElement {
       line-height: 200%;
       flex: 0 0 auto;
       display: inline-block;
+      background: #0078d4;
       color: #ffffff;
       cursor: pointer;
       border: solid 1px rgba(0, 0, 0, 0);
+     }
 
+     #installButton {
       min-width: 130px;
       margin-right: 30px;
       background: var(--install-button-color);
@@ -334,7 +338,8 @@ export class pwainstall extends LitElement {
   }
 
   async firstUpdated(): Promise<void> {
-    if (this.manifestPath) {
+    console.log(this.showopen);
+    if (this.manifestpath) {
       await this.getManifestData();
     }
 
@@ -343,27 +348,27 @@ export class pwainstall extends LitElement {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
       // Stash the event so it can be triggered later.
-      this.deferredPrompt = e;
+      this.deferredprompt = e;
     });
   }
 
   async getManifestData() {
-    const response = await fetch(this.manifestPath);
+    const response = await fetch(this.manifestpath);
     const data = await response.json();
 
     console.log(data);
-    this.manifestData = data;
+    this.manifestdata = data;
   }
 
   openPrompt() {
-    this.openModal = true;
+    this.openmodal = true;
   }
 
   public async install(): Promise<boolean> {
-    if (this.deferredPrompt) {
-      this.deferredPrompt.prompt();
+    if (this.deferredprompt) {
+      this.deferredprompt.prompt();
 
-      const choiceResult = await this.deferredPrompt.userChoice;
+      const choiceResult = await this.deferredprompt.userChoice;
 
       if (choiceResult.outcome === 'accepted') {
         console.log('Your PWA has been installed');
@@ -379,26 +384,32 @@ export class pwainstall extends LitElement {
   }
 
   cancel() {
-    this.openModal = false;
+    this.openmodal = false;
   }
 
   render() {
     return html`
-      ${this.openModal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
+      ${this.showopen ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+        <slot>
+          Install
+        </slot>
+      </button>` : null}
+
+      ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
 
       ${
-      this.openModal ?
+      this.openmodal ?
         html`
           <div id="installModal">
           <div id="headerContainer">
-          <img src="${this.iconPath}"></img>
+          <img src="${this.iconpath}"></img>
 
           <div>
-            <h1>${this.manifestData.name}</h1>
+            <h1>${this.manifestdata.name}</h1>
 
 
             <p id="desc">
-              ${this.manifestData.description}
+              ${this.manifestdata.description}
             </p>
           </div>
 
@@ -409,11 +420,11 @@ export class pwainstall extends LitElement {
 
         <div id="featuresScreenDiv">
 
-          ${this.manifestData.features ? html`<div id="keyFeatures">
+          ${this.manifestdata.features ? html`<div id="keyFeatures">
             <h3>Key Features</h3>
             <ul>
               ${
-            this.manifestData.features ? this.manifestData.features.map((feature) => {
+            this.manifestdata.features ? this.manifestdata.features.map((feature) => {
               return html`
                           <li>${feature}</li>
                         `
@@ -422,13 +433,13 @@ export class pwainstall extends LitElement {
             </ul>
           </div>` : null}
 
-          ${this.manifestData.screenshots ?
+          ${this.manifestdata.screenshots ?
             html`
             <div id="screenshotsContainer">
               <div id="screenshots">
                 <infinite-carousel-wc>
                 ${
-              this.manifestData.screenshots.map((screen, index) => {
+              this.manifestdata.screenshots.map((screen, index) => {
                 return html`
                               <div slot="${index + 1}"><img src="${screen.src}"></div>
                             `
@@ -441,12 +452,12 @@ export class pwainstall extends LitElement {
 
           <div>
             <h3>Description</h3>
-            <p>${this.manifestData.description}</p>
+            <p>${this.manifestdata.description}</p>
           </div>
         </div>
 
         <div id="buttonsContainer">
-          <button id="installButton" @click="${() => this.install()}">Install ${this.manifestData.short_name}</button>
+          <button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>
         </div>
           </div>
         `
