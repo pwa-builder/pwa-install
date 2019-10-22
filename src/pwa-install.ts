@@ -2,6 +2,8 @@ import {
   LitElement, html, customElement, property, css
 } from 'lit-element';
 
+import 'infinite-carousel-wc/dist/esm/infinite-carousel-wc.min.js';
+
 @customElement('pwa-install')
 export class pwainstall extends LitElement {
 
@@ -16,8 +18,8 @@ export class pwainstall extends LitElement {
      #installModal {
       background: white;
       position: fixed;
-      bottom: 4em;
-      top: 4em;
+      bottom: 3em;
+      top: 3em;
       left: 14em;
       right: 14em;
       font-family: sans-serif;
@@ -149,7 +151,7 @@ export class pwainstall extends LitElement {
      #featuresScreenDiv {
       display: flex;
       justify-content: space-between;
-      margin-right: 90px;
+      margin-right: 20px;
      }
 
      #featuresScreenDiv h3 {
@@ -157,6 +159,7 @@ export class pwainstall extends LitElement {
       font-weight: 600;
       font-size: 22px;
       line-height: 225%;
+      margin-top: 0px;
      }
 
      #keyFeatures {
@@ -199,6 +202,25 @@ export class pwainstall extends LitElement {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
+     }
+
+     infinite-carousel-wc {
+      background: #f0f0f0;
+      padding-top: 14px;
+      padding-bottom: 14px;
+      border-radius: 22px;
+      max-width: 27em;
+     }
+
+     infinite-carousel-wc > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+     }
+
+     infinite-carousel-wc > div > img {
+       max-width: 20em;
+       object-fit: contain;
      }
 
       #tagsDiv span {
@@ -319,12 +341,14 @@ export class pwainstall extends LitElement {
             html`
             <div id="screenshotsContainer">
               <div id="screenshots">
+                <infinite-carousel-wc>
                 ${
-              this.manifestData.screenshots.map((screen) => {
-                return html`
-                        <img src="${screen.src}">
-                      `
-              })}
+                  this.manifestData.screenshots.map((screen, index) => {
+                    return html`
+                              <div slot="${index + 1}"><img src="${screen.src}"></div>
+                            `
+                  })}
+                </infinite-carousel-wc>
               </div>
             </div>
             ` : null}
