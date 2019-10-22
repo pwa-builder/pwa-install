@@ -1,6 +1,6 @@
 {
   "name": "pwa-install",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "",
   "main": "dist/pwa-install.js",
   "module": "dist/pwa-install.js",
