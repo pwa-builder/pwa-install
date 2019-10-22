@@ -137,6 +137,24 @@ export class pwainstall extends LitElement {
       padding-bottom: 9px;
      }
 
+     #closeButton {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #f0f0f0;
+      border: none;
+      color: black;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      border-radius: 20px;
+      font-weight: 600;
+      display: none;
+      outline: none;
+      cursor: pointer;
+     }
+
      #contentContainer {
        margin-left: 40px;
        margin-right: 40px;
@@ -251,8 +269,18 @@ export class pwainstall extends LitElement {
       }
 
       @media (max-width: 800px) {
+
+        #background {
+          display: none;
+        }
+
+        #closeButton {
+          display: block;
+        }
+
          #installModal {
            overflow: scroll;
+           box-shadow: none;
          }
 
          infinite-carousel-wc {
@@ -382,6 +410,8 @@ export class pwainstall extends LitElement {
               ${this.manifestData.description}
             </p>
           </div>
+
+          <button id="closeButton" @click="${() => this.cancel()}">Close</button>
         </div>
 
         <div id="contentContainer">
