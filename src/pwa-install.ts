@@ -463,7 +463,7 @@ export class pwainstall extends LitElement {
         </div>
 
         <div id="buttonsContainer">
-          <button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>
+          ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>` : html`<button id="installButton">Close</button>`}
         </div>
           </div>
         `
