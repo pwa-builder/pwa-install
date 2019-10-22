@@ -402,7 +402,7 @@ export class pwainstall extends LitElement {
         html`
           <div id="installModal">
           <div id="headerContainer">
-          <img src="${this.iconpath}"></img>
+          <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}"></img>
 
           <div>
             <h1>${this.manifestdata.name}</h1>
