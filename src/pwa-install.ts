@@ -159,6 +159,11 @@ export class pwainstall extends LitElement {
       line-height: 225%;
      }
 
+     #keyFeatures {
+      max-height: 220px;
+      overflow: hidden;
+     }
+
      #keyFeatures ul {
       padding-inline-start: 22px;
       margin-block-start: 12px;
@@ -297,14 +302,18 @@ export class pwainstall extends LitElement {
 
         <div id="featuresScreenDiv">
 
-          <div id="keyFeatures">
+          ${this.manifestData.features ? html`<div id="keyFeatures">
             <h3>Key Features</h3>
             <ul>
-              <li>Microsoft Graph</li>
-              <li>Geolocation</li>
-              <li>Bluetooth</li>
+              ${
+            this.manifestData.features ? this.manifestData.features.map((feature) => {
+              return html`
+                          <li>${feature}</li>
+                        `
+            }) : null
+            }
             </ul>
-          </div>
+          </div>` : null}
 
           ${this.manifestData.screenshots ?
             html`

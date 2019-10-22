@@ -16,6 +16,12 @@
       "type": "image/png"
     }
   ],
+  "features": [
+    "Microsoft Graph",
+    "Low latency",
+    "fast",
+    "cross platform"
+  ],
   "icons": [
      {
         "src": "https://cdn.glitch.com/ad1b5386-7113-477b-8f34-c42ff6178d99%2Ficon-512x512.png?v=1565728638958",
