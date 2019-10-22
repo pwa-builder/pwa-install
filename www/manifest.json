@@ -2,12 +2,11 @@
   "name": "my PWA",
   "short_name": "pwa",
   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum porttitor libero id hendrerit. Sed id arcu hendrerit, pellentesque ante sed, maximus odio.",
-  "scope": "/",
   "orientation": "portrait",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
-  "start_url": "/",
+  "start_url": "www/",
   "dir": "ltr",
   "lang": "EN",
   "screenshots": [
