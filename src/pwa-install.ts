@@ -240,6 +240,7 @@ export class pwainstall extends LitElement {
       padding-bottom: 14px;
       border-radius: 22px;
       max-width: 27em;
+      min-height: 180px;
      }
 
      infinite-carousel-wc > div {
@@ -299,7 +300,7 @@ export class pwainstall extends LitElement {
          }
 
          #screenshots img {
-           height: 140px;
+           height: 180px;
          }
 
          #buttonsContainer {
