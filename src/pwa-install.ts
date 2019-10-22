@@ -110,7 +110,7 @@ export class pwainstall extends LitElement {
       border-radius: 0px 0px 12px 12px;
      }
 
-     #openButton, #installButton {
+     #installButton {
       text-align: center;
       align-content: center;
       align-self: center;
@@ -119,13 +119,10 @@ export class pwainstall extends LitElement {
       line-height: 200%;
       flex: 0 0 auto;
       display: inline-block;
-      background: #0078d4;
       color: #ffffff;
       cursor: pointer;
       border: solid 1px rgba(0, 0, 0, 0);
-     }
 
-     #installButton {
       min-width: 130px;
       margin-right: 30px;
       background: var(--install-button-color);
@@ -387,12 +384,6 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      <button id="openButton" @click="${() => this.openPrompt()}">
-        <slot>
-          Install
-        </slot>
-      </button>
-
       ${this.openModal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
 
       ${
