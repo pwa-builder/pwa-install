@@ -266,6 +266,20 @@ export class pwainstall extends LitElement {
         padding-top: 1px;
       }
 
+      @media(min-width: 1800px) {
+        #installModal {
+          left: 24em;
+          right: 24em;
+        }
+      }
+
+      @media(min-width: 1445px) {
+        #installModal {
+          left: 20em;
+          right: 20em;
+        }
+      }
+
       @media(max-width: 1200px) {
         #installModal {
           bottom: 0em;
