@@ -11,7 +11,7 @@ export class pwainstall extends LitElement {
   @property() manifestpath: string = "manifest.json";
   @property() iconpath: string;
   @property() manifestdata: any;
-  @property({type: Boolean }) openmodal: boolean;
+  @property({type: Boolean}) openmodal: boolean;
   @property({type: Boolean }) showopen: boolean;
 
   static get styles() {
@@ -412,6 +412,10 @@ export class pwainstall extends LitElement {
 
   cancel() {
     this.openmodal = false;
+
+    if (this.hasAttribute('openmodal')) {
+      this.removeAttribute('openmodal');
+    }
   }
 
   render() {
