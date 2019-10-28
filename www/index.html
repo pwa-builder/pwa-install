@@ -16,8 +16,14 @@
 
   <pwa-install></pwa-install>
 
+  <pwa-install id="lesser" manifestpath="manifest-lesser.json"></pwa-install>
+
   <button id="openInstall">
     Install
+  </button>
+
+  <button id="openInstallLess">
+    Install with lesser Manifest
   </button>
 
   <script type="module">
@@ -25,8 +31,12 @@
   </script>
 
   <script>
-    document.querySelector("#openInstall").addEventListener('click', () => {
+    document.querySelector('#openInstall').addEventListener('click', () => {
       document.querySelector('pwa-install').openPrompt();
+    })
+
+    document.querySelector('#openInstallLess').addEventListener('click', () => {
+      document.querySelector('#lesser').openPrompt();
     })
   </script>
 
