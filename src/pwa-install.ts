@@ -40,7 +40,7 @@ export class pwainstall extends LitElement {
       padding: 0;
 
       animation-name: opened;
-      animation-duration: 250ms;
+      animation-duration: 150ms;
      }
 
      @keyframes opened {
@@ -290,6 +290,10 @@ export class pwainstall extends LitElement {
           left: 22em;
           right: 22em;
         }
+
+        #closeButton {
+          right: 28em;
+        }
       }
 
       @media(max-width: 1200px) {
@@ -302,6 +306,28 @@ export class pwainstall extends LitElement {
 
           animation-name: mobile;
           animation-duration: 250ms;
+        }
+
+        @media(max-height: 900px) {
+          #installModal {
+            bottom: 6em;
+            top: 6em;
+          }
+
+          #closeButton {
+            top: 8.6em;
+          }
+        }
+
+        @media(max-height: 1020px) {
+          #installModal {
+            bottom: 9em;
+            top: 9em;
+          }
+
+          #closeButton {
+            top: 12.4em;
+          }
         }
 
         #closeButton {
