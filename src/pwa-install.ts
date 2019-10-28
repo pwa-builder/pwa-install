@@ -11,8 +11,8 @@ export class pwainstall extends LitElement {
   @property() manifestpath: string = "manifest.json";
   @property() iconpath: string;
   @property() manifestdata: any;
-  @property({type: Boolean}) openmodal: boolean;
-  @property({type: Boolean }) showopen: boolean;
+  @property({ type: Boolean }) openmodal: boolean;
+  @property({ type: Boolean }) showopen: boolean;
 
   static get styles() {
     return css`
@@ -28,8 +28,8 @@ export class pwainstall extends LitElement {
      #installModal {
       background: white;
       position: fixed;
-      bottom: 8em;
-      top: 8em;
+      bottom: 3em;
+      top: 3em;
       left: 14em;
       right: 14em;
       font-family: sans-serif;
@@ -45,11 +45,20 @@ export class pwainstall extends LitElement {
 
      @keyframes opened {
       from {
-        transform: scale(0.4, 0.4);
+        transform: scale(0.8, 0.8);
         opacity: 0.4;
       }
       to {
         transform: scale(1, 1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes mobile {
+      from {
+        opacity: 0.6;
+      }
+      to {
         opacity: 1;
       }
     }
@@ -146,9 +155,9 @@ export class pwainstall extends LitElement {
 
      #closeButton {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #f0f0f0;
+      top: 5em;
+      right: 18em;
+      background: transparent;
       border: none;
       color: black;
       padding-left: 12px;
@@ -157,9 +166,12 @@ export class pwainstall extends LitElement {
       padding-bottom: 4px;
       border-radius: 20px;
       font-weight: 600;
-      display: none;
       outline: none;
       cursor: pointer;
+      z-index: 1;
+
+      animation-name: fadein;
+      animation-duration: 450ms;
      }
 
      #contentContainer {
@@ -287,6 +299,14 @@ export class pwainstall extends LitElement {
           left: 0em;
           right: 0em;
           border-radius: 0px;
+
+          animation-name: mobile;
+          animation-duration: 250ms;
+        }
+
+        #closeButton {
+          top: 20px;
+          right: 20px;
         }
       }
 
@@ -294,10 +314,6 @@ export class pwainstall extends LitElement {
 
         #background {
           display: none;
-        }
-
-        #closeButton {
-          display: block;
         }
 
          #installModal {
@@ -438,6 +454,12 @@ export class pwainstall extends LitElement {
 
       ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
 
+      ${this.openmodal ? html`<button id="closeButton" @click="${() => this.cancel()}">
+            <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path opacity="0.33" fill-rule="evenodd" clip-rule="evenodd" d="M1.11932 0.357981C1.59693 -0.119327 2.37129 -0.119327 2.8489 0.357981L11.7681 9.27152L20.6873 0.357981C21.165 -0.119327 21.9393 -0.119327 22.4169 0.357981C22.8945 0.835288 22.8945 1.60916 22.4169 2.08646L13.4977 11L22.4169 19.9135C22.8945 20.3908 22.8945 21.1647 22.4169 21.642C21.9393 22.1193 21.165 22.1193 20.6873 21.642L11.7681 12.7285L2.8489 21.642C2.37129 22.1193 1.59693 22.1193 1.11932 21.642C0.641705 21.1647 0.641705 20.3908 1.11932 19.9135L10.0385 11L1.11932 2.08646C0.641705 1.60916 0.641705 0.835288 1.11932 0.357981Z" fill="#60656D"/>
+            </svg>
+          </button>` : null}
+
       ${
       this.openmodal ?
         html`
@@ -453,8 +475,6 @@ export class pwainstall extends LitElement {
               ${this.manifestdata.description}
             </p>
           </div>
-
-          <button id="closeButton" @click="${() => this.cancel()}">Close</button>
         </div>
 
         <div id="contentContainer">
