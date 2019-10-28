@@ -385,6 +385,16 @@ export class pwainstall extends LitElement {
 
     console.log(data);
     this.manifestdata = data;
+
+    if (this.manifestdata) {
+      this.updateButtonColor(this.manifestdata);
+    }
+  }
+
+  updateButtonColor(data) {
+    if (data.theme_color) {
+      this.style.setProperty('--install-button-color', data.theme_color);
+    }
   }
 
   openPrompt() {
