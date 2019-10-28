@@ -8,7 +8,7 @@
     "test": "npx es-dev-server --open www",
     "start": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
     "dev": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
-    "build": "tsc"
+    "build": "tsc && rollup -c"
   },
   "author": "PWABuilder Team",
   "license": "ISC",
@@ -19,6 +19,8 @@
   "devDependencies": {
     "concurrently": "^5.0.0",
     "es-dev-server": "^1.18.4",
+    "rollup": "^1.26.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "typescript": "^3.6.4"
   }
 }

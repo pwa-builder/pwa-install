@@ -9,7 +9,7 @@
     "module": "es2015",
     "moduleResolution": "node",
     "target": "es2017",
-    "outDir": "dist",
+    "outDir": "build",
     "declaration": true,
     "esModuleInterop": true,
     "sourceMap": true,
