@@ -283,6 +283,10 @@ export class pwainstall extends LitElement {
           left: 26em;
           right: 26em;
         }
+
+        #closeButton {
+          right: 32em;
+        }
       }
 
       @media(min-width: 1445px) {
