@@ -312,31 +312,13 @@ export class pwainstall extends LitElement {
           animation-duration: 250ms;
         }
 
-        @media(max-height: 900px) {
-          #installModal {
-            bottom: 6em;
-            top: 6em;
-          }
-
-          #closeButton {
-            top: 8.6em;
-          }
-        }
-
-        @media(max-height: 1020px) {
-          #installModal {
-            bottom: 9em;
-            top: 9em;
-          }
-
-          #closeButton {
-            top: 12.4em;
-          }
-        }
-
         #closeButton {
           top: 20px;
           right: 20px;
+        }
+
+        #screenshots {
+          justify-content: center;
         }
       }
 
