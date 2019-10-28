@@ -387,13 +387,11 @@ export class pwainstall extends LitElement {
   }
 
   async firstUpdated(): Promise<void> {
-    console.log(this.showopen);
     if (this.manifestpath) {
       await this.getManifestData();
     }
 
     window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('e', e);
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
       // Stash the event so it can be triggered later.
@@ -411,7 +409,6 @@ export class pwainstall extends LitElement {
     const response = await fetch(this.manifestpath);
     const data = await response.json();
 
-    console.log(data);
     this.manifestdata = data;
 
     if (this.manifestdata) {
