@@ -150,6 +150,8 @@ export class pwainstall extends LitElement {
       line-height: 21px;
       padding-top: 10px;
       padding-bottom: 9px;
+      padding-left: 20px;
+      padding-right: 20px;
       outline: none;
      }
 
