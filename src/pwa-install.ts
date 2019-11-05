@@ -353,6 +353,9 @@ export class pwainstall extends LitElement {
           bottom: 0;
           margin-bottom: 0;
           border-radius: 0;
+
+          padding-top: 1em;
+          padding-bottom: 1em;
          }
 
          #buttonsContainer #installButton {
