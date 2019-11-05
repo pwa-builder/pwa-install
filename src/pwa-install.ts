@@ -528,7 +528,7 @@ export class pwainstall extends LitElement {
 
           <div>
               <h3>Why install this app</h3>
-              <p>this.explainer</p>
+              <p>${this.explainer}</p>
           <div>
             <h3>App Description</h3>
             <p>${this.manifestdata.description}</p>
