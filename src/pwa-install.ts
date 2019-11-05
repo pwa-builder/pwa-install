@@ -241,11 +241,10 @@ export class pwainstall extends LitElement {
      }
 
      #desc {
-      width: 34em;
+      width: 40em;
       font-size: 14px;
       color: #7E7E7E;
       text-overflow: ellipsis;
-      white-space: nowrap;
       overflow: hidden;
      }
 
@@ -322,6 +321,22 @@ export class pwainstall extends LitElement {
 
         #screenshots {
           justify-content: center;
+        }
+      }
+
+      @media (max-width: 962px) {
+
+        #desc {
+          display: none;
+        }
+
+        #headerContainer {
+          margin-bottom: 24px;
+        }
+
+        #headerContainer img {
+          height: 42px;
+          width: 42px;
         }
       }
 
@@ -487,7 +502,7 @@ export class pwainstall extends LitElement {
 
 
             <p id="desc">
-              ${this.manifestdata.description}
+              ${this.explainer}
             </p>
           </div>
         </div>
@@ -526,9 +541,6 @@ export class pwainstall extends LitElement {
             ` : null}
           </div>
 
-          <div>
-              <h3>Why install this app</h3>
-              <p>${this.explainer}</p>
           <div>
             <h3>App Description</h3>
             <p>${this.manifestdata.description}</p>
