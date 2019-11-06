@@ -46,3 +46,13 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 | name         | Description               |
 | ------------ | ------------------------- |
 | `openPrompt()` | `Opens the install modal` |
+
+### CSS Variables
+
+We recommend using our [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) to easliy tweak the style of this component to fit your project. Here are our current
+supported CSS variables.
+
+| name         | Description               |
+| ------------ | ------------------------- |
+| `--install-button-color` | `Changes the color of the install button` |
+| `--modal-z-index`        | `Changes the z-index of the install modal`|
