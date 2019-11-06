@@ -13,6 +13,7 @@ export class pwainstall extends LitElement {
   @property() manifestdata: any;
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
+  @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
 
   static get styles() {
     return css`
@@ -240,11 +241,10 @@ export class pwainstall extends LitElement {
      }
 
      #desc {
-      width: 34em;
+      width: 40em;
       font-size: 14px;
       color: #7E7E7E;
       text-overflow: ellipsis;
-      white-space: nowrap;
       overflow: hidden;
      }
 
@@ -321,6 +321,22 @@ export class pwainstall extends LitElement {
 
         #screenshots {
           justify-content: center;
+        }
+      }
+
+      @media (max-width: 962px) {
+
+        #desc {
+          display: none;
+        }
+
+        #headerContainer {
+          margin-bottom: 24px;
+        }
+
+        #headerContainer img {
+          height: 42px;
+          width: 42px;
         }
       }
 
@@ -486,7 +502,7 @@ export class pwainstall extends LitElement {
 
 
             <p id="desc">
-              ${this.manifestdata.description}
+              ${this.explainer}
             </p>
           </div>
         </div>
@@ -526,7 +542,7 @@ export class pwainstall extends LitElement {
           </div>
 
           <div>
-            <h3>Description</h3>
+            <h3>App Description</h3>
             <p>${this.manifestdata.description}</p>
           </div>
         </div>
