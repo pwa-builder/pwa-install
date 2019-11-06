@@ -20,6 +20,7 @@ export class pwainstall extends LitElement {
 
      :host {
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+       --modal-z-index: auto;
      }
 
      button {
@@ -42,6 +43,8 @@ export class pwainstall extends LitElement {
 
       animation-name: opened;
       animation-duration: 150ms;
+
+      z-index: var(--modal-z-index);
      }
 
      @keyframes opened {
@@ -280,6 +283,17 @@ export class pwainstall extends LitElement {
         padding-top: 1px;
       }
 
+      @media(min-width: 1445px) {
+        #installModal {
+          left: 22em;
+          right: 22em;
+        }
+
+        #closeButton {
+          right: 28em;
+        }
+      }
+
       @media(min-width: 1800px) {
         #installModal {
           left: 26em;
@@ -291,14 +305,14 @@ export class pwainstall extends LitElement {
         }
       }
 
-      @media(min-width: 1445px) {
+      @media(min-width: 2000px) {
         #installModal {
-          left: 22em;
-          right: 22em;
+          left: 38em;
+          right: 38em;
         }
 
         #closeButton {
-          right: 28em;
+          right: 47em;
         }
       }
 
