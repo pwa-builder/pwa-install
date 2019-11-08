@@ -7,6 +7,8 @@ export declare class pwainstall extends LitElement {
     manifestdata: any;
     openmodal: boolean;
     showopen: boolean;
+    showeligible: boolean;
+    explainer: string;
     static readonly styles: import("lit-element").CSSResult;
     firstUpdated(): Promise<void>;
     getManifestData(): Promise<void>;

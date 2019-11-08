@@ -10,12 +10,14 @@ let pwainstall = class pwainstall extends LitElement {
     constructor() {
         super(...arguments);
         this.manifestpath = "manifest.json";
+        this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
     }
     static get styles() {
         return css `
 
      :host {
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+       --modal-z-index: auto;
      }
 
      button {
@@ -38,6 +40,8 @@ let pwainstall = class pwainstall extends LitElement {
 
       animation-name: opened;
       animation-duration: 150ms;
+
+      z-index: var(--modal-z-index);
      }
 
      @keyframes opened {
@@ -147,6 +151,8 @@ let pwainstall = class pwainstall extends LitElement {
       line-height: 21px;
       padding-top: 10px;
       padding-bottom: 9px;
+      padding-left: 20px;
+      padding-right: 20px;
       outline: none;
      }
 
@@ -235,11 +241,10 @@ let pwainstall = class pwainstall extends LitElement {
      }
 
      #desc {
-      width: 34em;
+      width: 40em;
       font-size: 14px;
       color: #7E7E7E;
       text-overflow: ellipsis;
-      white-space: nowrap;
       overflow: hidden;
      }
 
@@ -275,6 +280,17 @@ let pwainstall = class pwainstall extends LitElement {
         padding-top: 1px;
       }
 
+      @media(min-width: 1445px) {
+        #installModal {
+          left: 22em;
+          right: 22em;
+        }
+
+        #closeButton {
+          right: 28em;
+        }
+      }
+
       @media(min-width: 1800px) {
         #installModal {
           left: 26em;
@@ -286,14 +302,14 @@ let pwainstall = class pwainstall extends LitElement {
         }
       }
 
-      @media(min-width: 1445px) {
+      @media(min-width: 2000px) {
         #installModal {
-          left: 22em;
-          right: 22em;
+          left: 38em;
+          right: 38em;
         }
 
         #closeButton {
-          right: 28em;
+          right: 47em;
         }
       }
 
@@ -316,6 +332,22 @@ let pwainstall = class pwainstall extends LitElement {
 
         #screenshots {
           justify-content: center;
+        }
+      }
+
+      @media (max-width: 962px) {
+
+        #desc {
+          display: none;
+        }
+
+        #headerContainer {
+          margin-bottom: 24px;
+        }
+
+        #headerContainer img {
+          height: 42px;
+          width: 42px;
         }
       }
 
@@ -348,6 +380,9 @@ let pwainstall = class pwainstall extends LitElement {
           bottom: 0;
           margin-bottom: 0;
           border-radius: 0;
+
+          padding-top: 1em;
+          padding-bottom: 1em;
          }
 
          #buttonsContainer #installButton {
@@ -439,7 +474,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${this.showopen ? html `<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.showopen || (this.showeligible && this.deferredprompt) ? html `<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           Install
         </slot>
@@ -464,7 +499,7 @@ let pwainstall = class pwainstall extends LitElement {
 
 
             <p id="desc">
-              ${this.manifestdata.description}
+              ${this.explainer}
             </p>
           </div>
         </div>
@@ -501,7 +536,7 @@ let pwainstall = class pwainstall extends LitElement {
           </div>
 
           <div>
-            <h3>Description</h3>
+            <h3>App Description</h3>
             <p>${this.manifestdata.description}</p>
           </div>
         </div>
@@ -533,6 +568,12 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], pwainstall.prototype, "showopen", void 0);
+__decorate([
+    property({ type: Boolean })
+], pwainstall.prototype, "showeligible", void 0);
+__decorate([
+    property()
+], pwainstall.prototype, "explainer", void 0);
 pwainstall = __decorate([
     customElement('pwa-install')
 ], pwainstall);
