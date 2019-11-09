@@ -32,8 +32,8 @@ export class pwainstall extends LitElement {
       position: fixed;
       bottom: 3em;
       top: 3em;
-      left: 14em;
-      right: 14em;
+      left: 12em;
+      right: 12em;
       font-family: sans-serif;
       box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
       border-radius: 10px;
@@ -302,7 +302,7 @@ export class pwainstall extends LitElement {
         }
       }
 
-      @media(max-width: 1200px) {
+      @media(max-width: 1220px) {
         #installModal {
           bottom: 0em;
           top: 0em;
