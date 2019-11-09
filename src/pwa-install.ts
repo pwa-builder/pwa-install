@@ -485,7 +485,7 @@ export class pwainstall extends LitElement {
           <div id="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
-            <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}"></img>
+            <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}" alt="App Logo"></img>
 
             <div id="installTitle">
               <h1>${this.manifestdata.name}</h1>
@@ -528,7 +528,7 @@ export class pwainstall extends LitElement {
                 ${
               this.manifestdata.screenshots.map((screen, index) => {
                 return html`
-                              <div slot="${index + 1}"><img src="${screen.src}"></div>
+                              <div slot="${index + 1}"><img alt="App Screenshot" src="${screen.src}"></div>
                             `
               })}
                 </infinite-carousel-wc>
