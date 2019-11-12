@@ -14,8 +14,6 @@ export class pwainstall extends LitElement {
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
-  @property() featuresheader: string = "Key Features";
-  @property() descriptionheader: string = "Description";
 
   static get styles() {
     return css`
@@ -510,7 +508,7 @@ export class pwainstall extends LitElement {
         <div id="featuresScreenDiv">
 
           ${this.manifestdata.features ? html`<div id="keyFeatures">
-            <h3>${this.featuresheader}</h3>
+            <h3>Key Features</h3>
             <ul>
               ${
             this.manifestdata.features ? this.manifestdata.features.map((feature) => {
@@ -540,7 +538,7 @@ export class pwainstall extends LitElement {
           </div>
 
           <div>
-            <h3>${this.descriptionheader}</h3>
+            <h3>App Description</h3>
             <p>${this.manifestdata.description}</p>
           </div>
         </div>
