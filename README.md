@@ -40,6 +40,8 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 | -------------- | -------------- | ------------------------------- | --------- | --------------- |
 | `showopen`     | `showopen`     | Will always show install button | `boolean` | `false`         |
 | `manifestpath` | `manifestpath` | path to your web manifest       | `string`  | `manifest.json` |
+| `featuresheader`     | `featuresheader`     | Controls the text of the features header | `string` | `Key Features`         |
+| `descriptionheader` | `descriptionheader` | Controls the text of the description header       | `string`  | `Description` |
 
 ### Methods
 
