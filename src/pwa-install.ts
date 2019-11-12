@@ -406,7 +406,12 @@ export class pwainstall extends LitElement {
 
   async firstUpdated(): Promise<void> {
     if (this.manifestpath) {
-      await this.getManifestData();
+      try {
+        await this.getManifestData();
+      }
+      catch (err) {
+        console.error('Error getting manifest, check that you have a valid web manifest');
+      }
     }
 
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -423,6 +428,25 @@ export class pwainstall extends LitElement {
     }
   }
 
+  // Check that the manifest has our 3 required properties
+  // If not console an error to the user and return
+  checkManifest(manifestData) {
+    if (!manifestData.icons || !manifestData.icons[0]) {
+      console.error('Your web manifest must have atleast one icon listed');
+      return;
+    }
+
+    if (!manifestData.name) {
+      console.error('Your web manifest must have a name listed');
+      return;
+    }
+
+    if (!manifestData.description) {
+      console.error('Your web manifest must have a description listed');
+      return;
+    }
+  }
+
   async getManifestData() {
     const response = await fetch(this.manifestpath);
     const data = await response.json();
@@ -431,6 +455,8 @@ export class pwainstall extends LitElement {
 
     if (this.manifestdata) {
       this.updateButtonColor(this.manifestdata);
+
+      this.checkManifest(this.manifestdata);
     }
   }
 
