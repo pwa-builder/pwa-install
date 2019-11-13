@@ -1,5 +1,7 @@
 
 import resolve from 'rollup-plugin-node-resolve';
+import minify from 'rollup-plugin-babel-minify';
+import minifyHTML from 'rollup-plugin-minify-html-literals';
 
 export default {
 	input: ['build/pwa-install.js'],
@@ -9,6 +11,8 @@ export default {
 		sourcemap: true
 	},
 	plugins: [
-    resolve()
+    resolve(),
+    minifyHTML(),
+    minify()
   ]
 };
