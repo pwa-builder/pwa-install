@@ -13,6 +13,7 @@ export class pwainstall extends LitElement {
   @property() manifestdata: any;
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
+  @property({ type: Boolean }) isIOS: boolean;
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
   @property() descriptionheader: string = "Description";
@@ -283,6 +284,13 @@ export class pwainstall extends LitElement {
         padding-top: 1px;
       }
 
+    #iosText {
+      color: var(--install-button-color);
+      margin: 2em;
+      text-align: center;
+      font-weight: bold;
+    }
+
       @media(min-width: 1445px) {
         #installModal {
           left: 22em;
@@ -420,6 +428,9 @@ export class pwainstall extends LitElement {
       // Stash the event so it can be triggered later.
       this.deferredprompt = e;
     });
+
+    // handle iOS specifically
+    this.isIOS = navigator.userAgent.includes('iPhone');
 
     document.onkeyup = (e) => {
       if (e.key === "Escape") {
@@ -571,10 +582,10 @@ export class pwainstall extends LitElement {
           </div>
         </div>
 
-        <div id="buttonsContainer">
+        ${!this.isIOS ? html`<div id="buttonsContainer">
           ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>` : html`<button @click="${() => this.cancel()}" id="installButton">Close</button>`}
         </div>
-          </div>
+          </div>` : html`<p id="iosText">Tap the share button and then 'Add to Homescreen'</p>`}
         `
         : null
       }
