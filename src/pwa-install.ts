@@ -13,6 +13,8 @@ export class pwainstall extends LitElement {
   @property() manifestdata: any;
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
+  @property({ type: Boolean }) showEligible: boolean;
+  @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
@@ -432,6 +434,9 @@ export class pwainstall extends LitElement {
     // handle iOS specifically
     this.isIOS = navigator.userAgent.includes('iPhone');
 
+    // check for beforeinstallprompt support
+    this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
+
     document.onkeyup = (e) => {
       if (e.key === "Escape") {
         this.cancel();
@@ -481,6 +486,11 @@ export class pwainstall extends LitElement {
     this.openmodal = true;
   }
 
+  shouldShowInstall(): boolean {
+    const eligibleUser = this.showEligible && this.isSupportingBrowser && this.deferredprompt;
+    return this.showopen || eligibleUser;
+  }
+
   public async install(): Promise<boolean> {
     if (this.deferredprompt) {
       this.deferredprompt.prompt();
@@ -510,7 +520,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.showopen ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           Install
         </slot>
