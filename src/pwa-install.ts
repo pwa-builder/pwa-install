@@ -13,6 +13,9 @@ export class pwainstall extends LitElement {
   @property() manifestdata: any;
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
+  @property({ type: Boolean }) showEligible: boolean;
+  @property({ type: Boolean }) isSupportingBrowser: boolean;
+  @property({ type: Boolean }) isIOS: boolean;
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
   @property() descriptionheader: string = "Description";
@@ -283,6 +286,13 @@ export class pwainstall extends LitElement {
         padding-top: 1px;
       }
 
+    #iosText {
+      color: var(--install-button-color);
+      margin: 2em;
+      text-align: center;
+      font-weight: bold;
+    }
+
       @media(min-width: 1445px) {
         #installModal {
           left: 22em;
@@ -406,7 +416,12 @@ export class pwainstall extends LitElement {
 
   async firstUpdated(): Promise<void> {
     if (this.manifestpath) {
-      await this.getManifestData();
+      try {
+        await this.getManifestData();
+      }
+      catch (err) {
+        console.error('Error getting manifest, check that you have a valid web manifest');
+      }
     }
 
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -416,10 +431,35 @@ export class pwainstall extends LitElement {
       this.deferredprompt = e;
     });
 
+    // handle iOS specifically
+    this.isIOS = navigator.userAgent.includes('iPhone');
+
+    // check for beforeinstallprompt support
+    this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
+
     document.onkeyup = (e) => {
       if (e.key === "Escape") {
         this.cancel();
       }
+    }
+  }
+
+  // Check that the manifest has our 3 required properties
+  // If not console an error to the user and return
+  checkManifest(manifestData) {
+    if (!manifestData.icons || !manifestData.icons[0]) {
+      console.error('Your web manifest must have atleast one icon listed');
+      return;
+    }
+
+    if (!manifestData.name) {
+      console.error('Your web manifest must have a name listed');
+      return;
+    }
+
+    if (!manifestData.description) {
+      console.error('Your web manifest must have a description listed');
+      return;
     }
   }
 
@@ -431,6 +471,8 @@ export class pwainstall extends LitElement {
 
     if (this.manifestdata) {
       this.updateButtonColor(this.manifestdata);
+
+      this.checkManifest(this.manifestdata);
     }
   }
 
@@ -442,6 +484,11 @@ export class pwainstall extends LitElement {
 
   openPrompt() {
     this.openmodal = true;
+  }
+
+  shouldShowInstall(): boolean {
+    const eligibleUser = this.showEligible && this.isSupportingBrowser && this.deferredprompt;
+    return this.showopen || eligibleUser;
   }
 
   public async install(): Promise<boolean> {
@@ -473,7 +520,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.showopen ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           Install
         </slot>
@@ -545,10 +592,10 @@ export class pwainstall extends LitElement {
           </div>
         </div>
 
-        <div id="buttonsContainer">
+        ${!this.isIOS ? html`<div id="buttonsContainer">
           ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>` : html`<button @click="${() => this.cancel()}" id="installButton">Close</button>`}
         </div>
-          </div>
+          </div>` : html`<p id="iosText">Tap the share button and then 'Add to Homescreen'</p>`}
         `
         : null
       }

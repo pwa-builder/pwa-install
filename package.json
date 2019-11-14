@@ -1,6 +1,6 @@
 {
   "name": "@pwabuilder/pwainstall",
-  "version": "0.9.5",
+  "version": "0.9.9",
   "description": "",
   "main": "dist/pwa-install.js",
   "module": "dist/pwa-install.js",
@@ -20,6 +20,8 @@
     "concurrently": "^5.0.0",
     "es-dev-server": "^1.18.4",
     "rollup": "^1.26.0",
+    "rollup-plugin-babel-minify": "^9.1.1",
+    "rollup-plugin-minify-html-literals": "^1.2.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "typescript": "^3.6.4"
   }
