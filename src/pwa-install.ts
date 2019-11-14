@@ -19,6 +19,9 @@ export class pwainstall extends LitElement {
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
   @property() descriptionheader: string = "Description";
+  @property() installbuttontext: string = "Install";
+  @property() cancelbuttontext: string = "Cancel";
+  @property() iosinstallinfotext: string = "Tap the share button and then 'Add to Homescreen'";
 
   static get styles() {
     return css`
@@ -522,7 +525,7 @@ export class pwainstall extends LitElement {
     return html`
       ${this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
-          Install
+          ${this.installbuttontext}
         </slot>
       </button>` : null}
 
@@ -593,9 +596,9 @@ export class pwainstall extends LitElement {
         </div>
 
         ${!this.isIOS ? html`<div id="buttonsContainer">
-          ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>` : html`<button @click="${() => this.cancel()}" id="installButton">Close</button>`}
+          ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">${this.installbuttontext} ${this.manifestdata.short_name}</button>` : html`<button @click="${() => this.cancel()}" id="installButton">${this.cancelbuttontext}</button>`}
         </div>
-          </div>` : html`<p id="iosText">Tap the share button and then 'Add to Homescreen'</p>`}
+          </div>` : html`<p id="iosText">${this.iosinstallinfotext}</p>`}
         `
         : null
       }
