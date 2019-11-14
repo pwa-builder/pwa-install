@@ -14,9 +14,10 @@ export declare class pwainstall extends LitElement {
     featuresheader: string;
     descriptionheader: string;
     static get styles(): import("lit-element").CSSResult;
+    constructor();
     firstUpdated(): Promise<void>;
     checkManifest(manifestData: any): void;
-    getManifestData(): Promise<void>;
+    getManifestData(): Promise<any>;
     updateButtonColor(data: any): void;
     openPrompt(): void;
     shouldShowInstall(): boolean;

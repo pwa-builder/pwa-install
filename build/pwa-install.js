@@ -8,11 +8,15 @@ import { LitElement, html, customElement, property, css } from 'lit-element';
 import 'infinite-carousel-wc/dist/esm/infinite-carousel-wc.min.js';
 let pwainstall = class pwainstall extends LitElement {
     constructor() {
-        super(...arguments);
+        super();
         this.manifestpath = "manifest.json";
         this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
         this.featuresheader = "Key Features";
         this.descriptionheader = "Description";
+        // check for beforeinstallprompt support
+        this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
+        // handle iOS specifically
+        this.isIOS = navigator.userAgent.includes('iPhone');
     }
     static get styles() {
         return css `
@@ -422,10 +426,6 @@ let pwainstall = class pwainstall extends LitElement {
             // Stash the event so it can be triggered later.
             this.deferredprompt = e;
         });
-        // handle iOS specifically
-        this.isIOS = navigator.userAgent.includes('iPhone');
-        // check for beforeinstallprompt support
-        this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
         document.onkeyup = (e) => {
             if (e.key === "Escape") {
                 this.cancel();
@@ -449,12 +449,18 @@ let pwainstall = class pwainstall extends LitElement {
         }
     }
     async getManifestData() {
-        const response = await fetch(this.manifestpath);
-        const data = await response.json();
-        this.manifestdata = data;
-        if (this.manifestdata) {
-            this.updateButtonColor(this.manifestdata);
-            this.checkManifest(this.manifestdata);
+        try {
+            const response = await fetch(this.manifestpath);
+            const data = await response.json();
+            this.manifestdata = data;
+            if (this.manifestdata) {
+                this.updateButtonColor(this.manifestdata);
+                this.checkManifest(this.manifestdata);
+                return data;
+            }
+        }
+        catch (err) {
+            return null;
         }
     }
     updateButtonColor(data) {
@@ -467,6 +473,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     shouldShowInstall() {
         const eligibleUser = this.showEligible && this.isSupportingBrowser && this.deferredprompt;
+        console.log(eligibleUser);
         return this.showopen || eligibleUser;
     }
     async install() {
