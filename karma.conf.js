@@ -16,7 +16,7 @@ module.exports = config => {
       plugins: [
         // load plugin
         require.resolve('@open-wc/karma-esm'),
-    
+
         // fallback: resolve any karma- plugins
         'karma-*',
       ],
@@ -28,6 +28,12 @@ module.exports = config => {
         // if you are using 'bare module imports' you will need this option
         nodeResolve: true,
       },
+
+      coverageIstanbulReporter: {
+        thresholds: {
+          emitWarning: true
+        }
+      }
     }),
   );
   return config;
