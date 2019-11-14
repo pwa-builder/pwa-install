@@ -417,6 +417,16 @@ export class pwainstall extends LitElement {
     `;
   }
 
+  constructor() {
+    super();
+
+    // check for beforeinstallprompt support
+    this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
+
+    // handle iOS specifically
+    this.isIOS = navigator.userAgent.includes('iPhone');
+  }
+
   async firstUpdated(): Promise<void> {
     if (this.manifestpath) {
       try {
@@ -434,11 +444,6 @@ export class pwainstall extends LitElement {
       this.deferredprompt = e;
     });
 
-    // handle iOS specifically
-    this.isIOS = navigator.userAgent.includes('iPhone');
-
-    // check for beforeinstallprompt support
-    this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
 
     document.onkeyup = (e) => {
       if (e.key === "Escape") {
@@ -467,15 +472,22 @@ export class pwainstall extends LitElement {
   }
 
   async getManifestData() {
-    const response = await fetch(this.manifestpath);
-    const data = await response.json();
+    try {
+      const response = await fetch(this.manifestpath);
+      const data = await response.json();
 
-    this.manifestdata = data;
+      this.manifestdata = data;
 
-    if (this.manifestdata) {
-      this.updateButtonColor(this.manifestdata);
+      if (this.manifestdata) {
+        this.updateButtonColor(this.manifestdata);
 
-      this.checkManifest(this.manifestdata);
+        this.checkManifest(this.manifestdata);
+
+        return data;
+      }
+    }
+    catch (err) {
+      return null
     }
   }
 
