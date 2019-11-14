@@ -5,7 +5,11 @@
   "main": "dist/pwa-install.js",
   "module": "dist/pwa-install.js",
   "scripts": {
-    "test": "npx es-dev-server --open www",
+    "test": "./node_modules/.bin/karma start --coverage",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "test:update-snapshots": "karma start --update-snapshots",
+    "test:prune-snapshots": "karma start --prune-snapshots",
+    "test:compatibility": "karma start --compatibility all --auto-watch=true --single-run=false",
     "start": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
     "dev": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
     "build": "tsc && rollup -c"
@@ -17,8 +21,14 @@
     "lit-element": "^2.2.1"
   },
   "devDependencies": {
+    "@open-wc/karma-esm": "^2.9.8",
+    "@open-wc/testing": "^2.3.9",
+    "@open-wc/testing-helpers": "^1.3.0",
+    "@open-wc/testing-karma": "^3.1.54",
     "concurrently": "^5.0.0",
+    "deepmerge": "^4.2.2",
     "es-dev-server": "^1.18.4",
+    "karma": "^4.4.1",
     "rollup": "^1.26.0",
     "rollup-plugin-babel-minify": "^9.1.1",
     "rollup-plugin-minify-html-literals": "^1.2.2",
