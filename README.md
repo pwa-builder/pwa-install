@@ -45,7 +45,7 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 | `descriptionheader` | `descriptionheader` | Controls the text of the description header       | `string`  | `Description`   |
 | `installbuttontext` | `installbuttontext` | Controls the text of the install button           | `string`  | `Install`       |
 | `cancelbuttontext`  | `cancelbuttontext`  | Controls the text of the cancel button            | `string`  | `Cancel`        |
-| `iosinstallinfotext`| `iosinstallinfotext`| Controls the iOS installing info text             | `string`  | `Tap the share button and then 'Add to Homescreen'`   |
+| `iosinstallinfotext`| `iosinstallinfotext`| Controls the iOS installation info text             | `string`  | `Tap the share button and then 'Add to Homescreen'`   |
 
 ### Methods
 
