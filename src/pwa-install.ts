@@ -414,6 +414,22 @@ export class pwainstall extends LitElement {
         }
       }
 
+      @media(max-width: 400px) {
+        #headerContainer h1 {
+          font-size: 26px;
+        }
+
+        #headerContainer img {
+          height: 40px;
+          width: 40px;
+        }
+
+        #featuresScreenDiv h3 {
+          font-size: 18px;
+          margin-bottom: 0px;
+        }
+      }
+
     `;
   }
 
