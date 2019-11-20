@@ -440,7 +440,7 @@ export class pwainstall extends LitElement {
     this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
 
     // handle iOS specifically
-    this.isIOS = navigator.userAgent.includes('iPhone');
+    this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
   }
 
   async firstUpdated(): Promise<void> {
