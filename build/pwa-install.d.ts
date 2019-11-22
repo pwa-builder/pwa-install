@@ -13,6 +13,9 @@ export declare class pwainstall extends LitElement {
     explainer: string;
     featuresheader: string;
     descriptionheader: string;
+    installbuttontext: string;
+    cancelbuttontext: string;
+    iosinstallinfotext: string;
     static get styles(): import("lit-element").CSSResult;
     constructor();
     firstUpdated(): Promise<void>;

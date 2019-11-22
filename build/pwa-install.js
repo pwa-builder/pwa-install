@@ -13,10 +13,13 @@ let pwainstall = class pwainstall extends LitElement {
         this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
         this.featuresheader = "Key Features";
         this.descriptionheader = "Description";
+        this.installbuttontext = "Install";
+        this.cancelbuttontext = "Cancel";
+        this.iosinstallinfotext = "Tap the share button and then 'Add to Homescreen'";
         // check for beforeinstallprompt support
         this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
         // handle iOS specifically
-        this.isIOS = navigator.userAgent.includes('iPhone');
+        this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
     }
     static get styles() {
         return css `
@@ -289,6 +292,9 @@ let pwainstall = class pwainstall extends LitElement {
       margin: 2em;
       text-align: center;
       font-weight: bold;
+
+      position: fixed;
+      bottom: 0;
     }
 
       @media(min-width: 1445px) {
@@ -409,6 +415,26 @@ let pwainstall = class pwainstall extends LitElement {
         }
       }
 
+      @media(max-width: 400px) {
+        #headerContainer h1 {
+          font-size: 26px;
+        }
+
+        #headerContainer img {
+          height: 40px;
+          width: 40px;
+        }
+
+        #featuresScreenDiv h3 {
+          font-size: 18px;
+          margin-bottom: 0px;
+        }
+
+        #keyFeatures ul {
+          margin-top: 0px;
+        }
+      }
+
     `;
     }
     async firstUpdated() {
@@ -473,7 +499,6 @@ let pwainstall = class pwainstall extends LitElement {
     }
     shouldShowInstall() {
         const eligibleUser = this.showEligible && this.isSupportingBrowser && this.deferredprompt;
-        console.log(eligibleUser);
         return this.showopen || eligibleUser;
     }
     async install() {
@@ -503,7 +528,7 @@ let pwainstall = class pwainstall extends LitElement {
         return html `
       ${this.shouldShowInstall() ? html `<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
-          Install
+          ${this.installbuttontext}
         </slot>
       </button>` : null}
 
@@ -570,9 +595,9 @@ let pwainstall = class pwainstall extends LitElement {
         </div>
 
         ${!this.isIOS ? html `<div id="buttonsContainer">
-          ${this.deferredprompt ? html `<button id="installButton" @click="${() => this.install()}">Install ${this.manifestdata.short_name}</button>` : html `<button @click="${() => this.cancel()}" id="installButton">Close</button>`}
+          ${this.deferredprompt ? html `<button id="installButton" @click="${() => this.install()}">${this.installbuttontext} ${this.manifestdata.short_name}</button>` : html `<button @click="${() => this.cancel()}" id="installButton">${this.cancelbuttontext}</button>`}
         </div>
-          </div>` : html `<p id="iosText">Tap the share button and then 'Add to Homescreen'</p>`}
+          </div>` : html `<p id="iosText">${this.iosinstallinfotext}</p>`}
         `
             : null}
     `;
@@ -614,6 +639,15 @@ __decorate([
 __decorate([
     property()
 ], pwainstall.prototype, "descriptionheader", void 0);
+__decorate([
+    property()
+], pwainstall.prototype, "installbuttontext", void 0);
+__decorate([
+    property()
+], pwainstall.prototype, "cancelbuttontext", void 0);
+__decorate([
+    property()
+], pwainstall.prototype, "iosinstallinfotext", void 0);
 pwainstall = __decorate([
     customElement('pwa-install')
 ], pwainstall);

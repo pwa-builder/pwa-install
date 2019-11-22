@@ -294,6 +294,9 @@ export class pwainstall extends LitElement {
       margin: 2em;
       text-align: center;
       font-weight: bold;
+
+      position: fixed;
+      bottom: 0;
     }
 
       @media(min-width: 1445px) {
@@ -427,6 +430,10 @@ export class pwainstall extends LitElement {
         #featuresScreenDiv h3 {
           font-size: 18px;
           margin-bottom: 0px;
+        }
+
+        #keyFeatures ul {
+          margin-top: 0px;
         }
       }
 
