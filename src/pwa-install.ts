@@ -299,6 +299,13 @@ export class pwainstall extends LitElement {
       bottom: 0;
     }
 
+    @media(max-height: 780px) {
+      #buttonsContainer {
+        bottom: -1em;
+        background: transparent;
+      }
+    }
+
       @media(min-width: 1445px) {
         #installModal {
           left: 22em;
