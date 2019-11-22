@@ -32,6 +32,7 @@ export class pwainstall extends LitElement {
      :host {
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
        --modal-z-index: auto;
+       --modal-background-color: white;
      }
 
      button {
@@ -39,7 +40,7 @@ export class pwainstall extends LitElement {
      }
 
      #installModal {
-      background: white;
+      background: var(--modal-background-color);
       position: fixed;
       bottom: 3em;
       top: 3em;
