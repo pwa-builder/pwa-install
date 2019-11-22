@@ -507,6 +507,9 @@ let pwainstall = class pwainstall extends LitElement {
     openPrompt() {
         this.openmodal = true;
     }
+    closePrompt() {
+        this.openmodal = false;
+    }
     shouldShowInstall() {
         const eligibleUser = this.showEligible || this.isSupportingBrowser && this.deferredprompt;
         console.log(this.deferredprompt);

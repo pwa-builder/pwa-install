@@ -24,6 +24,7 @@ export declare class pwainstall extends LitElement {
     getManifestData(): Promise<any>;
     updateButtonColor(data: any): void;
     openPrompt(): void;
+    closePrompt(): void;
     shouldShowInstall(): boolean;
     install(): Promise<boolean>;
     cancel(): void;
