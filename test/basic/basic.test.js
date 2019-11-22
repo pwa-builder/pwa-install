@@ -80,14 +80,14 @@ it('shouldShowInstall should return true if showopen is true', async () => {
   expect(testResult).to.be.true;
 });
 
-it('shouldShowInstall should return undefined if showeligible is on', async () => {
-  // this should be undefined because install is not eligible in this case
-  const el = await fixture('<pwa-install showEligible></pwa-install>');
+it('shouldShowInstall should return true if showeligible is on', async () => {
+  // this should be undefined because install is eligible in this case
+  const el = await fixture('<pwa-install showeligible></pwa-install>');
 
   const testResult = el.shouldShowInstall();
   await elementUpdated(el);
 
-  expect(testResult).to.be.undefined;
+  expect(testResult).to.be.true;
 });
 
 
