@@ -16,7 +16,7 @@
 
   <pwa-install showopen>Slot test</pwa-install>
 
-  <pwa-install showopen></pwa-install>
+  <pwa-install showopen id="mainInstall"></pwa-install>
 
   <pwa-install showeligible>Show Eligible</pwa-install>
 
@@ -67,7 +67,23 @@
 
     document.querySelector('#openInvalidMani').addEventListener('click', () => {
       document.querySelector('#invalidMani').openPrompt();
-    })
+    });
+
+    document.querySelector("#mainInstall").addEventListener('show', (ev) => {
+      shown(ev);
+    });
+
+    document.querySelector("#mainInstall").addEventListener('hide', (ev) => {
+      hidden(ev);
+    });
+
+    function shown(ev) {
+      console.log('show event fired', ev);
+    }
+
+    function hidden(ev) {
+      console.log('hide event fired', ev);
+    }
   </script>
 
   <script>

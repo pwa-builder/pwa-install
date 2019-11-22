@@ -536,10 +536,16 @@ export class pwainstall extends LitElement {
 
   openPrompt() {
     this.openmodal = true;
+
+    let event = new CustomEvent('show');
+    this.dispatchEvent(event);
   }
 
   closePrompt() {
-    this.openmodal = false
+    this.openmodal = false;
+
+    let event = new CustomEvent('hide');
+    this.dispatchEvent(event);
   }
 
   shouldShowInstall(): boolean {
@@ -552,6 +558,9 @@ export class pwainstall extends LitElement {
     if (this.deferredprompt) {
       this.deferredprompt.prompt();
 
+      let event = new CustomEvent('show');
+      this.dispatchEvent(event);
+
       const choiceResult = await this.deferredprompt.userChoice;
 
       if (choiceResult.outcome === 'accepted') {
@@ -559,15 +568,24 @@ export class pwainstall extends LitElement {
 
         this.cancel();
         this.installed = true;
+
+        let event = new CustomEvent('hide');
+        this.dispatchEvent(event);
+
         return true;
       } else {
+        console.log('User chose to not install your PWA');
+
         this.cancel();
 
         // set installed to true because we dont 
         // want to show the install button to 
         // a user who chose not to install
         this.installed = true;
-        console.log('User chose to not install your PWA');
+
+        let event = new CustomEvent('hide');
+        this.dispatchEvent(event);
+
         return false;
       }
     }
@@ -582,6 +600,9 @@ export class pwainstall extends LitElement {
     if (this.hasAttribute('openmodal')) {
       this.removeAttribute('openmodal');
     }
+
+    let event = new CustomEvent('hide');
+    this.dispatchEvent(event);
   }
 
   render() {
