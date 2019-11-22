@@ -10,6 +10,7 @@ export declare class pwainstall extends LitElement {
     showEligible: boolean;
     isSupportingBrowser: boolean;
     isIOS: boolean;
+    installed: boolean;
     explainer: string;
     featuresheader: string;
     descriptionheader: string;

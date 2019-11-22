@@ -11,11 +11,14 @@ export class pwainstall extends LitElement {
   @property() manifestpath: string = "manifest.json";
   @property() iconpath: string;
   @property() manifestdata: any;
+
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
   @property({ type: Boolean }) showEligible: boolean;
   @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
+  @property({ type: Boolean }) installed: boolean;
+
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
   @property() descriptionheader: string = "Description";
@@ -136,7 +139,7 @@ export class pwainstall extends LitElement {
       border-radius: 0px 0px 12px 12px;
      }
 
-     #openButton, #installButton {
+     #openButton, #installButton, #installCancelButton {
       text-align: center;
       align-content: center;
       align-self: center;
@@ -152,7 +155,7 @@ export class pwainstall extends LitElement {
       outline: none;
      }
 
-     #installButton {
+     #installButton, #installCancelButton {
       min-width: 130px;
       margin-right: 30px;
       background: var(--install-button-color);
@@ -165,6 +168,7 @@ export class pwainstall extends LitElement {
       padding-left: 20px;
       padding-right: 20px;
       outline: none;
+      color: white;
      }
 
      #closeButton {
@@ -455,6 +459,8 @@ export class pwainstall extends LitElement {
 
     // handle iOS specifically
     this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
+
+    this.installed = false;
   }
 
   async firstUpdated(): Promise<void> {
@@ -471,6 +477,7 @@ export class pwainstall extends LitElement {
       // Prevent Chrome 67 and earlier from automatically showing the prompt
       e.preventDefault();
       // Stash the event so it can be triggered later.
+      console.log(e);
       this.deferredprompt = e;
     });
 
@@ -532,7 +539,8 @@ export class pwainstall extends LitElement {
   }
 
   shouldShowInstall(): boolean {
-    const eligibleUser = this.showEligible && this.isSupportingBrowser && this.deferredprompt;
+    const eligibleUser = this.showEligible || this.isSupportingBrowser && this.deferredprompt;
+    console.log(this.deferredprompt);
     return this.showopen || eligibleUser;
   }
 
@@ -544,8 +552,17 @@ export class pwainstall extends LitElement {
 
       if (choiceResult.outcome === 'accepted') {
         console.log('Your PWA has been installed');
+
+        this.cancel();
+        this.installed = true;
         return true;
       } else {
+        this.cancel();
+
+        // set installed to true because we dont 
+        // want to show the install button to 
+        // a user who chose not to install
+        this.installed = true;
         console.log('User chose to not install your PWA');
         return false;
       }
@@ -565,7 +582,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.installed !== true && this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
@@ -638,7 +655,7 @@ export class pwainstall extends LitElement {
         </div>
 
         ${!this.isIOS ? html`<div id="buttonsContainer">
-          ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">${this.installbuttontext} ${this.manifestdata.short_name}</button>` : html`<button @click="${() => this.cancel()}" id="installButton">${this.cancelbuttontext}</button>`}
+          ${this.deferredprompt ? html`<button id="installButton" @click="${() => this.install()}">${this.installbuttontext} ${this.manifestdata.short_name}</button>` : html`<button @click="${() => this.cancel()}" id="installCancelButton">${this.cancelbuttontext}</button>`}
         </div>
           </div>` : html`<p id="iosText">${this.iosinstallinfotext}</p>`}
         `
