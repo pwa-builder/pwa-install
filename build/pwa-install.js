@@ -24,7 +24,6 @@ let pwainstall = class pwainstall extends LitElement {
     }
     static get styles() {
         return css `
-
      :host {
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
        --modal-z-index: auto;
@@ -456,12 +455,16 @@ let pwainstall = class pwainstall extends LitElement {
                 console.error('Error getting manifest, check that you have a valid web manifest');
             }
         }
+        if (this.showEligible) {
+            this.showopen = false;
+        }
         window.addEventListener('beforeinstallprompt', (e) => {
             // Prevent Chrome 67 and earlier from automatically showing the prompt
             e.preventDefault();
-            // Stash the event so it can be triggered later.
             console.log(e);
+            // Stash the event so it can be triggered later.
             this.deferredprompt = e;
+            this.showopen = true;
         });
         document.onkeyup = (e) => {
             if (e.key === "Escape") {
@@ -516,9 +519,12 @@ let pwainstall = class pwainstall extends LitElement {
         this.dispatchEvent(event);
     }
     shouldShowInstall() {
-        const eligibleUser = this.showEligible || this.isSupportingBrowser && this.deferredprompt;
-        console.log(this.deferredprompt);
-        return this.showopen || eligibleUser;
+        const eligibleUser = this.showEligible && this.deferredprompt || this.isSupportingBrowser && this.deferredprompt;
+        console.log('this.deferredprompt', this.deferredprompt);
+        console.log('this.showEligible', this.showEligible);
+        console.log('this.isSupportingBrowser', this.isSupportingBrowser);
+        return eligibleUser;
+        // return this.showopen || eligibleUser;
     }
     async install() {
         if (this.deferredprompt) {
@@ -560,7 +566,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${this.installed !== true && this.shouldShowInstall() ? html `<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.installed !== true && this.shouldShowInstall() || this.shouldShowInstall() && this.showEligible && this.showopen ? html `<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
