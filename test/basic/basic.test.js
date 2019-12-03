@@ -71,23 +71,27 @@ it('shouldShowInstall should return undefined', async () => {
   expect(testResult).to.be.undefined;
 });
 
-it('shouldShowInstall should return true if showopen is true', async () => {
+// will be undefined in the test environment as there is no manifest / sw
+// we never want to show the install button if the app cant be installed
+it('shouldShowInstall should still return undefined even if showopen is true', async () => {
   const el = await fixture('<pwa-install showopen></pwa-install>');
 
   const testResult = el.shouldShowInstall();
   await elementUpdated(el);
 
-  expect(testResult).to.be.true;
+  expect(testResult).to.be.undefined;
 });
 
-it('shouldShowInstall should return true if showeligible is on', async () => {
+// will be undefined in the test environment as there is no manifest / sw
+// we never want to show the install button if the app cant be installed
+it('shouldShowInstall should return undefined even if showeligible is on', async () => {
   // this should be undefined because install is eligible in this case
   const el = await fixture('<pwa-install showeligible></pwa-install>');
 
   const testResult = el.shouldShowInstall();
   await elementUpdated(el);
 
-  expect(testResult).to.be.true;
+  expect(testResult).to.be.undefined;
 });
 
 
