@@ -17,7 +17,6 @@
   "author": "PWABuilder Team",
   "license": "ISC",
   "dependencies": {
-    "infinite-carousel-wc": "^0.4.1",
     "lit-element": "^2.2.1"
   },
   "devDependencies": {

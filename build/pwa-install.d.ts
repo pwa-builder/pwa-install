@@ -1,5 +1,4 @@
 import { LitElement } from 'lit-element';
-import 'infinite-carousel-wc/dist/esm/infinite-carousel-wc.min.js';
 export declare class pwainstall extends LitElement {
     deferredprompt: any;
     manifestpath: string;
@@ -23,6 +22,8 @@ export declare class pwainstall extends LitElement {
     checkManifest(manifestData: any): void;
     getManifestData(): Promise<any>;
     updateButtonColor(data: any): void;
+    scrollToLeft(): void;
+    scrollToRight(): void;
     openPrompt(): void;
     closePrompt(): void;
     shouldShowInstall(): boolean;

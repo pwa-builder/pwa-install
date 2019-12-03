@@ -5,7 +5,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { LitElement, html, customElement, property, css } from 'lit-element';
-import 'infinite-carousel-wc/dist/esm/infinite-carousel-wc.min.js';
 let pwainstall = class pwainstall extends LitElement {
     constructor() {
         super();
@@ -230,14 +229,57 @@ let pwainstall = class pwainstall extends LitElement {
       color: rgba(51, 51, 51, 0.72);
      }
 
+     #screenshotsContainer {
+       display: flex;
+     }
+
+     #screenshotsContainer button {
+      border: none;
+      width: 4em;
+      
+      transition: background-color 0.2s;
+     }
+
+     #screenshotsContainer button:hover {
+       background-color: #bbbbbb;
+     }
+
+     #screenshotsContainer button svg {
+      width: 28px;
+      fill: #6b6969;
+     }
+
      #screenshots {
       display: flex;
-      justify-content: flex-end;
+      scroll-snap-type: x mandatory;
+      flex-wrap: wrap;
+      flex-direction: column;
+      overflow-x: scroll;
+
+      width: 24em;
+      height: 14em;
+
+      -webkit-overflow-scrolling: touch
+     }
+
+     #screenshots div {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       scroll-snap-align: start;
+
+       height: 14em;
+       width: 100%;
+
+       background:#efefef;
      }
 
      #screenshots img {
-      height: 200px;
-      margin-right: 12px;
+       height: 100%;
+     }
+
+     #screenshots::-webkit-scrollbar {
+       display: none;
      }
 
      #tagsDiv {
@@ -295,7 +337,7 @@ let pwainstall = class pwainstall extends LitElement {
       text-align: center;
       font-weight: bold;
 
-      position: fixed;
+      position: relative;
       bottom: 0;
     }
 
@@ -508,6 +550,25 @@ let pwainstall = class pwainstall extends LitElement {
             this.style.setProperty('--install-button-color', data.theme_color);
         }
     }
+    scrollToLeft() {
+        const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+        // screenshotsDiv.scrollBy(-10, 0);
+        screenshotsDiv.scrollBy({
+            left: -15,
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+    scrollToRight() {
+        const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+        console.log(screenshotsDiv);
+        // screenshotsDiv.scrollBy(10, 0);
+        screenshotsDiv.scrollBy({
+            left: 15,
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
     openPrompt() {
         this.openmodal = true;
         let event = new CustomEvent('show');
@@ -615,15 +676,19 @@ let pwainstall = class pwainstall extends LitElement {
           ${this.manifestdata.screenshots ?
                 html `
             <div id="screenshotsContainer">
-              <div id="screenshots">
-                <infinite-carousel-wc>
-                ${this.manifestdata.screenshots.map((screen, index) => {
+              <button @click="${() => this.scrollToLeft()}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M401.4 224h-214l83-79.4c11.9-12.5 11.9-32.7 0-45.2s-31.2-12.5-43.2 0L89 233.4c-6 5.8-9 13.7-9 22.4v.4c0 8.7 3 16.6 9 22.4l138.1 134c12 12.5 31.3 12.5 43.2 0 11.9-12.5 11.9-32.7 0-45.2l-83-79.4h214c16.9 0 30.6-14.3 30.6-32 .1-18-13.6-32-30.5-32z"/></svg>
+              </button>
+                <section id="screenshots">
+                  ${this.manifestdata.screenshots.map((screen) => {
                     return html `
-                              <div slot="${index + 1}"><img alt="App Screenshot" src="${screen.src}"></div>
-                            `;
+                            <div><img alt="App Screenshot" src="${screen.src}"></div>
+                          `;
                 })}
-                </infinite-carousel-wc>
-              </div>
+                </section>
+              <button @click="${() => this.scrollToRight()}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M284.9 412.6l138.1-134c6-5.8 9-13.7 9-22.4v-.4c0-8.7-3-16.6-9-22.4l-138.1-134c-12-12.5-31.3-12.5-43.2 0-11.9 12.5-11.9 32.7 0 45.2l83 79.4h-214c-17 0-30.7 14.3-30.7 32 0 18 13.7 32 30.6 32h214l-83 79.4c-11.9 12.5-11.9 32.7 0 45.2 12 12.5 31.3 12.5 43.3 0z"/></svg>
+              </button>
             </div>
             ` : null}
           </div>
