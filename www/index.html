@@ -20,17 +20,16 @@
 
   <pwa-install id="mainInstall"></pwa-install>
 
-  <pwa-install showEligible>Eligible Install</pwa-install>
+  <pwa-install id="lesser" manifestpath="manifest-lesser.json" usecustom></pwa-install>
 
-  <pwa-install id="lesser" manifestpath="manifest-lesser.json"></pwa-install>
-
-  <pwa-install id="ownContent" featuresheader="My own features header" 
+  <pwa-install  id="ownContent" featuresheader="My own features header" 
     descriptionheader="My description" 
     iosinstallinfotext="Yo, dude! Tap the share button and then 'Add to Homescreen'"
     installbuttontext="Click here to install"
-    cancelbuttontext="I'll do it later!"></pwa-install>
+    cancelbuttontext="I'll do it later!"
+    usecustom></pwa-install >
 
-  <pwa-install id="invalidMani" manifestpath="manifest-invalid.json"></pwa-install>
+  <pwa-install id="invalidMani" manifestpath="manifest-invalid.json" usecustom></pwa-install>
 
   <button id="openInstall">
     Install
@@ -47,10 +46,6 @@
   <button id="openInvalidMani">
     Install with invalid Manifest
   </button>
-
-  <script type="module">
-    import '../build/pwa-install.js';
-  </script>
 
   <script>
     document.querySelector('#openInstall').addEventListener('click', () => {
@@ -84,6 +79,10 @@
     function hidden(ev) {
       console.log('hide event fired', ev);
     }
+  </script>
+
+  <script type="module">
+    import '../build/pwa-install.js';
   </script>
 
   <script>

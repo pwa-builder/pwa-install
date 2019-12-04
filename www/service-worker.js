@@ -14,7 +14,6 @@ self.addEventListener("install", function (event) {
 
   event.waitUntil(
     caches.open(CACHE).then(function (cache) {
-      console.log("[PWA Builder] Caching pages during install", cache);
     })
   );
 });
@@ -27,14 +26,11 @@ self.addEventListener("activate", function (event) {
 
 // If any fetch fails, it will look for the request in the cache and serve it from there first
 self.addEventListener("fetch", function (event) {
-  console.log(event);
  
 });
 
 function fromCache(request) {
-  console.log(request);
 }
 
 function updateCache(request, response) {
-  console.log(request, response);
 }

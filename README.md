@@ -38,13 +38,14 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 
 | Property            | Attribute           | Description                                       | Type      | Default         |
 | ------------------- | ------------------- | ------------------------------------------------- | --------- | --------------- |
-| `showeligible`      | `showeligible`      | Will only show install button if user is eligible | `boolean` | `false`         |
+| `showopen`          | `showopen`          | Will always show the install button               | `boolean` | `false`         |
+| `usecustom`         | `usecustom`         | Hides default button                              | `boolean` | `false`         |
 | `manifestpath`      | `manifestpath`      | path to your web manifest                         | `string`  | `manifest.json` |
 | `featuresheader`    | `featuresheader`    | Controls the text of the features header          | `string`  | `Key Features`  |
 | `descriptionheader` | `descriptionheader` | Controls the text of the description header       | `string`  | `Description`   |
 | `installbuttontext` | `installbuttontext` | Controls the text of the install button           | `string`  | `Install`       |
 | `cancelbuttontext`  | `cancelbuttontext`  | Controls the text of the cancel button            | `string`  | `Cancel`        |
-| `iosinstallinfotext`| `iosinstallinfotext`| Controls the iOS installation info text             | `string`  | `Tap the share button and then 'Add to Homescreen'`   |
+| `iosinstallinfotext`| `iosinstallinfotext`| Controls the iOS installation info text           | `string`  | `Tap the share button and then 'Add to Homescreen'`   |
 
 ### Methods
 

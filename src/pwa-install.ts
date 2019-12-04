@@ -5,17 +5,17 @@ import {
 @customElement('pwa-install')
 export class pwainstall extends LitElement {
 
-  @property() deferredprompt: any;
   @property() manifestpath: string = "manifest.json";
   @property() iconpath: string;
   @property() manifestdata: any;
 
   @property({ type: Boolean }) openmodal: boolean;
   @property({ type: Boolean }) showopen: boolean;
-  @property({ type: Boolean }) showEligible: boolean;
   @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
   @property({ type: Boolean }) installed: boolean;
+  @property({ type: Boolean }) hasprompt: boolean = false;
+  @property({ type: Boolean }) usecustom: boolean = false;
 
   @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
@@ -23,6 +23,8 @@ export class pwainstall extends LitElement {
   @property() installbuttontext: string = "Install";
   @property() cancelbuttontext: string = "Cancel";
   @property() iosinstallinfotext: string = "Tap the share button and then 'Add to Homescreen'";
+
+  @property() deferredprompt: any;
 
   static get styles() {
     return css`
@@ -504,6 +506,18 @@ export class pwainstall extends LitElement {
     this.installed = false;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+
+    window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
+
+    document.onkeyup = (e) => {
+      if (e.key === "Escape") {
+        this.cancel();
+      }
+    }
+  }
+
   async firstUpdated(): Promise<void> {
     if (this.manifestpath) {
       try {
@@ -513,27 +527,15 @@ export class pwainstall extends LitElement {
         console.error('Error getting manifest, check that you have a valid web manifest');
       }
     }
+  }
 
-    if (this.showEligible) {
-      this.showopen = false;
-    }
+  handleInstallPromptEvent(event) {
+    console.log(event);
+    this.deferredprompt = event;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      e.preventDefault();
-      console.log(e);
-      // Stash the event so it can be triggered later.
-      this.deferredprompt = e;
+    this.hasprompt = true;
 
-      this.showopen = true;
-    });
-
-
-    document.onkeyup = (e) => {
-      if (e.key === "Escape") {
-        this.cancel();
-      }
-    }
+    event.preventDefault();
   }
 
   // Check that the manifest has our 3 required properties
@@ -617,12 +619,11 @@ export class pwainstall extends LitElement {
   }
 
   shouldShowInstall(): boolean {
-    const eligibleUser = this.showEligible && this.deferredprompt || this.isSupportingBrowser && this.deferredprompt;
+    const eligibleUser = !this.usecustom && this.isSupportingBrowser && this.hasprompt === true;
     console.log('this.deferredprompt', this.deferredprompt);
-    console.log('this.showEligible', this.showEligible);
     console.log('this.isSupportingBrowser', this.isSupportingBrowser);
-    return eligibleUser;
-    // return this.showopen || eligibleUser;
+    // return eligibleUser;
+    return this.showopen || eligibleUser;
   }
 
   public async install(): Promise<boolean> {
@@ -678,7 +679,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.installed !== true && this.shouldShowInstall() || this.shouldShowInstall() && this.showEligible && this.showopen ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${!this.usecustom && this.showopen || this.shouldShowInstall() && this.installed !== true ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>

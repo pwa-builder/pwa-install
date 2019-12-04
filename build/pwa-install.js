@@ -9,6 +9,8 @@ let pwainstall = class pwainstall extends LitElement {
     constructor() {
         super();
         this.manifestpath = "manifest.json";
+        this.hasprompt = false;
+        this.usecustom = false;
         this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
         this.featuresheader = "Key Features";
         this.descriptionheader = "Description";
@@ -488,6 +490,15 @@ let pwainstall = class pwainstall extends LitElement {
 
     `;
     }
+    connectedCallback() {
+        super.connectedCallback();
+        window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
+        document.onkeyup = (e) => {
+            if (e.key === "Escape") {
+                this.cancel();
+            }
+        };
+    }
     async firstUpdated() {
         if (this.manifestpath) {
             try {
@@ -497,22 +508,12 @@ let pwainstall = class pwainstall extends LitElement {
                 console.error('Error getting manifest, check that you have a valid web manifest');
             }
         }
-        if (this.showEligible) {
-            this.showopen = false;
-        }
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent Chrome 67 and earlier from automatically showing the prompt
-            e.preventDefault();
-            console.log(e);
-            // Stash the event so it can be triggered later.
-            this.deferredprompt = e;
-            this.showopen = true;
-        });
-        document.onkeyup = (e) => {
-            if (e.key === "Escape") {
-                this.cancel();
-            }
-        };
+    }
+    handleInstallPromptEvent(event) {
+        console.log(event);
+        this.deferredprompt = event;
+        this.hasprompt = true;
+        event.preventDefault();
     }
     // Check that the manifest has our 3 required properties
     // If not console an error to the user and return
@@ -580,12 +581,11 @@ let pwainstall = class pwainstall extends LitElement {
         this.dispatchEvent(event);
     }
     shouldShowInstall() {
-        const eligibleUser = this.showEligible && this.deferredprompt || this.isSupportingBrowser && this.deferredprompt;
+        const eligibleUser = !this.usecustom && this.isSupportingBrowser && this.hasprompt === true;
         console.log('this.deferredprompt', this.deferredprompt);
-        console.log('this.showEligible', this.showEligible);
         console.log('this.isSupportingBrowser', this.isSupportingBrowser);
-        return eligibleUser;
-        // return this.showopen || eligibleUser;
+        // return eligibleUser;
+        return this.showopen || eligibleUser;
     }
     async install() {
         if (this.deferredprompt) {
@@ -627,7 +627,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${this.installed !== true && this.shouldShowInstall() || this.shouldShowInstall() && this.showEligible && this.showopen ? html `<button id="openButton" @click="${() => this.openPrompt()}">
+      ${!this.usecustom && this.showopen || this.shouldShowInstall() && this.installed !== true ? html `<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
@@ -710,9 +710,6 @@ let pwainstall = class pwainstall extends LitElement {
 };
 __decorate([
     property()
-], pwainstall.prototype, "deferredprompt", void 0);
-__decorate([
-    property()
 ], pwainstall.prototype, "manifestpath", void 0);
 __decorate([
     property()
@@ -728,9 +725,6 @@ __decorate([
 ], pwainstall.prototype, "showopen", void 0);
 __decorate([
     property({ type: Boolean })
-], pwainstall.prototype, "showEligible", void 0);
-__decorate([
-    property({ type: Boolean })
 ], pwainstall.prototype, "isSupportingBrowser", void 0);
 __decorate([
     property({ type: Boolean })
@@ -738,6 +732,12 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], pwainstall.prototype, "installed", void 0);
+__decorate([
+    property({ type: Boolean })
+], pwainstall.prototype, "hasprompt", void 0);
+__decorate([
+    property({ type: Boolean })
+], pwainstall.prototype, "usecustom", void 0);
 __decorate([
     property()
 ], pwainstall.prototype, "explainer", void 0);
@@ -756,6 +756,9 @@ __decorate([
 __decorate([
     property()
 ], pwainstall.prototype, "iosinstallinfotext", void 0);
+__decorate([
+    property()
+], pwainstall.prototype, "deferredprompt", void 0);
 pwainstall = __decorate([
     customElement('pwa-install')
 ], pwainstall);
