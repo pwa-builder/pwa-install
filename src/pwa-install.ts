@@ -527,10 +527,14 @@ export class pwainstall extends LitElement {
         console.error('Error getting manifest, check that you have a valid web manifest');
       }
     }
+
+    if (this.deferredprompt === undefined) {
+      // add listener once more
+      window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
+    }
   }
 
   handleInstallPromptEvent(event) {
-    console.log(event);
     this.deferredprompt = event;
 
     this.hasprompt = true;
@@ -619,7 +623,7 @@ export class pwainstall extends LitElement {
   }
 
   shouldShowInstall(): boolean {
-    const eligibleUser = !this.usecustom && this.isSupportingBrowser && this.hasprompt === true;
+    const eligibleUser = !this.usecustom && this.isSupportingBrowser && this.hasprompt === true || this.isIOS;
     console.log('this.deferredprompt', this.deferredprompt);
     console.log('this.isSupportingBrowser', this.isSupportingBrowser);
     // return eligibleUser;
@@ -679,7 +683,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${!this.usecustom && this.showopen || this.shouldShowInstall() && this.installed !== true ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.usecustom === false && this.showopen || this.shouldShowInstall() && this.installed !== true ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
