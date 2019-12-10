@@ -130,7 +130,7 @@ export class pwainstall extends LitElement {
       display: flex;
       justify-content: flex-end;
       position: relative;
-      bottom: -4em;
+      bottom: -3.5em;
       height: 100px;
 
       background:#dedede75;
