@@ -630,7 +630,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${this.usecustom === false && this.showopen || this.shouldShowInstall() && this.installed !== true ? html `<button id="openButton" @click="${() => this.openPrompt()}">
+      ${!this.usecustom && this.installed !== true || this.shouldShowInstall() && this.installed !== true ? html `<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
