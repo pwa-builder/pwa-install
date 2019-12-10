@@ -63,4 +63,5 @@ supported CSS variables.
 | ------------ | ------------------------- |
 | `--install-button-color` | `Changes the color of the install button` |
 | `--modal-z-index`        | `Changes the z-index of the install modal`|
+| `--modal-background-index` | `Changes the z-index of the install modal background`|
 | `--modal-background-color` | `Changes the background color of the install modal`|

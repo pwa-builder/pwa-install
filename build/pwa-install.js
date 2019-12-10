@@ -27,7 +27,8 @@ let pwainstall = class pwainstall extends LitElement {
         return css `
      :host {
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
-       --modal-z-index: auto;
+       --modal-z-index: 9999;
+       --background-z-index: 9998;
        --modal-background-color: white;
      }
 
@@ -92,6 +93,7 @@ let pwainstall = class pwainstall extends LitElement {
       right: 0;
       background: #e3e3e3b0;
       backdrop-filter: blur(5px);
+      z-index: var(--background-z-index);
 
       animation-name: fadein;
       animation-duration: 250ms;
@@ -588,7 +590,8 @@ let pwainstall = class pwainstall extends LitElement {
         console.log('this.deferredprompt', this.deferredprompt);
         console.log('this.isSupportingBrowser', this.isSupportingBrowser);
         // return eligibleUser;
-        return this.showopen || eligibleUser;
+        console.log('eligible user', eligibleUser);
+        return eligibleUser;
     }
     async install() {
         if (this.deferredprompt) {
