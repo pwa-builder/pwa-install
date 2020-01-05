@@ -17,7 +17,7 @@ export class pwainstall extends LitElement {
   @property({ type: Boolean }) hasprompt: boolean = false;
   @property({ type: Boolean }) usecustom: boolean = false;
 
-  @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
+  @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property() featuresheader: string = "Key Features";
   @property() descriptionheader: string = "Description";
   @property() installbuttontext: string = "Install";
