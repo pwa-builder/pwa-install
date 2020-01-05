@@ -130,12 +130,9 @@ export class pwainstall extends LitElement {
       display: flex;
       justify-content: flex-end;
       position: relative;
-      bottom: -3.5em;
       height: 100px;
 
       background:#dedede75;
-      margin-top: auto;
-      margin-bottom: 63px;
       width: 100%;
       right: 0em;
       border-radius: 0px 0px 12px 12px;
@@ -191,6 +188,7 @@ export class pwainstall extends LitElement {
      #contentContainer {
        margin-left: 40px;
        margin-right: 40px;
+       flex: 1;
      }
 
      #contentContainer h3 {
