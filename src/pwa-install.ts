@@ -348,6 +348,10 @@ export class pwainstall extends LitElement {
       bottom: 0;
     }
 
+    #manifest-description {
+      white-space: pre-wrap;
+    }
+
     @media(max-height: 780px) {
       #buttonsContainer {
         bottom: -1em;
@@ -758,7 +762,7 @@ export class pwainstall extends LitElement {
 
           <div>
             <h3>${this.descriptionheader}</h3>
-            <p>${this.manifestdata.description}</p>
+            <p id="manifest-description">${this.manifestdata.description}</p>
           </div>
         </div>
 
