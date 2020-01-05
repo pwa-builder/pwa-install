@@ -295,7 +295,8 @@ export class pwainstall extends LitElement {
      }
 
      #desc {
-      width: 40em;
+      width: 100%;
+      max-width: 40em;
       font-size: 14px;
       color: #7E7E7E;
       text-overflow: ellipsis;
@@ -706,8 +707,8 @@ export class pwainstall extends LitElement {
               <h1>${this.manifestdata.name}</h1>
 
               <p id="desc">
-              ${this.explainer}
-            </p>
+                ${this.explainer}
+              </p>
             </div>
           </div>
 
