@@ -29,6 +29,7 @@ export class pwainstall extends LitElement {
   static get styles() {
     return css`
      :host {
+       --install-focus-color: #919c9c;
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
        --modal-z-index: 9999;
        --background-z-index: 9998;
@@ -188,6 +189,13 @@ export class pwainstall extends LitElement {
       align-self: self-end;
      }
 
+
+     #closeButton:focus,
+     #installButton:focus,
+     #installCancelButton:focus {
+      box-shadow: 0 0 0 3px var(--install-focus-color);
+     }
+
      #contentContainer {
        margin-left: 40px;
        margin-right: 40px;
@@ -247,6 +255,7 @@ export class pwainstall extends LitElement {
       transition: background-color 0.2s;
      }
 
+     #screenshotsContainer button:focus,
      #screenshotsContainer button:hover {
        background-color: #bbbbbb;
      }
