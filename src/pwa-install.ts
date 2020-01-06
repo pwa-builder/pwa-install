@@ -540,11 +540,11 @@ export class pwainstall extends LitElement {
 
     window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
 
-    document.onkeyup = (e) => {
-      if (e.key === "Escape") {
+    document.addEventListener('keyup', (event) => {
+      if (event.key === "Escape") {
         this.cancel();
       }
-    }
+    });
   }
 
   async firstUpdated(): Promise<void> {
