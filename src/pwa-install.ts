@@ -39,13 +39,25 @@ export class pwainstall extends LitElement {
        outline: none;
      }
 
+     #installModalWrapper {
+      height: 100vh;
+      width: 100vw;
+      overflow: auto;
+      position: fixed;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: var(--modal-z-index);
+     }
+
+     #descriptionWrapper {
+       margin-bottom: 3em;
+     }
+
      #installModal {
       background: var(--modal-background-color);
-      position: fixed;
-      bottom: 3em;
-      top: 3em;
-      left: 12em;
-      right: 12em;
+      margin: 3em 12em;
       font-family: sans-serif;
       box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
       border-radius: 10px;
@@ -357,32 +369,30 @@ export class pwainstall extends LitElement {
 
       @media(min-width: 1445px) {
         #installModal {
-          left: 22em;
-          right: 22em;
+          margin-left: 22em;
+          margin-right: 22em;
         }
       }
 
       @media(min-width: 1800px) {
         #installModal {
-          left: 26em;
-          right: 26em;
+          margin-left: 26em;
+          margin-right: 26em;
         }
       }
 
       @media(min-width: 2000px) {
         #installModal {
-          left: 38em;
-          right: 38em;
+          margin-left: 38em;
+          margin-right: 38em;
         }
       }
 
       @media(max-width: 1220px) {
         #installModal {
-          bottom: 0em;
-          top: 0em;
-          left: 0em;
-          right: 0em;
+          margin: 0;
           border-radius: 0px;
+          min-height: 100%;
 
           animation-name: mobile;
           animation-duration: 250ms;
@@ -697,6 +707,7 @@ export class pwainstall extends LitElement {
       ${
       this.openmodal ?
         html`
+          <div id="installModalWrapper">
           <div id="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
@@ -733,6 +744,7 @@ export class pwainstall extends LitElement {
             }) : null
             }
             </ul>
+          </div>
           </div>` : null}
 
           ${this.manifestdata.screenshots ?
@@ -756,7 +768,7 @@ export class pwainstall extends LitElement {
             ` : null}
           </div>
 
-          <div>
+          <div id="descriptionWrapper">
             <h3>${this.descriptionheader}</h3>
             <p>${this.manifestdata.description}</p>
           </div>
