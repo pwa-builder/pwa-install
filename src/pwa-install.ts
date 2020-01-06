@@ -218,7 +218,8 @@ export class pwainstall extends LitElement {
 
      #featuresScreenDiv {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
+      align-items: center;
       margin-right: 20px;
      }
 
@@ -231,7 +232,6 @@ export class pwainstall extends LitElement {
      }
 
      #keyFeatures {
-      max-height: 220px;
       overflow: hidden;
      }
 
@@ -249,6 +249,7 @@ export class pwainstall extends LitElement {
      }
 
      #screenshotsContainer {
+       max-height: 220px;
        display: flex;
      }
 
