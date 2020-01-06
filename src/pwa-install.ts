@@ -49,7 +49,6 @@ export class pwainstall extends LitElement {
       top: 0;
       left: 0;
       right: 0;
-      z-index: var(--modal-z-index);
      }
 
      #descriptionWrapper {
@@ -57,6 +56,7 @@ export class pwainstall extends LitElement {
      }
 
      #installModal {
+      position: absolute;
       background: var(--modal-background-color);
       margin: 3em 12em;
       font-family: sans-serif;
@@ -445,6 +445,7 @@ export class pwainstall extends LitElement {
          #installModal {
            overflow: scroll;
            box-shadow: none;
+           max-width: 100%;
          }
 
          infinite-carousel-wc {
@@ -719,12 +720,12 @@ export class pwainstall extends LitElement {
         </slot>
       </button>` : null}
 
-      ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
 
       ${
       this.openmodal ?
         html`
           <div id="installModalWrapper">
+          ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
           <div id="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
