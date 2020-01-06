@@ -404,6 +404,14 @@ export class pwainstall extends LitElement {
       }
 
       @media (max-width: 962px) {
+        #headerContainer h1  {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        #logoContainer {
+          align-items: center
+        }
 
         #desc {
           display: none;
