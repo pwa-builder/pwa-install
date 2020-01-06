@@ -371,7 +371,7 @@ export class pwainstall extends LitElement {
 
     @media(max-height: 780px) {
       #buttonsContainer {
-        bottom: -1em;
+        height: 70px;
         background: transparent;
       }
     }
