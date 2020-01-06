@@ -206,7 +206,7 @@ export class pwainstall extends LitElement {
 
      #featuresScreenDiv {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       margin-right: 20px;
      }
