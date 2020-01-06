@@ -36,22 +36,23 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 
 ### Properties
 
-| Property            | Attribute           | Description                                       | Type      | Default         |
-| ------------------- | ------------------- | ------------------------------------------------- | --------- | --------------- |
-| `showopen`          | `showopen`          | Will always show the install button               | `boolean` | `false`         |
-| `usecustom`         | `usecustom`         | Hides default button                              | `boolean` | `false`         |
-| `manifestpath`      | `manifestpath`      | path to your web manifest                         | `string`  | `manifest.json` |
-| `featuresheader`    | `featuresheader`    | Controls the text of the features header          | `string`  | `Key Features`  |
-| `descriptionheader` | `descriptionheader` | Controls the text of the description header       | `string`  | `Description`   |
-| `installbuttontext` | `installbuttontext` | Controls the text of the install button           | `string`  | `Install`       |
-| `cancelbuttontext`  | `cancelbuttontext`  | Controls the text of the cancel button            | `string`  | `Cancel`        |
-| `iosinstallinfotext`| `iosinstallinfotext`| Controls the iOS installation info text           | `string`  | `Tap the share button and then 'Add to Homescreen'`   |
+| Property             | Attribute            | Description                                                                     | Type      | Default                                             |
+| -------------------- | -------------------- | ------------------------------------------------------------------------------- | --------- | --------------------------------------------------- |
+| `showopen`           | `showopen`           | Will always show the install button                                             | `boolean` | `false`                                             |
+| `usecustom`          | `usecustom`          | Hides default button                                                            | `boolean` | `false`                                             |
+| `manifestpath`       | `manifestpath`       | path to your web manifest                                                       | `string`  | `manifest.json`                                     |
+| `explainer`          | `explainer`          | Controls the text of the explainer text just below the titlee of the app header | `string`  | `This app can be installed on`                      |
+| `featuresheader`     | `featuresheader`     | Controls the text of the features header                                        | `string`  | `Key Features`                                      |
+| `descriptionheader`  | `descriptionheader`  | Controls the text of the description header                                     | `string`  | `Description`                                       |
+| `installbuttontext`  | `installbuttontext`  | Controls the text of the install button                                         | `string`  | `Install`                                           |
+| `cancelbuttontext`   | `cancelbuttontext`   | Controls the text of the cancel button                                          | `string`  | `Cancel`                                            |
+| `iosinstallinfotext` | `iosinstallinfotext` | Controls the iOS installation info text                                         | `string`  | `Tap the share button and then 'Add to Homescreen'` |
 
 ### Methods
 
-| name         | Description               |
-| ------------ | ------------------------- |
-| `openPrompt()` | `Opens the install modal` |
+| name            | Description                |
+| --------------- | -------------------------- |
+| `openPrompt()`  | `Opens the install modal`  |
 | `closePrompt()` | `Closes the install modal` |
 
 ### CSS Variables
@@ -59,9 +60,9 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 We recommend using our [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) to easliy tweak the style of this component to fit your project. Here are our current
 supported CSS variables.
 
-| name         | Description               |
-| ------------ | ------------------------- |
-| `--install-button-color` | `Changes the color of the install button` |
-| `--modal-z-index`        | `Changes the z-index of the install modal`|
-| `--modal-background-index` | `Changes the z-index of the install modal background`|
-| `--modal-background-color` | `Changes the background color of the install modal`|
+| name                       | Description                                           |
+| -------------------------- | ----------------------------------------------------- |
+| `--install-button-color`   | `Changes the color of the install button`             |
+| `--modal-z-index`          | `Changes the z-index of the install modal`            |
+| `--modal-background-index` | `Changes the z-index of the install modal background` |
+| `--modal-background-color` | `Changes the background color of the install modal`   |
