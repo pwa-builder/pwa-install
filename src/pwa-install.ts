@@ -5,11 +5,11 @@ import {
 @customElement('pwa-install')
 export class pwainstall extends LitElement {
 
-  @property() manifestpath: string = "manifest.json";
-  @property() iconpath: string;
-  @property() manifestdata: any;
+  @property({ type: String }) manifestpath: string = "manifest.json";
+  @property({ type: String }) iconpath: string;
+  @property({ type: Object }) manifestdata: any;
 
-  @property({ type: Boolean }) openmodal: boolean;
+  @property({ type: Boolean }) openmodal: boolean = false;
   @property({ type: Boolean }) showopen: boolean;
   @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
@@ -17,14 +17,14 @@ export class pwainstall extends LitElement {
   @property({ type: Boolean }) hasprompt: boolean = false;
   @property({ type: Boolean }) usecustom: boolean = false;
 
-  @property() explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
-  @property() featuresheader: string = "Key Features";
-  @property() descriptionheader: string = "Description";
-  @property() installbuttontext: string = "Install";
-  @property() cancelbuttontext: string = "Cancel";
-  @property() iosinstallinfotext: string = "Tap the share button and then 'Add to Homescreen'";
+  @property({ type: String }) explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
+  @property({ type: String }) featuresheader: string = "Key Features";
+  @property({ type: String }) descriptionheader: string = "Description";
+  @property({ type: String }) installbuttontext: string = "Install";
+  @property({ type: String }) cancelbuttontext: string = "Cancel";
+  @property({ type: String }) iosinstallinfotext: string = "Tap the share button and then 'Add to Homescreen'";
 
-  @property() deferredprompt: any;
+  deferredprompt: any;
 
   static get styles() {
     return css`
@@ -533,16 +533,22 @@ export class pwainstall extends LitElement {
     this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
 
     this.installed = false;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
 
     window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
 
-    document.onkeyup = (e) => {
+    document.onkeyup = async (e) => {
+      console.log(e.key);
       if (e.key === "Escape") {
-        this.cancel();
+        this.openmodal = false;
+
+        if (this.hasAttribute('openmodal')) {
+          this.removeAttribute('openmodal');
+        }
+
+        let event = new CustomEvent('hide');
+        this.dispatchEvent(event);
+
+        await this.requestUpdate();
       }
     }
   }
@@ -672,7 +678,7 @@ export class pwainstall extends LitElement {
       if (choiceResult.outcome === 'accepted') {
         console.log('Your PWA has been installed');
 
-        this.cancel();
+        await this.cancel();
         this.installed = true;
 
         let event = new CustomEvent('hide');
@@ -682,7 +688,7 @@ export class pwainstall extends LitElement {
       } else {
         console.log('User chose to not install your PWA');
 
-        this.cancel();
+        await this.cancel();
 
         // set installed to true because we dont 
         // want to show the install button to 
@@ -701,14 +707,18 @@ export class pwainstall extends LitElement {
   }
 
   cancel() {
-    this.openmodal = false;
+    return new Promise((resolve, reject) => {
+      this.openmodal = false;
 
-    if (this.hasAttribute('openmodal')) {
-      this.removeAttribute('openmodal');
-    }
+      if (this.hasAttribute('openmodal')) {
+        this.removeAttribute('openmodal');
+      }
 
-    let event = new CustomEvent('hide');
-    this.dispatchEvent(event);
+      let event = new CustomEvent('hide');
+      this.dispatchEvent(event);
+
+      resolve();
+    });
   }
 
   render() {
@@ -719,10 +729,10 @@ export class pwainstall extends LitElement {
         </slot>
       </button>` : null}
 
-      ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
+      ${this.openmodal === true ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
 
       ${
-      this.openmodal ?
+      this.openmodal === true ?
         html`
           <div id="installModalWrapper">
           <div id="installModal">
@@ -772,11 +782,11 @@ export class pwainstall extends LitElement {
               </button>
                 <section id="screenshots">
                   ${
-                    this.manifestdata.screenshots.map((screen) => {
-                      return html`
+              this.manifestdata.screenshots.map((screen) => {
+                return html`
                             <div><img alt="App Screenshot" src="${screen.src}"></div>
                           `
-                  })}
+              })}
                 </section>
               <button @click="${() => this.scrollToRight()}">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M284.9 412.6l138.1-134c6-5.8 9-13.7 9-22.4v-.4c0-8.7-3-16.6-9-22.4l-138.1-134c-12-12.5-31.3-12.5-43.2 0-11.9 12.5-11.9 32.7 0 45.2l83 79.4h-214c-17 0-30.7 14.3-30.7 32 0 18 13.7 32 30.6 32h214l-83 79.4c-11.9 12.5-11.9 32.7 0 45.2 12 12.5 31.3 12.5 43.3 0z"/></svg>
