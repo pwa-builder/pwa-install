@@ -11,7 +11,6 @@ let pwainstall = class pwainstall extends LitElement {
         this.manifestpath = "manifest.json";
         this.openmodal = false;
         this.hasprompt = false;
-        this.usecustom = false;
         this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
         this.featuresheader = "Key Features";
         this.descriptionheader = "Description";
@@ -24,18 +23,11 @@ let pwainstall = class pwainstall extends LitElement {
         this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
         this.installed = false;
         window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
-        document.onkeyup = async (e) => {
-            console.log(e.key);
-            if (e.key === "Escape") {
-                this.openmodal = false;
-                if (this.hasAttribute('openmodal')) {
-                    this.removeAttribute('openmodal');
-                }
-                let event = new CustomEvent('hide');
-                this.dispatchEvent(event);
-                await this.requestUpdate();
+        document.addEventListener('keyup', (event) => {
+            if (event.key === "Escape") {
+                this.cancel();
             }
-        };
+        });
     }
     static get styles() {
         return css `
@@ -60,7 +52,6 @@ let pwainstall = class pwainstall extends LitElement {
       top: 0;
       left: 0;
       right: 0;
-      z-index: var(--modal-z-index);
      }
 
      #descriptionWrapper {
@@ -68,6 +59,7 @@ let pwainstall = class pwainstall extends LitElement {
      }
 
      #installModal {
+      position: absolute;
       background: var(--modal-background-color);
       margin: 3em 12em;
       font-family: sans-serif;
@@ -382,7 +374,7 @@ let pwainstall = class pwainstall extends LitElement {
 
     @media(max-height: 780px) {
       #buttonsContainer {
-        bottom: -1em;
+        height: 70px;
         background: transparent;
       }
     }
@@ -456,6 +448,7 @@ let pwainstall = class pwainstall extends LitElement {
          #installModal {
            overflow: scroll;
            box-shadow: none;
+           max-width: 100%;
          }
 
          infinite-carousel-wc {
@@ -618,7 +611,7 @@ let pwainstall = class pwainstall extends LitElement {
         this.dispatchEvent(event);
     }
     shouldShowInstall() {
-        const eligibleUser = !this.usecustom && this.isSupportingBrowser && this.hasprompt === true || this.isIOS;
+        const eligibleUser = !this.usecustom && this.isSupportingBrowser && (this.hasprompt || this.isIOS);
         console.log('this.deferredprompt', this.deferredprompt);
         console.log('this.isSupportingBrowser', this.isSupportingBrowser);
         // return eligibleUser;
@@ -668,17 +661,16 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${!this.usecustom && this.installed !== true || this.shouldShowInstall() && this.installed !== true ? html `<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.usecustom !== true && this.installed !== true || this.shouldShowInstall() && this.installed !== true ? html `<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
       </button>` : null}
 
-      ${this.openmodal === true ? html `<div id="background" @click="${() => this.cancel()}"></div>` : null}
-
       ${this.openmodal === true ?
             html `
           <div id="installModalWrapper">
+          ${this.openmodal ? html `<div id="background" @click="${() => this.cancel()}"></div>` : null}
           <div id="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
