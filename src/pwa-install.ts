@@ -24,7 +24,7 @@ export class pwainstall extends LitElement {
   @property({ type: String }) cancelbuttontext: string = "Cancel";
   @property({ type: String }) iosinstallinfotext: string = "Tap the share button and then 'Add to Homescreen'";
 
-  deferredprompt: any;
+  @property() deferredprompt: any;
 
   static get styles() {
     return css`
@@ -553,11 +553,6 @@ export class pwainstall extends LitElement {
         console.error('Error getting manifest, check that you have a valid web manifest');
       }
     }
-
-    if (this.deferredprompt === undefined) {
-      // add listener once more
-      window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
-    }
   }
 
   handleInstallPromptEvent(event) {
@@ -649,7 +644,7 @@ export class pwainstall extends LitElement {
   }
 
   shouldShowInstall(): boolean {
-    const eligibleUser = !this.usecustom && this.isSupportingBrowser && (this.hasprompt || this.isIOS);
+    const eligibleUser = this.isSupportingBrowser && (this.hasprompt || this.isIOS);
     console.log('this.deferredprompt', this.deferredprompt);
     console.log('this.isSupportingBrowser', this.isSupportingBrowser);
     // return eligibleUser;
@@ -714,7 +709,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.usecustom !== true || this.shouldShowInstall() && this.installed !== true ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.usecustom !== true && this.shouldShowInstall() && this.installed !== true ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
