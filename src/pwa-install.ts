@@ -537,21 +537,11 @@ export class pwainstall extends LitElement {
 
     window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
 
-    document.onkeyup = async (e) => {
-      console.log(e.key);
-      if (e.key === "Escape") {
-        this.openmodal = false;
-
-        if (this.hasAttribute('openmodal')) {
-          this.removeAttribute('openmodal');
-        }
-
-        let event = new CustomEvent('hide');
-        this.dispatchEvent(event);
-
-        await this.requestUpdate();
+    document.addEventListener('keyup', (event) => {
+      if (event.key === "Escape") {
+        this.cancel();
       }
-    }
+    });
   }
 
   async firstUpdated(): Promise<void> {
