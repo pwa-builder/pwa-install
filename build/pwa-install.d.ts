@@ -19,7 +19,6 @@ export declare class pwainstall extends LitElement {
     deferredprompt: any;
     static get styles(): import("lit-element").CSSResult;
     constructor();
-    connectedCallback(): void;
     firstUpdated(): Promise<void>;
     handleInstallPromptEvent(event: any): void;
     checkManifest(manifestData: any): void;
@@ -31,6 +30,6 @@ export declare class pwainstall extends LitElement {
     closePrompt(): void;
     shouldShowInstall(): boolean;
     install(): Promise<boolean>;
-    cancel(): void;
+    cancel(): Promise<unknown>;
     render(): import("lit-element").TemplateResult;
 }
