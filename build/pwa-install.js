@@ -9,9 +9,10 @@ let pwainstall = class pwainstall extends LitElement {
     constructor() {
         super();
         this.manifestpath = "manifest.json";
+        this.openmodal = false;
         this.hasprompt = false;
         this.usecustom = false;
-        this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed up.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
+        this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
         this.featuresheader = "Key Features";
         this.descriptionheader = "Description";
         this.installbuttontext = "Install";
@@ -22,10 +23,24 @@ let pwainstall = class pwainstall extends LitElement {
         // handle iOS specifically
         this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
         this.installed = false;
+        window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
+        document.onkeyup = async (e) => {
+            console.log(e.key);
+            if (e.key === "Escape") {
+                this.openmodal = false;
+                if (this.hasAttribute('openmodal')) {
+                    this.removeAttribute('openmodal');
+                }
+                let event = new CustomEvent('hide');
+                this.dispatchEvent(event);
+                await this.requestUpdate();
+            }
+        };
     }
     static get styles() {
         return css `
      :host {
+       --install-focus-color: #919c9c;
        --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
        --modal-z-index: 9999;
        --background-z-index: 9998;
@@ -36,13 +51,25 @@ let pwainstall = class pwainstall extends LitElement {
        outline: none;
      }
 
+     #installModalWrapper {
+      height: 100vh;
+      width: 100vw;
+      overflow: auto;
+      position: fixed;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: var(--modal-z-index);
+     }
+
+     #descriptionWrapper {
+       margin-bottom: 3em;
+     }
+
      #installModal {
       background: var(--modal-background-color);
-      position: fixed;
-      bottom: 3em;
-      top: 3em;
-      left: 12em;
-      right: 12em;
+      margin: 3em 12em;
       font-family: sans-serif;
       box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
       border-radius: 10px;
@@ -127,12 +154,9 @@ let pwainstall = class pwainstall extends LitElement {
       display: flex;
       justify-content: flex-end;
       position: relative;
-      bottom: -3.5em;
       height: 100px;
 
       background:#dedede75;
-      margin-top: auto;
-      margin-bottom: 63px;
       width: 100%;
       right: 0em;
       border-radius: 0px 0px 12px 12px;
@@ -185,9 +209,17 @@ let pwainstall = class pwainstall extends LitElement {
       align-self: self-end;
      }
 
+
+     #closeButton:focus,
+     #installButton:focus,
+     #installCancelButton:focus {
+      box-shadow: 0 0 0 3px var(--install-focus-color);
+     }
+
      #contentContainer {
        margin-left: 40px;
        margin-right: 40px;
+       flex: 1;
      }
 
      #contentContainer h3 {
@@ -203,7 +235,8 @@ let pwainstall = class pwainstall extends LitElement {
 
      #featuresScreenDiv {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
+      align-items: center;
       margin-right: 20px;
      }
 
@@ -216,7 +249,6 @@ let pwainstall = class pwainstall extends LitElement {
      }
 
      #keyFeatures {
-      max-height: 220px;
       overflow: hidden;
      }
 
@@ -234,6 +266,7 @@ let pwainstall = class pwainstall extends LitElement {
      }
 
      #screenshotsContainer {
+       max-height: 220px;
        display: flex;
      }
 
@@ -244,6 +277,7 @@ let pwainstall = class pwainstall extends LitElement {
       transition: background-color 0.2s;
      }
 
+     #screenshotsContainer button:focus,
      #screenshotsContainer button:hover {
        background-color: #bbbbbb;
      }
@@ -292,7 +326,8 @@ let pwainstall = class pwainstall extends LitElement {
      }
 
      #desc {
-      width: 40em;
+      width: 100%;
+      max-width: 40em;
       font-size: 14px;
       color: #7E7E7E;
       text-overflow: ellipsis;
@@ -354,32 +389,30 @@ let pwainstall = class pwainstall extends LitElement {
 
       @media(min-width: 1445px) {
         #installModal {
-          left: 22em;
-          right: 22em;
+          margin-left: 22em;
+          margin-right: 22em;
         }
       }
 
       @media(min-width: 1800px) {
         #installModal {
-          left: 26em;
-          right: 26em;
+          margin-left: 26em;
+          margin-right: 26em;
         }
       }
 
       @media(min-width: 2000px) {
         #installModal {
-          left: 38em;
-          right: 38em;
+          margin-left: 38em;
+          margin-right: 38em;
         }
       }
 
       @media(max-width: 1220px) {
         #installModal {
-          bottom: 0em;
-          top: 0em;
-          left: 0em;
-          right: 0em;
+          margin: 0;
           border-radius: 0px;
+          min-height: 100%;
 
           animation-name: mobile;
           animation-duration: 250ms;
@@ -391,6 +424,14 @@ let pwainstall = class pwainstall extends LitElement {
       }
 
       @media (max-width: 962px) {
+        #headerContainer h1  {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        #logoContainer {
+          align-items: center
+        }
 
         #desc {
           display: none;
@@ -492,15 +533,6 @@ let pwainstall = class pwainstall extends LitElement {
 
     `;
     }
-    connectedCallback() {
-        super.connectedCallback();
-        window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
-        document.onkeyup = (e) => {
-            if (e.key === "Escape") {
-                this.cancel();
-            }
-        };
-    }
     async firstUpdated() {
         if (this.manifestpath) {
             try {
@@ -601,7 +633,7 @@ let pwainstall = class pwainstall extends LitElement {
             const choiceResult = await this.deferredprompt.userChoice;
             if (choiceResult.outcome === 'accepted') {
                 console.log('Your PWA has been installed');
-                this.cancel();
+                await this.cancel();
                 this.installed = true;
                 let event = new CustomEvent('hide');
                 this.dispatchEvent(event);
@@ -609,7 +641,7 @@ let pwainstall = class pwainstall extends LitElement {
             }
             else {
                 console.log('User chose to not install your PWA');
-                this.cancel();
+                await this.cancel();
                 // set installed to true because we dont 
                 // want to show the install button to 
                 // a user who chose not to install
@@ -624,12 +656,15 @@ let pwainstall = class pwainstall extends LitElement {
         }
     }
     cancel() {
-        this.openmodal = false;
-        if (this.hasAttribute('openmodal')) {
-            this.removeAttribute('openmodal');
-        }
-        let event = new CustomEvent('hide');
-        this.dispatchEvent(event);
+        return new Promise((resolve, reject) => {
+            this.openmodal = false;
+            if (this.hasAttribute('openmodal')) {
+                this.removeAttribute('openmodal');
+            }
+            let event = new CustomEvent('hide');
+            this.dispatchEvent(event);
+            resolve();
+        });
     }
     render() {
         return html `
@@ -639,10 +674,11 @@ let pwainstall = class pwainstall extends LitElement {
         </slot>
       </button>` : null}
 
-      ${this.openmodal ? html `<div id="background" @click="${() => this.cancel()}"></div>` : null}
+      ${this.openmodal === true ? html `<div id="background" @click="${() => this.cancel()}"></div>` : null}
 
-      ${this.openmodal ?
+      ${this.openmodal === true ?
             html `
+          <div id="installModalWrapper">
           <div id="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
@@ -652,8 +688,8 @@ let pwainstall = class pwainstall extends LitElement {
               <h1>${this.manifestdata.name}</h1>
 
               <p id="desc">
-              ${this.explainer}
-            </p>
+                ${this.explainer}
+              </p>
             </div>
           </div>
 
@@ -677,6 +713,7 @@ let pwainstall = class pwainstall extends LitElement {
                         `;
             }) : null}
             </ul>
+          </div>
           </div>` : null}
 
           ${this.manifestdata.screenshots ?
@@ -699,7 +736,7 @@ let pwainstall = class pwainstall extends LitElement {
             ` : null}
           </div>
 
-          <div>
+          <div id="descriptionWrapper">
             <h3>${this.descriptionheader}</h3>
             <p>${this.manifestdata.description}</p>
           </div>
@@ -715,13 +752,13 @@ let pwainstall = class pwainstall extends LitElement {
     }
 };
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "manifestpath", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "iconpath", void 0);
 __decorate([
-    property()
+    property({ type: Object })
 ], pwainstall.prototype, "manifestdata", void 0);
 __decorate([
     property({ type: Boolean })
@@ -745,26 +782,23 @@ __decorate([
     property({ type: Boolean })
 ], pwainstall.prototype, "usecustom", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "explainer", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "featuresheader", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "descriptionheader", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "installbuttontext", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "cancelbuttontext", void 0);
 __decorate([
-    property()
+    property({ type: String })
 ], pwainstall.prototype, "iosinstallinfotext", void 0);
-__decorate([
-    property()
-], pwainstall.prototype, "deferredprompt", void 0);
 pwainstall = __decorate([
     customElement('pwa-install')
 ], pwainstall);
