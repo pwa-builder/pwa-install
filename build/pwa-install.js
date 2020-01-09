@@ -20,7 +20,12 @@ let pwainstall = class pwainstall extends LitElement {
         // check for beforeinstallprompt support
         this.isSupportingBrowser = window.hasOwnProperty('BeforeInstallPromptEvent');
         // handle iOS specifically
-        this.isIOS = navigator.userAgent.includes('iPhone') || navigator.userAgent.includes('iPad');
+        // this includes the regular iPad
+        // and the iPad pro
+        // but not macOS
+        this.isIOS = navigator.userAgent.includes('iPhone')
+            || navigator.userAgent.includes('iPad')
+            || navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints && navigator.maxTouchPoints > 2;
         this.installed = false;
         window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
         document.addEventListener('keyup', (event) => {

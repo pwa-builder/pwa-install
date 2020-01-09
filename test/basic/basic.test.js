@@ -34,14 +34,12 @@ it ('still shouldnt have manifest data', async () => {
   expect(el.manifestdata).to.be.undefined;
 });
 
-it('shouldShowInstall should return undefined if no manifest data', async () => {
+it('shouldShowInstall should return false if no manifest data', async () => {
   const el = await fixture('<pwa-install></pwa-install>');
   await el.getManifestData();
 
-  expect(el.manifestdata).to.be.undefined;
-
   const testResult = el.shouldShowInstall();
-  expect(testResult).to.be.undefined;
+  expect(testResult).to.be.false;
 });
 
 it('should have manifest data', async () => {
@@ -62,39 +60,32 @@ it('should detect supported browser', async () => {
   expect(el.isSupportingBrowser).to.be.true;
 });
 
-it('shouldShowInstall should return undefined', async () => {
+it('shouldShowInstall should return false', async () => {
   const el = await fixture('<pwa-install></pwa-install>');
 
   const testResult = el.shouldShowInstall();
   await elementUpdated(el);
 
-  expect(testResult).to.be.undefined;
+  expect(testResult).to.be.false;
 });
 
-// will be undefined in the test environment as there is no manifest / sw
-// we never want to show the install button if the app cant be installed
-it('shouldShowInstall should still return undefined even if showopen is true', async () => {
+it('shouldShowInstall should still return false even if showopen is true', async () => {
   const el = await fixture('<pwa-install showopen></pwa-install>');
 
   const testResult = el.shouldShowInstall();
   await elementUpdated(el);
 
-  expect(testResult).to.be.undefined;
+  expect(testResult).to.be.false;
 });
 
-// will be undefined in the test environment as there is no manifest / sw
-// we never want to show the install button if the app cant be installed
-it('shouldShowInstall should return undefined even if showeligible is on', async () => {
-  // this should be undefined because install is eligible in this case
+it('shouldShowInstall should return false even if showeligible is on', async () => {
   const el = await fixture('<pwa-install showeligible></pwa-install>');
 
   const testResult = el.shouldShowInstall();
   await elementUpdated(el);
 
-  expect(testResult).to.be.undefined;
+  expect(testResult).to.be.false;
 });
-
-
 
 it('deferredPrompt should be undefined if not in install eligible env', async () => {
   const el = await fixture('<pwa-install></pwa-install>');
