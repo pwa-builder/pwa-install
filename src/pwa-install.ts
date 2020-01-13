@@ -286,7 +286,7 @@ export class pwainstall extends LitElement {
       overflow-x: scroll;
 
       width: 24em;
-      height: 13.7em;
+      max-height: 220px;
 
       -webkit-overflow-scrolling: touch
      }
