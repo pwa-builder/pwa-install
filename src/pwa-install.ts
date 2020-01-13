@@ -258,6 +258,7 @@ export class pwainstall extends LitElement {
      #screenshotsContainer {
        max-height: 220px;
        display: flex;
+       max-width: 26em;
      }
 
      #screenshotsContainer button {
@@ -304,6 +305,7 @@ export class pwainstall extends LitElement {
 
      #screenshots img {
        height: 100%;
+       object-fit: contain;
      }
 
      #screenshots::-webkit-scrollbar {
