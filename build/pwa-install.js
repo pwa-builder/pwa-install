@@ -57,6 +57,7 @@ let pwainstall = class pwainstall extends LitElement {
       top: 0;
       left: 0;
       right: 0;
+      z-index: var(--modal-z-index);
      }
 
      #descriptionWrapper {
@@ -292,7 +293,7 @@ let pwainstall = class pwainstall extends LitElement {
       overflow-x: scroll;
 
       width: 24em;
-      height: 14em;
+      height: 13.7em;
 
       -webkit-overflow-scrolling: touch
      }
