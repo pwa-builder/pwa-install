@@ -294,7 +294,7 @@ let pwainstall = class pwainstall extends LitElement {
       overflow-x: scroll;
 
       width: 24em;
-      height: 13.7em;
+      max-height: 220px;
 
       -webkit-overflow-scrolling: touch
      }
@@ -681,7 +681,7 @@ let pwainstall = class pwainstall extends LitElement {
             <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}" alt="App Logo"></img>
 
             <div id="installTitle">
-              <h1>${this.manifestdata.name}</h1>
+              <h1>${this.manifestdata.short_name || this.manifestdata.name}</h1>
 
               <p id="desc">
                 ${this.explainer}
