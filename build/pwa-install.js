@@ -248,6 +248,7 @@ let pwainstall = class pwainstall extends LitElement {
 
      #keyFeatures {
       overflow: hidden;
+      padding-right: 2em;
      }
 
      #keyFeatures ul {
@@ -389,8 +390,7 @@ let pwainstall = class pwainstall extends LitElement {
 
       @media(min-width: 1445px) {
         #installModal {
-          margin-left: 22em;
-          margin-right: 22em;
+          margin: 3em 16em;
         }
       }
 
