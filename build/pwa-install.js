@@ -267,7 +267,7 @@ let pwainstall = class pwainstall extends LitElement {
      #screenshotsContainer {
        max-height: 220px;
        display: flex;
-       max-width: 26em;
+       max-width: 30em;
      }
 
      #screenshotsContainer button {
@@ -294,7 +294,7 @@ let pwainstall = class pwainstall extends LitElement {
       flex-direction: column;
       overflow-x: scroll;
 
-      width: 24em;
+      width: 22em;
       max-height: 220px;
 
       -webkit-overflow-scrolling: touch
