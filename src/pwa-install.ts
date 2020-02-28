@@ -524,6 +524,12 @@ export class pwainstall extends LitElement {
         }
       }
 
+      @media all and (display-mode: standalone) {
+        button {
+          display: none;
+        }
+      }
+
     `;
   }
 
@@ -700,6 +706,20 @@ export class pwainstall extends LitElement {
     }
   }
 
+  public getInstalledStatus() {
+    // cast to any because the typescript navigator object
+    // does not have this non standard safari object
+    if ((navigator as any).standalone) {
+      return true;
+    }
+    else if (matchMedia('(display-mode: standalone)').matches) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   cancel() {
     return new Promise((resolve, reject) => {
       this.openmodal = false;
@@ -717,7 +737,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.usecustom !== true && this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html`<button id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
