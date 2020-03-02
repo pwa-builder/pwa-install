@@ -30,6 +30,7 @@ export declare class pwainstall extends LitElement {
     closePrompt(): void;
     shouldShowInstall(): boolean;
     install(): Promise<boolean>;
+    getInstalledStatus(): boolean;
     cancel(): Promise<unknown>;
     render(): import("lit-element").TemplateResult;
 }
