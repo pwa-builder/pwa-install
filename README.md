@@ -54,6 +54,7 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 | --------------- | -------------------------- |
 | `openPrompt()`  | `Opens the install modal`  |
 | `closePrompt()` | `Closes the install modal` |
+| `getInstalledStatus()` | `Tell if the PWA is installed or not` |
 
 ### CSS Variables
 
