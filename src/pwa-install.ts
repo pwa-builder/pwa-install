@@ -742,7 +742,7 @@ export class pwainstall extends LitElement {
         html`
           <div id="installModalWrapper">
           ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
-          <div id="installModal">
+          <div id="installModal" part="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
             <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}" alt="App Logo"></img>
