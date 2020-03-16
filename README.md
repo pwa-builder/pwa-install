@@ -56,6 +56,9 @@ Then you can use the element `<pwa-install></pwa-install>` anywhere in your temp
 | `closePrompt()` | `Closes the install modal` |
 | `getInstalledStatus()` | `Tell if the PWA is installed or not` |
 
+
+## Styling
+
 ### CSS Variables
 
 We recommend using our [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) to easliy tweak the style of this component to fit your project. Here are our current
@@ -67,3 +70,13 @@ supported CSS variables.
 | `--modal-z-index`          | `Changes the z-index of the install modal`            |
 | `--modal-background-index` | `Changes the z-index of the install modal background` |
 | `--modal-background-color` | `Changes the background color of the install modal`   |
+
+### Shadow Parts
+
+If you need to style this component more comprehensively, you can use Shadow Parts to style both the install button and the install modal. To target these two elements you can use `pwa-install::part(openButton)` and `pwa-install::part(installModal)` respectively. For example, to make the background of the install button grey, I would need this CSS:
+
+```css
+pwa-install::part(openButton) {
+  backround: grey;
+}
+```
