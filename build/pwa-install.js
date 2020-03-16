@@ -403,7 +403,7 @@ let pwainstall = class pwainstall extends LitElement {
           animation-name: mobile;
           animation-duration: 250ms;
         }
-
+ 
         #screenshots {
           justify-content: center;
         }
@@ -678,7 +678,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html `<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html `<button part="openButton" id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
