@@ -50,6 +50,10 @@ export class pwainstall extends LitElement {
       left: 0;
       right: 0;
       z-index: var(--modal-z-index);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
      }
 
      #descriptionWrapper {
@@ -59,7 +63,6 @@ export class pwainstall extends LitElement {
      #installModal {
       position: absolute;
       background: var(--modal-background-color);
-      margin: 3em 12em;
       font-family: sans-serif;
       box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
       border-radius: 10px;
@@ -380,31 +383,14 @@ export class pwainstall extends LitElement {
       }
     }
 
-      @media(min-width: 1445px) {
-        #installModal {
-          margin: 3em 16em;
-        }
-      }
 
-      @media(min-width: 1800px) {
-        #installModal {
-          margin-left: 26em;
-          margin-right: 26em;
-        }
-      }
-
-      @media(min-width: 2000px) {
-        #installModal {
-          margin-left: 38em;
-          margin-right: 38em;
-        }
-      }
 
       @media(max-width: 1220px) {
         #installModal {
           margin: 0;
           border-radius: 0px;
           min-height: 100%;
+          width: 100%;
 
           animation-name: mobile;
           animation-duration: 250ms;
