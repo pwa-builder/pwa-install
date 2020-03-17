@@ -50,6 +50,10 @@ export class pwainstall extends LitElement {
       left: 0;
       right: 0;
       z-index: var(--modal-z-index);
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
      }
 
      #descriptionWrapper {
@@ -59,7 +63,6 @@ export class pwainstall extends LitElement {
      #installModal {
       position: absolute;
       background: var(--modal-background-color);
-      margin: 3em 12em;
       font-family: sans-serif;
       box-shadow: 0px 25px 26px rgba(32, 36, 50, 0.25), 0px 5px 9px rgba(51, 58, 83, 0.53);
       border-radius: 10px;
@@ -380,36 +383,19 @@ export class pwainstall extends LitElement {
       }
     }
 
-      @media(min-width: 1445px) {
-        #installModal {
-          margin: 3em 16em;
-        }
-      }
 
-      @media(min-width: 1800px) {
-        #installModal {
-          margin-left: 26em;
-          margin-right: 26em;
-        }
-      }
-
-      @media(min-width: 2000px) {
-        #installModal {
-          margin-left: 38em;
-          margin-right: 38em;
-        }
-      }
 
       @media(max-width: 1220px) {
         #installModal {
           margin: 0;
           border-radius: 0px;
           min-height: 100%;
+          width: 100%;
 
           animation-name: mobile;
           animation-duration: 250ms;
         }
-
+ 
         #screenshots {
           justify-content: center;
         }
@@ -495,12 +481,20 @@ export class pwainstall extends LitElement {
         #contentContainer {
           margin-left: 20px;
           margin-right: 20px;
+          margin-bottom: 5em;
         }
 
         #headerContainer img {
           height: 60px;
           width: 60px;
           margin-right: 12px;
+        }
+
+        #buttonsContainer {
+          position: fixed;
+          bottom: 0;
+          background: #efefef2b;
+          backdrop-filter: blur(10px);
         }
       }
 
@@ -521,6 +515,12 @@ export class pwainstall extends LitElement {
 
         #keyFeatures ul {
           margin-top: 0px;
+        }
+      }
+
+      @media all and (display-mode: standalone) {
+        button {
+          display: none;
         }
       }
 
@@ -700,6 +700,20 @@ export class pwainstall extends LitElement {
     }
   }
 
+  public getInstalledStatus() {
+    // cast to any because the typescript navigator object
+    // does not have this non standard safari object
+    if ((navigator as any).standalone) {
+      return true;
+    }
+    else if (matchMedia('(display-mode: standalone)').matches) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   cancel() {
     return new Promise((resolve, reject) => {
       this.openmodal = false;
@@ -717,7 +731,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.usecustom !== true && this.shouldShowInstall() ? html`<button id="openButton" @click="${() => this.openPrompt()}">
+      ${this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html`<button part="openButton" id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
@@ -728,7 +742,7 @@ export class pwainstall extends LitElement {
         html`
           <div id="installModalWrapper">
           ${this.openmodal ? html`<div id="background" @click="${() => this.cancel()}"></div>` : null}
-          <div id="installModal">
+          <div id="installModal" part="installModal">
           <div id="headerContainer">
           <div id="logoContainer">
             <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}" alt="App Logo"></img>
