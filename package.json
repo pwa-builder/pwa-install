@@ -31,7 +31,7 @@
     "karma": "^4.4.1",
     "karma-threshold-reporter": "^0.1.15",
     "rollup": "^1.26.0",
-    "rollup-plugin-babel-minify": "^9.1.1",
+    "rollup-plugin-babel-minify": "^10.0.0",
     "rollup-plugin-minify-html-literals": "^1.2.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "typescript": "^3.6.4"
