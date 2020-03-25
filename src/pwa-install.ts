@@ -334,26 +334,6 @@ export class pwainstall extends LitElement {
        display: flex;
      }
 
-     infinite-carousel-wc {
-      background: #f0f0f0;
-      padding-top: 14px;
-      padding-bottom: 14px;
-      border-radius: 22px;
-      max-width: 27em;
-      min-height: 180px;
-     }
-
-     infinite-carousel-wc > div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-     }
-
-     infinite-carousel-wc > div > img {
-       max-width: 20em;
-       object-fit: contain;
-     }
-
       #tagsDiv span {
         background: grey;
         color: white;
@@ -435,10 +415,7 @@ export class pwainstall extends LitElement {
            overflow: scroll;
            box-shadow: none;
            max-width: 100%;
-         }
-
-         infinite-carousel-wc {
-           width: 100%;
+           height: 100%;
          }
 
          #screenshotsContainer {

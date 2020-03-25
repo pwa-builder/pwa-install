@@ -443,6 +443,7 @@ let pwainstall = class pwainstall extends LitElement {
            overflow: scroll;
            box-shadow: none;
            max-width: 100%;
+           height: 100%;
          }
 
          infinite-carousel-wc {
@@ -489,7 +490,6 @@ let pwainstall = class pwainstall extends LitElement {
         #contentContainer {
           margin-left: 20px;
           margin-right: 20px;
-          margin-bottom: 5em;
         }
 
         #headerContainer img {
