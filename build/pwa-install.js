@@ -597,7 +597,7 @@ let pwainstall = class pwainstall extends LitElement {
         this.dispatchEvent(event);
     }
     shouldShowInstall() {
-        const eligibleUser = this.isSupportingBrowser && (this.hasprompt || this.isIOS);
+        const eligibleUser = this.isSupportingBrowser || (this.hasprompt || this.isIOS);
         console.log('this.deferredprompt', this.deferredprompt);
         console.log('this.isSupportingBrowser', this.isSupportingBrowser);
         // return eligibleUser;
