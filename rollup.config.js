@@ -1,6 +1,6 @@
 
 import resolve from 'rollup-plugin-node-resolve';
-import minify from 'rollup-plugin-babel-minify';
+import { terser } from 'rollup-plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import strip from '@rollup/plugin-strip';
 
@@ -14,7 +14,7 @@ export default {
   plugins: [
     resolve(),
     minifyHTML(),
-    minify(),
+    terser(),
     strip({
       functions: ['console.log']
     })
