@@ -30,7 +30,8 @@ There are two ways to use this component. For simple projects or just to get sta
 - Run `npm install @pwabuilder/pwainstall`
 - import with `import '@pwabuilder/pwainstall'`
 
-Then you can use the element `<pwa-install></pwa-install>` anywhere in your template, JSX, html etc. An example of using this component can be found here: https://glitch.com/~pwainstall
+Then you can use the element `<pwa-install></pwa-install>` anywhere in your template, JSX, html etc. 
+live demo: https://pwainstall.glitch.me
 
 ## API
 
