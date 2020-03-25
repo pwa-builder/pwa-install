@@ -10,8 +10,8 @@
     "test:update-snapshots": "karma start --update-snapshots",
     "test:prune-snapshots": "karma start --prune-snapshots",
     "test:compatibility": "karma start --compatibility all --auto-watch=true --single-run=false",
-    "start": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
-    "dev": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --open www/\"",
+    "start": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --compatibility none --open www/\"",
+    "dev": "concurrently \"tsc --watch\" \"npx es-dev-server --node-resolve --compatibility none --open www/\"",
     "build": "tsc && rollup -c"
   },
   "author": "PWABuilder Team",
