@@ -356,12 +356,17 @@ let pwainstall = class pwainstall extends LitElement {
 
     #iosText {
       color: var(--install-button-color);
-      margin: 2em;
       text-align: center;
       font-weight: bold;
 
-      position: relative;
+      position: fixed;
       bottom: 0;
+      left: 0;
+      right: 0;
+      backdrop-filter: blur(10px);
+      background: rgba(239, 239, 239, 0.17);
+      margin: 0;
+      padding: 2em;
     }
 
     @media(max-height: 780px) {
