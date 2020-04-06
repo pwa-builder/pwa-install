@@ -78,6 +78,6 @@ If you need to style this component more comprehensively, you can use [Shadow Pa
 
 ```css
 pwa-install::part(openButton) {
-  backround: grey;
+  background: grey;
 }
 ```
