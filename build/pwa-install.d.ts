@@ -1,8 +1,16 @@
 import { LitElement } from 'lit-element';
+interface ManifestData {
+    name: string;
+    short_name: string;
+    description: string;
+    screenshots: Array<any>;
+    features: Array<any>;
+    icons: Array<any>;
+}
 export declare class pwainstall extends LitElement {
     manifestpath: string;
     iconpath: string;
-    manifestdata: any;
+    manifestdata: ManifestData;
     openmodal: boolean;
     showopen: boolean;
     isSupportingBrowser: boolean;
@@ -22,15 +30,16 @@ export declare class pwainstall extends LitElement {
     firstUpdated(): Promise<void>;
     handleInstallPromptEvent(event: any): void;
     checkManifest(manifestData: any): void;
-    getManifestData(): Promise<any>;
+    getManifestData(): Promise<ManifestData>;
     updateButtonColor(data: any): void;
     scrollToLeft(): void;
     scrollToRight(): void;
     openPrompt(): void;
     closePrompt(): void;
-    shouldShowInstall(): boolean;
+    shouldShowInstall(): Promise<boolean>;
     install(): Promise<boolean>;
     getInstalledStatus(): boolean;
-    cancel(): Promise<unknown>;
+    cancel(): Promise<void>;
     render(): import("lit-element").TemplateResult;
 }
+export {};

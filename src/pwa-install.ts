@@ -643,12 +643,15 @@ export class pwainstall extends LitElement {
     this.dispatchEvent(event);
   }
 
-  shouldShowInstall(): boolean {
-    const eligibleUser = this.isSupportingBrowser || (this.hasprompt || this.isIOS);
-    console.log('this.deferredprompt', this.deferredprompt);
-    console.log('this.isSupportingBrowser', this.isSupportingBrowser);
-    // return eligibleUser;
-    console.log('eligible user', eligibleUser);
+  async shouldShowInstall(): Promise<boolean> {
+    let relatedApps = [];
+
+    if ('getInstalledRelatedApps' in navigator) {
+      relatedApps = await (navigator as any).getInstalledRelatedApps();
+    }
+
+    const eligibleUser = this.isSupportingBrowser && relatedApps.length === 0 || (this.hasprompt || this.isIOS);
+
     return eligibleUser;
   }
 

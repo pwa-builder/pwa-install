@@ -27,6 +27,7 @@ let pwainstall = class pwainstall extends LitElement {
             || navigator.userAgent.includes('iPad')
             || navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints && navigator.maxTouchPoints > 2;
         this.installed = false;
+        // grab an install event
         window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
         document.addEventListener('keyup', (event) => {
             if (event.key === "Escape") {
@@ -596,12 +597,12 @@ let pwainstall = class pwainstall extends LitElement {
         let event = new CustomEvent('hide');
         this.dispatchEvent(event);
     }
-    shouldShowInstall() {
-        const eligibleUser = this.isSupportingBrowser || (this.hasprompt || this.isIOS);
-        console.log('this.deferredprompt', this.deferredprompt);
-        console.log('this.isSupportingBrowser', this.isSupportingBrowser);
-        // return eligibleUser;
-        console.log('eligible user', eligibleUser);
+    async shouldShowInstall() {
+        let relatedApps = [];
+        if ('getInstalledRelatedApps' in navigator) {
+            relatedApps = await navigator.getInstalledRelatedApps();
+        }
+        const eligibleUser = this.isSupportingBrowser && relatedApps.length === 0 || (this.hasprompt || this.isIOS);
         return eligibleUser;
     }
     async install() {
