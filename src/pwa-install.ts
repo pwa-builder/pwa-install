@@ -2,12 +2,21 @@ import {
   LitElement, html, customElement, property, css
 } from 'lit-element';
 
+interface ManifestData {
+  name: string,
+  short_name: string,
+  description: string,
+  screenshots: Array<any>,
+  features: Array<any>,
+  icons: Array<any>
+}
+
 @customElement('pwa-install')
 export class pwainstall extends LitElement {
 
   @property({ type: String }) manifestpath: string = "manifest.json";
   @property({ type: String }) iconpath: string;
-  @property({ type: Object }) manifestdata: any;
+  @property({ type: Object }) manifestdata: ManifestData;
 
   @property({ type: Boolean }) openmodal: boolean = false;
   @property({ type: Boolean }) showopen: boolean;
@@ -525,6 +534,7 @@ export class pwainstall extends LitElement {
 
     this.installed = false;
 
+    // grab an install event
     window.addEventListener('beforeinstallprompt', (event) => this.handleInstallPromptEvent(event));
 
     document.addEventListener('keyup', (event) => {
@@ -545,7 +555,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  handleInstallPromptEvent(event) {
+  handleInstallPromptEvent(event): void {
     this.deferredprompt = event;
 
     this.hasprompt = true;
@@ -555,7 +565,7 @@ export class pwainstall extends LitElement {
 
   // Check that the manifest has our 3 required properties
   // If not console an error to the user and return
-  checkManifest(manifestData) {
+  checkManifest(manifestData): void {
     if (!manifestData.icons || !manifestData.icons[0]) {
       console.error('Your web manifest must have atleast one icon listed');
       return;
@@ -572,7 +582,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  async getManifestData() {
+  async getManifestData(): Promise<ManifestData> {
     try {
       const response = await fetch(this.manifestpath);
       const data = await response.json();
@@ -592,13 +602,13 @@ export class pwainstall extends LitElement {
     }
   }
 
-  updateButtonColor(data) {
+  updateButtonColor(data): void {
     if (data.theme_color) {
       this.style.setProperty('--install-button-color', data.theme_color);
     }
   }
 
-  scrollToLeft() {
+  scrollToLeft(): void {
     const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
     // screenshotsDiv.scrollBy(-10, 0);
     screenshotsDiv.scrollBy({
@@ -608,7 +618,7 @@ export class pwainstall extends LitElement {
     });
   }
 
-  scrollToRight() {
+  scrollToRight(): void {
     const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
     console.log(screenshotsDiv);
     // screenshotsDiv.scrollBy(10, 0);
@@ -619,14 +629,14 @@ export class pwainstall extends LitElement {
     });
   }
 
-  openPrompt() {
+  public openPrompt(): void {
     this.openmodal = true;
 
     let event = new CustomEvent('show');
     this.dispatchEvent(event);
   }
 
-  closePrompt() {
+  public closePrompt(): void {
     this.openmodal = false;
 
     let event = new CustomEvent('hide');
@@ -682,7 +692,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  public getInstalledStatus() {
+  public getInstalledStatus(): boolean {
     // cast to any because the typescript navigator object
     // does not have this non standard safari object
     if ((navigator as any).standalone) {
@@ -696,7 +706,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  cancel() {
+  cancel(): Promise<void> {
     return new Promise((resolve, reject) => {
       this.openmodal = false;
 
