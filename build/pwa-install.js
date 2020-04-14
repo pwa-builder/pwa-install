@@ -639,7 +639,7 @@ let pwainstall = class pwainstall extends LitElement {
         // cast to any because the typescript navigator object
         // does not have this non standard safari object
         if (navigator.standalone) {
-            return true;
+            return navigator.standalone;
         }
         else if (matchMedia('(display-mode: standalone)').matches) {
             return true;
@@ -661,7 +661,7 @@ let pwainstall = class pwainstall extends LitElement {
     }
     render() {
         return html `
-      ${this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html `<button part="openButton" id="openButton" @click="${() => this.openPrompt()}">
+      ${('standalone' in navigator && navigator.standalone === false) || this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html `<button part="openButton" id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
