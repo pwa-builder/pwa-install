@@ -1,6 +1,7 @@
 name: CI
 
-on: [push]
+on: release:
+    types: [published]
 
 jobs:
   generate_changelog:
@@ -17,7 +18,7 @@ jobs:
       - name: Commit files
         env:
           CI_USER: jgw96
-          CI_EMAIL: hgw9617@gmail.com
+          CI_EMAIL: jgw9617@gmail.com
         run: |
           git config --local user.email "$CI_EMAIL"
           git config --local user.name "$CI_USER"
@@ -26,7 +27,7 @@ jobs:
       - name: Push changes
         if: env.push == 1
         env:
-          CI_USER: hgw96
+          CI_USER: jgw96
           CI_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           git push "https://$CI_USER:$CI_TOKEN@github.com/$GITHUB_REPOSITORY.git" HEAD:master
