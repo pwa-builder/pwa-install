@@ -277,7 +277,7 @@ export class pwainstall extends LitElement {
      #screenshotsContainer button {
       border: none;
       width: 4em;
-      
+
       transition: background-color 0.2s;
      }
 
@@ -389,7 +389,7 @@ export class pwainstall extends LitElement {
           animation-name: mobile;
           animation-duration: 250ms;
         }
- 
+
         #screenshots {
           justify-content: center;
         }
@@ -528,7 +528,7 @@ export class pwainstall extends LitElement {
     // this includes the regular iPad
     // and the iPad pro
     // but not macOS
-    this.isIOS = navigator.userAgent.includes('iPhone') 
+    this.isIOS = navigator.userAgent.includes('iPhone')
     || navigator.userAgent.includes('iPad')
     || navigator.userAgent.includes('Macintosh') && navigator.maxTouchPoints && navigator.maxTouchPoints > 2;
 
@@ -612,7 +612,8 @@ export class pwainstall extends LitElement {
     const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
     // screenshotsDiv.scrollBy(-10, 0);
     screenshotsDiv.scrollBy({
-      left: -15,
+      // left: -15,
+      left: -(screenshotsDiv.clientWidth),
       top: 0,
       behavior: 'smooth'
     });
@@ -620,10 +621,10 @@ export class pwainstall extends LitElement {
 
   scrollToRight(): void {
     const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
-    console.log(screenshotsDiv);
     // screenshotsDiv.scrollBy(10, 0);
     screenshotsDiv.scrollBy({
-      left: 15,
+      // left: 15,
+      left: screenshotsDiv.clientWidth,
       top: 0,
       behavior: 'smooth'
     });
@@ -679,8 +680,8 @@ export class pwainstall extends LitElement {
 
         await this.cancel();
 
-        // set installed to true because we dont 
-        // want to show the install button to 
+        // set installed to true because we dont
+        // want to show the install button to
         // a user who chose not to install
         this.installed = true;
 
