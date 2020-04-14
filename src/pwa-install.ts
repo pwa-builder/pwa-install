@@ -370,6 +370,10 @@ export class pwainstall extends LitElement {
       padding: 2em;
     }
 
+    #manifest-description {
+      white-space: pre-wrap;
+    }
+
     @media(max-height: 780px) {
       #buttonsContainer {
         height: 70px;
@@ -700,7 +704,7 @@ export class pwainstall extends LitElement {
     // cast to any because the typescript navigator object
     // does not have this non standard safari object
     if ((navigator as any).standalone) {
-      return true;
+      return (navigator as any).standalone;
     }
     else if (matchMedia('(display-mode: standalone)').matches) {
       return true;
@@ -727,7 +731,7 @@ export class pwainstall extends LitElement {
 
   render() {
     return html`
-      ${this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html`<button part="openButton" id="openButton" @click="${() => this.openPrompt()}">
+      ${('standalone' in navigator && (navigator as any).standalone === false) || this.usecustom !== true && this.shouldShowInstall() && this.installed === false ? html`<button part="openButton" id="openButton" @click="${() => this.openPrompt()}">
         <slot>
           ${this.installbuttontext}
         </slot>
@@ -800,7 +804,7 @@ export class pwainstall extends LitElement {
 
           <div id="descriptionWrapper">
             <h3>${this.descriptionheader}</h3>
-            <p>${this.manifestdata.description}</p>
+            <p id="manifest-description">${this.manifestdata.description}</p>
           </div>
         </div>
 

@@ -1,5 +1,7 @@
 # pwa-install
 
+![CI](https://github.com/pwa-builder/pwa-install/workflows/CI/badge.svg)
+
 `pwa-install` is a [web component](https://meowni.ca/posts/web-components-with-otters/) from the [PWABuilder](https://pwabuilder.com) team that brings an awesome "install" experience to your Progressive Web App!
 
 _Built with [lit-element](https://lit-element.polymer-project.org/)_
