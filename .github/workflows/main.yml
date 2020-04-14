@@ -1,6 +1,9 @@
 name: CI
 
 on:
+    pull_request:
+      types: [closed]
+    
     release:
       types: [published]
 
