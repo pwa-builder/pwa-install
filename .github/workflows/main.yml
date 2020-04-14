@@ -1,7 +1,8 @@
 name: CI
 
-on: release:
-    types: [published]
+on:
+    release:
+      types: [published]
 
 jobs:
   generate_changelog:
