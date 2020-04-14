@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
+## [1.6.1](https://github.com/pwa-builder/pwa-install/tree/1.6.1) (2020-04-14)
 
-[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/81c0c5577e05f6f4cc6b435c75cb031d3a20ab62...HEAD)
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/81c0c5577e05f6f4cc6b435c75cb031d3a20ab62...1.6.1)
 
 **Security fixes:**
 
@@ -80,6 +80,7 @@
 - fix overflow scroll and cut off text [\#114](https://github.com/pwa-builder/pwa-install/pull/114) ([hipstersmoothie](https://github.com/hipstersmoothie))
 - center title on mobile [\#113](https://github.com/pwa-builder/pwa-install/pull/113) ([hipstersmoothie](https://github.com/hipstersmoothie))
 - fix close button placement on certain screen sizes [\#111](https://github.com/pwa-builder/pwa-install/pull/111) ([hipstersmoothie](https://github.com/hipstersmoothie))
+- allow for white-space in description [\#110](https://github.com/pwa-builder/pwa-install/pull/110) ([hipstersmoothie](https://github.com/hipstersmoothie))
 - correct word in default explainer [\#109](https://github.com/pwa-builder/pwa-install/pull/109) ([hipstersmoothie](https://github.com/hipstersmoothie))
 - Fix long features list text clipping [\#108](https://github.com/pwa-builder/pwa-install/pull/108) ([hipstersmoothie](https://github.com/hipstersmoothie))
 - add docs for explainer text [\#107](https://github.com/pwa-builder/pwa-install/pull/107) ([hipstersmoothie](https://github.com/hipstersmoothie))
