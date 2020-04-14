@@ -277,7 +277,7 @@ let pwainstall = class pwainstall extends LitElement {
      #screenshotsContainer button {
       border: none;
       width: 4em;
-      
+
       transition: background-color 0.2s;
      }
 
@@ -389,7 +389,7 @@ let pwainstall = class pwainstall extends LitElement {
           animation-name: mobile;
           animation-duration: 250ms;
         }
- 
+
         #screenshots {
           justify-content: center;
         }
@@ -572,17 +572,18 @@ let pwainstall = class pwainstall extends LitElement {
         const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
         // screenshotsDiv.scrollBy(-10, 0);
         screenshotsDiv.scrollBy({
-            left: -15,
+            // left: -15,
+            left: -(screenshotsDiv.clientWidth),
             top: 0,
             behavior: 'smooth'
         });
     }
     scrollToRight() {
         const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
-        console.log(screenshotsDiv);
         // screenshotsDiv.scrollBy(10, 0);
         screenshotsDiv.scrollBy({
-            left: 15,
+            // left: 15,
+            left: screenshotsDiv.clientWidth,
             top: 0,
             behavior: 'smooth'
         });
@@ -622,8 +623,8 @@ let pwainstall = class pwainstall extends LitElement {
             else {
                 console.log('User chose to not install your PWA');
                 await this.cancel();
-                // set installed to true because we dont 
-                // want to show the install button to 
+                // set installed to true because we dont
+                // want to show the install button to
                 // a user who chose not to install
                 this.installed = true;
                 let event = new CustomEvent('hide');
