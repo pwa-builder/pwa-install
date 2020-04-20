@@ -25,6 +25,7 @@ export class pwainstall extends LitElement {
   @property({ type: Boolean }) installed: boolean;
   @property({ type: Boolean }) hasprompt: boolean = false;
   @property({ type: Boolean }) usecustom: boolean;
+  @property({ type: Array }) relatedApps: any[] = [];
 
   @property({ type: String }) explainer: string = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. "
   @property({ type: String }) featuresheader: string = "Key Features";
@@ -39,7 +40,7 @@ export class pwainstall extends LitElement {
     return css`
      :host {
        --install-focus-color: #919c9c;
-       --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+       --install-button-color: #1FC2C8;
        --modal-z-index: 9999;
        --background-z-index: 9998;
        --modal-background-color: white;
@@ -178,6 +179,10 @@ export class pwainstall extends LitElement {
       cursor: pointer;
       border: solid 1px rgba(0, 0, 0, 0);
       outline: none;
+     }
+
+     #openButton {
+       background: var(--install-button-color);
      }
 
      #installButton, #installCancelButton {
@@ -557,6 +562,10 @@ export class pwainstall extends LitElement {
         console.error('Error getting manifest, check that you have a valid web manifest');
       }
     }
+    
+    if ('getInstalledRelatedApps' in navigator) {
+      this.relatedApps = await (navigator as any).getInstalledRelatedApps();
+    }
   }
 
   handleInstallPromptEvent(event): void {
@@ -594,8 +603,6 @@ export class pwainstall extends LitElement {
       this.manifestdata = data;
 
       if (this.manifestdata) {
-        this.updateButtonColor(this.manifestdata);
-
         this.checkManifest(this.manifestdata);
 
         return data;
@@ -603,12 +610,6 @@ export class pwainstall extends LitElement {
     }
     catch (err) {
       return null
-    }
-  }
-
-  updateButtonColor(data): void {
-    if (data.theme_color) {
-      this.style.setProperty('--install-button-color', data.theme_color);
     }
   }
 
@@ -648,14 +649,8 @@ export class pwainstall extends LitElement {
     this.dispatchEvent(event);
   }
 
-  async shouldShowInstall(): Promise<boolean> {
-    let relatedApps = [];
-
-    if ('getInstalledRelatedApps' in navigator) {
-      relatedApps = await (navigator as any).getInstalledRelatedApps();
-    }
-
-    const eligibleUser = this.isSupportingBrowser && relatedApps.length === 0 || (this.hasprompt || this.isIOS);
+  shouldShowInstall() {
+    const eligibleUser = this.isSupportingBrowser && this.relatedApps.length < 1 && (this.hasprompt || this.isIOS);
 
     return eligibleUser;
   }

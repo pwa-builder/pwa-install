@@ -18,6 +18,7 @@ export declare class pwainstall extends LitElement {
     installed: boolean;
     hasprompt: boolean;
     usecustom: boolean;
+    relatedApps: any[];
     explainer: string;
     featuresheader: string;
     descriptionheader: string;
@@ -31,12 +32,11 @@ export declare class pwainstall extends LitElement {
     handleInstallPromptEvent(event: any): void;
     checkManifest(manifestData: any): void;
     getManifestData(): Promise<ManifestData>;
-    updateButtonColor(data: any): void;
     scrollToLeft(): void;
     scrollToRight(): void;
     openPrompt(): void;
     closePrompt(): void;
-    shouldShowInstall(): Promise<boolean>;
+    shouldShowInstall(): boolean;
     install(): Promise<boolean>;
     getInstalledStatus(): boolean;
     cancel(): Promise<void>;
