@@ -1,5 +1,18 @@
 # Changelog
 
+## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
+
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.1...HEAD)
+
+**Closed issues:**
+
+- \[Question\] styling with CSS variables [\#245](https://github.com/pwa-builder/pwa-install/issues/245)
+
+**Merged pull requests:**
+
+- Styling fix [\#246](https://github.com/pwa-builder/pwa-install/pull/246) ([jgw96](https://github.com/jgw96))
+- Safari - Carousel Issue \#177 [\#242](https://github.com/pwa-builder/pwa-install/pull/242) ([lee-leonardo](https://github.com/lee-leonardo))
+
 ## [1.6.1](https://github.com/pwa-builder/pwa-install/tree/1.6.1) (2020-04-14)
 
 [Full Changelog](https://github.com/pwa-builder/pwa-install/compare/81c0c5577e05f6f4cc6b435c75cb031d3a20ab62...1.6.1)
