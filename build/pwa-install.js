@@ -40,7 +40,7 @@ let pwainstall = class pwainstall extends LitElement {
         return css `
      :host {
        --install-focus-color: #919c9c;
-       --install-button-color: linear-gradient(90deg, #1FC2C8 0%, #9337D8 169.8%);
+       --install-button-color: #1FC2C8;
        --modal-z-index: 9999;
        --background-z-index: 9998;
        --modal-background-color: white;
@@ -179,6 +179,10 @@ let pwainstall = class pwainstall extends LitElement {
       cursor: pointer;
       border: solid 1px rgba(0, 0, 0, 0);
       outline: none;
+     }
+
+     #openButton {
+       background: var(--install-button-color);
      }
 
      #installButton, #installCancelButton {
@@ -562,18 +566,12 @@ let pwainstall = class pwainstall extends LitElement {
             const data = await response.json();
             this.manifestdata = data;
             if (this.manifestdata) {
-                this.updateButtonColor(this.manifestdata);
                 this.checkManifest(this.manifestdata);
                 return data;
             }
         }
         catch (err) {
             return null;
-        }
-    }
-    updateButtonColor(data) {
-        if (data.theme_color) {
-            this.style.setProperty('--install-button-color', data.theme_color);
         }
     }
     scrollToLeft() {
