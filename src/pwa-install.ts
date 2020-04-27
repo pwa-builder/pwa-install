@@ -84,6 +84,8 @@ export class pwainstall extends LitElement {
       animation-duration: 150ms;
 
       z-index: var(--modal-z-index);
+
+      max-width: 56em;
      }
 
      @keyframes opened {
