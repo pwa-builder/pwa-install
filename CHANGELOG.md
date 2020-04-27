@@ -4,13 +4,20 @@
 
 [Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.2...HEAD)
 
+**Closed issues:**
+
+- Install button not showing [\#258](https://github.com/pwa-builder/pwa-install/issues/258)
+
 **Merged pull requests:**
 
+- fix\(\): set max width on modal [\#266](https://github.com/pwa-builder/pwa-install/pull/266) ([jgw96](https://github.com/jgw96))
 - build\(deps-dev\): bump @open-wc/karma-esm from 2.13.22 to 2.13.26 [\#257](https://github.com/pwa-builder/pwa-install/pull/257) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump es-dev-server from 1.45.3 to 1.46.5 [\#256](https://github.com/pwa-builder/pwa-install/pull/256) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/testing from 2.5.10 to 2.5.13 [\#255](https://github.com/pwa-builder/pwa-install/pull/255) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup from 2.3.3 to 2.7.1 [\#254](https://github.com/pwa-builder/pwa-install/pull/254) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-karma from 3.3.11 to 3.3.15 [\#253](https://github.com/pwa-builder/pwa-install/pull/253) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-helpers from 1.7.0 to 1.7.2 [\#249](https://github.com/pwa-builder/pwa-install/pull/249) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Styling fix [\#246](https://github.com/pwa-builder/pwa-install/pull/246) ([jgw96](https://github.com/jgw96))
 
 ## [1.6.2](https://github.com/pwa-builder/pwa-install/tree/1.6.2) (2020-04-20)
 
@@ -22,8 +29,6 @@
 
 **Merged pull requests:**
 
-- build\(deps-dev\): bump @open-wc/testing from 2.5.10 to 2.5.13 [\#255](https://github.com/pwa-builder/pwa-install/pull/255) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Styling fix [\#246](https://github.com/pwa-builder/pwa-install/pull/246) ([jgw96](https://github.com/jgw96))
 - Safari - Carousel Issue \#177 [\#242](https://github.com/pwa-builder/pwa-install/pull/242) ([lee-leonardo](https://github.com/lee-leonardo))
 
 ## [1.6.1](https://github.com/pwa-builder/pwa-install/tree/1.6.1) (2020-04-14)
