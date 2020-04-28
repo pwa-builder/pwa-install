@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
+## [1.6.3](https://github.com/pwa-builder/pwa-install/tree/1.6.3) (2020-04-27)
 
-[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.2...HEAD)
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.2...1.6.3)
 
 **Closed issues:**
 
@@ -17,7 +17,6 @@
 - build\(deps-dev\): bump rollup from 2.3.3 to 2.7.1 [\#254](https://github.com/pwa-builder/pwa-install/pull/254) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-karma from 3.3.11 to 3.3.15 [\#253](https://github.com/pwa-builder/pwa-install/pull/253) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-helpers from 1.7.0 to 1.7.2 [\#249](https://github.com/pwa-builder/pwa-install/pull/249) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Styling fix [\#246](https://github.com/pwa-builder/pwa-install/pull/246) ([jgw96](https://github.com/jgw96))
 
 ## [1.6.2](https://github.com/pwa-builder/pwa-install/tree/1.6.2) (2020-04-20)
 
@@ -29,6 +28,7 @@
 
 **Merged pull requests:**
 
+- Styling fix [\#246](https://github.com/pwa-builder/pwa-install/pull/246) ([jgw96](https://github.com/jgw96))
 - Safari - Carousel Issue \#177 [\#242](https://github.com/pwa-builder/pwa-install/pull/242) ([lee-leonardo](https://github.com/lee-leonardo))
 
 ## [1.6.1](https://github.com/pwa-builder/pwa-install/tree/1.6.1) (2020-04-14)
