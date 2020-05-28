@@ -1,5 +1,17 @@
 # Changelog
 
+## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
+
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.3...HEAD)
+
+**Closed issues:**
+
+- \[FEATURE\] Add I18n for pwa install [\#274](https://github.com/pwa-builder/pwa-install/issues/274)
+
+**Merged pull requests:**
+
+- build\(deps-dev\): bump rollup from 2.7.1 to 2.11.2 [\#315](https://github.com/pwa-builder/pwa-install/pull/315) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 ## [1.6.3](https://github.com/pwa-builder/pwa-install/tree/1.6.3) (2020-04-27)
 
 [Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.2...1.6.3)
