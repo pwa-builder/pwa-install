@@ -28,7 +28,7 @@
     "concurrently": "^5.0.0",
     "deepmerge": "^4.2.2",
     "es-dev-server": "^1.45.3",
-    "karma": "^4.4.1",
+    "karma": "^5.1.0",
     "karma-threshold-reporter": "^0.1.15",
     "rollup": "^2.3.3",
     "rollup-plugin-minify-html-literals": "^1.2.3",
