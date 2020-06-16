@@ -10,6 +10,7 @@
 
 **Merged pull requests:**
 
+- chore\(\): update deps [\#331](https://github.com/pwa-builder/pwa-install/pull/331) ([jgw96](https://github.com/jgw96))
 - build\(deps-dev\): bump es-dev-server from 1.46.5 to 1.55.0 [\#324](https://github.com/pwa-builder/pwa-install/pull/324) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump typescript from 3.8.3 to 3.9.5 [\#320](https://github.com/pwa-builder/pwa-install/pull/320) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup-plugin-terser from 5.3.0 to 6.1.0 [\#316](https://github.com/pwa-builder/pwa-install/pull/316) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
