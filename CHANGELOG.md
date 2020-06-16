@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
+## [1.6.4](https://github.com/pwa-builder/pwa-install/tree/1.6.4) (2020-06-16)
 
-[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.3...HEAD)
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.3...1.6.4)
 
 **Closed issues:**
 
