@@ -10,7 +10,12 @@
 
 **Merged pull requests:**
 
+- build\(deps-dev\): bump es-dev-server from 1.46.5 to 1.55.0 [\#324](https://github.com/pwa-builder/pwa-install/pull/324) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump typescript from 3.8.3 to 3.9.5 [\#320](https://github.com/pwa-builder/pwa-install/pull/320) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump rollup-plugin-terser from 5.3.0 to 6.1.0 [\#316](https://github.com/pwa-builder/pwa-install/pull/316) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup from 2.7.1 to 2.11.2 [\#315](https://github.com/pwa-builder/pwa-install/pull/315) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @rollup/plugin-strip from 1.3.2 to 1.3.3 [\#283](https://github.com/pwa-builder/pwa-install/pull/283) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump concurrently from 5.1.0 to 5.2.0 [\#261](https://github.com/pwa-builder/pwa-install/pull/261) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [1.6.3](https://github.com/pwa-builder/pwa-install/tree/1.6.3) (2020-04-27)
 
