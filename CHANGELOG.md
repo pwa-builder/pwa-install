@@ -4,8 +4,13 @@
 
 [Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.4...HEAD)
 
+**Closed issues:**
+
+- "Install" not working using pwa-install [\#355](https://github.com/pwa-builder/pwa-install/issues/355)
+
 **Merged pull requests:**
 
+- build\(deps-dev\): bump rollup from 2.21.0 to 2.22.1 [\#358](https://github.com/pwa-builder/pwa-install/pull/358) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup from 2.16.1 to 2.21.0 [\#348](https://github.com/pwa-builder/pwa-install/pull/348) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [1.6.4](https://github.com/pwa-builder/pwa-install/tree/1.6.4) (2020-06-16)
