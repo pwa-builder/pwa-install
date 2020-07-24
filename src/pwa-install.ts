@@ -764,7 +764,7 @@ export class pwainstall extends LitElement {
           <div id="logoContainer">
             <img src="${
               this.iconpath ? this.iconpath : this.manifestdata.icons[0].src
-            }" alt="App Logo"></img>
+            }" alt="App Logo"/>
 
             <div id="installTitle">
               <h1>${this.manifestdata.short_name || this.manifestdata.name}</h1>
