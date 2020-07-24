@@ -811,7 +811,7 @@ export class pwainstall extends LitElement {
                   <div id="screenshotsContainer">
                     <button
                       @click="${() => this.scrollToLeft()}"
-                      aria-label="last screenshot"
+                      aria-label="previous image"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -833,7 +833,7 @@ export class pwainstall extends LitElement {
                     </section>
                     <button
                       @click="${() => this.scrollToRight()}"
-                      aria-label="next screenshot"
+                      aria-label="next image"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
