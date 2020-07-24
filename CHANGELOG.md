@@ -4,13 +4,25 @@
 
 [Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.4...HEAD)
 
+**Security fixes:**
+
+- build\(deps\): \[security\] bump lodash from 4.17.15 to 4.17.19 [\#356](https://github.com/pwa-builder/pwa-install/pull/356) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
 **Closed issues:**
 
 - "Install" not working using pwa-install [\#355](https://github.com/pwa-builder/pwa-install/issues/355)
 
 **Merged pull requests:**
 
+- build\(deps-dev\): bump rollup from 2.22.1 to 2.23.0 [\#360](https://github.com/pwa-builder/pwa-install/pull/360) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup from 2.21.0 to 2.22.1 [\#358](https://github.com/pwa-builder/pwa-install/pull/358) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump typescript from 3.9.5 to 3.9.7 [\#357](https://github.com/pwa-builder/pwa-install/pull/357) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/testing-karma from 3.4.4 to 3.4.7 [\#354](https://github.com/pwa-builder/pwa-install/pull/354) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump es-dev-server from 1.55.0 to 1.56.1 [\#353](https://github.com/pwa-builder/pwa-install/pull/353) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/karma-esm from 2.16.14 to 2.16.17 [\#352](https://github.com/pwa-builder/pwa-install/pull/352) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @rollup/plugin-strip from 1.3.3 to 2.0.0 [\#351](https://github.com/pwa-builder/pwa-install/pull/351) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/testing-helpers from 1.8.3 to 1.8.4 [\#350](https://github.com/pwa-builder/pwa-install/pull/350) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/testing from 2.5.18 to 2.5.19 [\#349](https://github.com/pwa-builder/pwa-install/pull/349) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup from 2.16.1 to 2.21.0 [\#348](https://github.com/pwa-builder/pwa-install/pull/348) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 
 ## [1.6.4](https://github.com/pwa-builder/pwa-install/tree/1.6.4) (2020-06-16)
@@ -48,6 +60,7 @@
 - build\(deps-dev\): bump rollup from 2.3.3 to 2.7.1 [\#254](https://github.com/pwa-builder/pwa-install/pull/254) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-karma from 3.3.11 to 3.3.15 [\#253](https://github.com/pwa-builder/pwa-install/pull/253) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-helpers from 1.7.0 to 1.7.2 [\#249](https://github.com/pwa-builder/pwa-install/pull/249) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Update README.md [\#225](https://github.com/pwa-builder/pwa-install/pull/225) ([richardtaylordawson](https://github.com/richardtaylordawson))
 
 ## [1.6.2](https://github.com/pwa-builder/pwa-install/tree/1.6.2) (2020-04-20)
 
@@ -112,7 +125,6 @@
 
 **Merged pull requests:**
 
-- Update README.md [\#225](https://github.com/pwa-builder/pwa-install/pull/225) ([richardtaylordawson](https://github.com/richardtaylordawson))
 - build\(deps-dev\): bump @open-wc/karma-esm from 2.13.18 to 2.13.20 [\#219](https://github.com/pwa-builder/pwa-install/pull/219) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-karma from 3.1.54 to 3.3.9 [\#218](https://github.com/pwa-builder/pwa-install/pull/218) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing from 2.5.6 to 2.5.8 [\#216](https://github.com/pwa-builder/pwa-install/pull/216) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
