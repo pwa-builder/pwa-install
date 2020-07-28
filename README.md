@@ -56,6 +56,7 @@ live demo: https://pwainstall.glitch.me
 | `installbuttontext`  | `installbuttontext`  | Controls the text of the install button                                         | `string`  | `Install`                                           |
 | `cancelbuttontext`   | `cancelbuttontext`   | Controls the text of the cancel button                                          | `string`  | `Cancel`                                            |
 | `iosinstallinfotext` | `iosinstallinfotext` | Controls the iOS installation info text                                         | `string`  | `Tap the share button and then 'Add to Homescreen'` |
+| `iconpath`           | `iconpath`           | Controls the image of the description header                                    | `string`  | the first icon in `manifest.json`                   |
 
 ### Methods
 
