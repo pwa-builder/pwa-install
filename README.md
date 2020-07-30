@@ -8,7 +8,7 @@ _Built with [lit-element](https://lit-element.polymer-project.org/)_
 
 ### What does it look like?
 
-<img loading="lazy" alt="An image of what the component looks like" src="https://github.com/pwa-builder/pwa-auth/raw/master/assets/installsnip.png?raw=true">
+<img loading="lazy" alt="An image of what the component looks like" src="https://raw.githubusercontent.com/pwa-builder/pwa-install/master/assets/installsnip.png">
 
 ## Supported Browsers
 - Edge
