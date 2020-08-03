@@ -23,7 +23,7 @@
     "@open-wc/karma-esm": "^3.0.1",
     "@open-wc/testing": "^2.5.18",
     "@open-wc/testing-helpers": "^1.8.3",
-    "@open-wc/testing-karma": "^3.4.4",
+    "@open-wc/testing-karma": "^4.0.1",
     "@rollup/plugin-strip": "^2.0.0",
     "concurrently": "^5.2.0",
     "deepmerge": "^4.2.2",
