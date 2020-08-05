@@ -1,4 +1,4 @@
-import { LitElement } from 'lit-element';
+import { LitElement } from "lit-element";
 interface ManifestData {
     name: string;
     short_name: string;
