@@ -863,4 +863,3 @@ pwainstall = __decorate([
     customElement("pwa-install")
 ], pwainstall);
 export { pwainstall };
-//# sourceMappingURL=pwa-install.js.map
