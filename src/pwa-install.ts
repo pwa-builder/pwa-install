@@ -39,7 +39,7 @@ export class pwainstall extends LitElement {
     return css`
       :host {
         --install-focus-color: #919c9c;
-        --install-button-color: #1fc2c8;
+        --install-button-color: #0078d4;
         --modal-z-index: 9999;
         --background-z-index: 9998;
         --modal-background-color: white;
