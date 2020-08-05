@@ -12,7 +12,7 @@
     "outDir": "build",
     "declaration": true,
     "esModuleInterop": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "rootDir": "src"
   },
 
