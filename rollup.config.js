@@ -9,7 +9,7 @@ export default {
   output: {
     file: 'dist/pwa-install.js',
     format: 'es',
-    sourcemap: true
+    sourcemap: false
   },
   plugins: [
     resolve(),
