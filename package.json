@@ -34,6 +34,6 @@
     "rollup-plugin-minify-html-literals": "^1.2.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^6.1.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   }
 }
