@@ -524,6 +524,47 @@ export class pwainstall extends LitElement {
           display: none;
         }
       }
+
+      @media (prefers-color-scheme: dark) {
+        :host {
+          --modal-background-color: black;
+        }
+
+        #installModal h1,
+        #installModal h2,
+        #installModal h3,
+        #installModal p,
+        #featuresScreenDiv #keyFeatures li {
+          color: #ffffff;
+        }
+
+        #closeButton svg path {
+          fill: #ffffff;
+          opacity: 1;
+        }
+      }
+
+      /* 08-26-2020: supported by only safari desktop */
+      @media (inverted-colors: inverted) {
+        :host {
+          --install-focus-color: #6e6363;
+          --install-button-color: #ff872b;
+          --modal-background-color: black;
+        }
+
+        #installModal h1,
+        #installModal h2,
+        #installModal h3,
+        #installModal p,
+        #featuresScreenDiv #keyFeatures li {
+          color: #ffffff;
+        }
+
+        #closeButton svg path {
+          fill: #ffffff;
+          opacity: 1;
+        }
+      }
     `;
   }
 
