@@ -542,6 +542,10 @@ export class pwainstall extends LitElement {
           fill: #ffffff;
           opacity: 1;
         }
+
+        #buttonsContainer {
+          background: rgb(36 36 36);
+        }
       }
 
       /* 08-26-2020: supported by only safari desktop */
@@ -563,6 +567,10 @@ export class pwainstall extends LitElement {
         #closeButton svg path {
           fill: #ffffff;
           opacity: 1;
+        }
+
+        #buttonsContainer {
+          background: rgb(36 36 36);
         }
       }
     `;
