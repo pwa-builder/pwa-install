@@ -189,6 +189,10 @@ export class pwainstall extends LitElement {
         background: var(--install-button-color);
       }
 
+      #openButton:focus {
+        outline: -webkit-focus-ring-color auto 1px;
+      }
+
       #installButton,
       #installCancelButton {
         min-width: 130px;
