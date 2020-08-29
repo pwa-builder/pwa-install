@@ -190,6 +190,7 @@ export class pwainstall extends LitElement {
       }
 
       #openButton:focus {
+        outline: auto;
         outline: -webkit-focus-ring-color auto 1px;
       }
 
