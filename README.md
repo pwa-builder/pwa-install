@@ -175,3 +175,20 @@ class Example extends FASTElement {
   </script>
 </body>
 ```
+
+### Example of programmatically creating the element
+```html
+<head>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"
+  ></script>
+</head>
+<body>
+  <script async defer>
+    var installComponent = document.createElement('pwa-install');
+    document.body.appendChild(installComponent);
+    installComponent.getInstalledStatus();
+  </script>
+</body>
+```
