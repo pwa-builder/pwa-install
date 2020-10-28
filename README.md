@@ -47,7 +47,6 @@ live demo: https://pwainstall.glitch.me
 
 | Property             | Attribute            | Description                                                                     | Type      | Default                                             |
 | -------------------- | -------------------- | ------------------------------------------------------------------------------- | --------- | --------------------------------------------------- |
-| `showopen`           | `showopen`           | Will always show the install button                                             | `boolean` | `false`                                             |
 | `usecustom`          | `usecustom`          | Hides default button                                                            | `boolean` | `false`                                             |
 | `manifestpath`       | `manifestpath`       | path to your web manifest                                                       | `string`  | `manifest.json`                                     |
 | `explainer`          | `explainer`          | Controls the text of the explainer text just below the titlee of the app header | `string`  | `This app can be installed on`                      |
