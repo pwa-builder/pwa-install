@@ -682,9 +682,9 @@ export class pwainstall extends LitElement {
   }
 
   scrollToLeft(): void {
-    const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+    const screenshotsDiv = this.shadowRoot?.querySelector("#screenshots");
     // screenshotsDiv.scrollBy(-10, 0);
-    screenshotsDiv.scrollBy({
+    screenshotsDiv?.scrollBy({
       // left: -15,
       left: -screenshotsDiv.clientWidth,
       top: 0,
@@ -693,9 +693,9 @@ export class pwainstall extends LitElement {
   }
 
   scrollToRight(): void {
-    const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+    const screenshotsDiv = this.shadowRoot?.querySelector("#screenshots");
     // screenshotsDiv.scrollBy(10, 0);
-    screenshotsDiv.scrollBy({
+    screenshotsDiv?.scrollBy({
       // left: 15,
       left: screenshotsDiv.clientWidth,
       top: 0,
