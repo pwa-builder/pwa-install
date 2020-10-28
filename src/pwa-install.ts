@@ -804,7 +804,7 @@ export class pwainstall extends LitElement {
         : null}
       ${this.openmodal === true
         ? html`
-          <div id="installModalWrapper">
+          <dialog id="installModalWrapper">
           ${
             this.openmodal
               ? html`<div
@@ -929,7 +929,7 @@ export class pwainstall extends LitElement {
                 </button>`
           }
         </div>
-          </div>`
+        </dialog>`
             : html`<p id="iosText">${this.iosinstallinfotext}</p>`
         }
         `
