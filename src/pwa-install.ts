@@ -12,16 +12,23 @@ interface ManifestData {
 @customElement("pwa-install")
 export class pwainstall extends LitElement {
   @property({ type: String }) manifestpath: string = "manifest.json";
-  @property({ type: String }) iconpath: string;
-  @property({ type: Object }) manifestdata: ManifestData;
+  @property({ type: String }) iconpath: string = "";
+  @property({ type: Object }) manifestdata: ManifestData = {
+    name: "",
+    short_name: "",
+    description: "",
+    icons: [],
+    screenshots: [],
+    features: []
+  };
 
   @property({ type: Boolean }) openmodal: boolean = false;
-  @property({ type: Boolean }) showopen: boolean;
+  @property({ type: Boolean }) showopen: boolean = false;
   @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
   @property({ type: Boolean }) installed: boolean;
   @property({ type: Boolean }) hasprompt: boolean = false;
-  @property({ type: Boolean }) usecustom: boolean;
+  @property({ type: Boolean }) usecustom: boolean = false;
   @property({ type: Array }) relatedApps: any[] = [];
 
   @property({ type: String }) explainer: string =
@@ -597,7 +604,7 @@ export class pwainstall extends LitElement {
       navigator.userAgent.includes("iPhone") ||
       navigator.userAgent.includes("iPad") ||
       (navigator.userAgent.includes("Macintosh") &&
-        navigator.maxTouchPoints &&
+        typeof navigator.maxTouchPoints === "number" &&
         navigator.maxTouchPoints > 2);
 
     this.installed = false;
@@ -630,7 +637,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  handleInstallPromptEvent(event): void {
+  handleInstallPromptEvent(event: Event): void {
     this.deferredprompt = event;
 
     this.hasprompt = true;
@@ -640,7 +647,7 @@ export class pwainstall extends LitElement {
 
   // Check that the manifest has our 3 required properties
   // If not console an error to the user and return
-  checkManifest(manifestData): void {
+  checkManifest(manifestData: ManifestData): void {
     if (!manifestData.icons || !manifestData.icons[0]) {
       console.error("Your web manifest must have atleast one icon listed");
       return;
@@ -657,7 +664,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  async getManifestData(): Promise<ManifestData> {
+  async getManifestData(): Promise<ManifestData | null> {
     try {
       const response = await fetch(this.manifestpath);
       const data = await response.json();
@@ -670,8 +677,9 @@ export class pwainstall extends LitElement {
         return data;
       }
     } catch (err) {
-      return null;
     }
+
+    return null;
   }
 
   scrollToLeft(): void {
@@ -750,12 +758,10 @@ export class pwainstall extends LitElement {
 
         let event = new CustomEvent("hide");
         this.dispatchEvent(event);
-
-        return false;
       }
-    } else {
-      // handle else case
     }
+
+    return false;
   }
 
   public getInstalledStatus(): boolean {
