@@ -23,7 +23,6 @@ export class pwainstall extends LitElement {
   };
 
   @property({ type: Boolean }) openmodal: boolean = false;
-  @property({ type: Boolean }) showopen: boolean = false;
   @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
   @property({ type: Boolean }) installed: boolean;
