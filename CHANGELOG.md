@@ -14,6 +14,7 @@
 
 **Merged pull requests:**
 
+- fix\(\): improve automated release [\#464](https://github.com/pwa-builder/pwa-install/pull/464) ([jgw96](https://github.com/jgw96))
 - build\(deps-dev\): bump @open-wc/testing-helpers from 1.8.9 to 1.8.12 [\#462](https://github.com/pwa-builder/pwa-install/pull/462) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing from 2.5.24 to 2.5.32 [\#461](https://github.com/pwa-builder/pwa-install/pull/461) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - Strict Mode friendly, examples, start of types [\#460](https://github.com/pwa-builder/pwa-install/pull/460) ([lee-leonardo](https://github.com/lee-leonardo))
