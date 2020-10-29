@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Get version from package.json
         uses: nyaayaya/package-version@v1
+        with:
+          path: package.json
         
         
       - name: Create Release
