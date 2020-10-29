@@ -728,6 +728,9 @@ export class pwainstall extends LitElement implements PWAInstall {
 
     let event = new CustomEvent("show");
     this.dispatchEvent(event);
+    this.updateComplete.then(() => {
+      (this.shadowRoot?.querySelector("#closeButton") as HTMLElement)?.focus()
+    });
   }
 
   public closePrompt(): void {
@@ -808,6 +811,10 @@ export class pwainstall extends LitElement implements PWAInstall {
 
       resolve();
     });
+  }
+
+  focusOut() {
+    console.log("focus out");
   }
 
   render() {
