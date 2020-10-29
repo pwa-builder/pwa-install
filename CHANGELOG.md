@@ -2,7 +2,25 @@
 
 ## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
 
-[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.4...HEAD)
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.7...HEAD)
+
+**Security fixes:**
+
+- build\(deps\): \[security\] bump node-fetch from 2.6.0 to 2.6.1 [\#463](https://github.com/pwa-builder/pwa-install/pull/463) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+
+**Closed issues:**
+
+- \[Question\] Lack of docs [\#455](https://github.com/pwa-builder/pwa-install/issues/455)
+
+**Merged pull requests:**
+
+- build\(deps-dev\): bump @open-wc/testing-helpers from 1.8.9 to 1.8.12 [\#462](https://github.com/pwa-builder/pwa-install/pull/462) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/testing from 2.5.24 to 2.5.32 [\#461](https://github.com/pwa-builder/pwa-install/pull/461) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Strict Mode friendly, examples, start of types [\#460](https://github.com/pwa-builder/pwa-install/pull/460) ([lee-leonardo](https://github.com/lee-leonardo))
+
+## [1.6.7](https://github.com/pwa-builder/pwa-install/tree/1.6.7) (2020-10-28)
+
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.4...1.6.7)
 
 **Security fixes:**
 
@@ -10,10 +28,42 @@
 
 **Closed issues:**
 
+- isIOS type [\#457](https://github.com/pwa-builder/pwa-install/issues/457)
+- \[Question\] LICENSE [\#454](https://github.com/pwa-builder/pwa-install/issues/454)
+- \[Question\] npmignore  [\#453](https://github.com/pwa-builder/pwa-install/issues/453)
+- \[Question\] What's the best way to "wait" for the install button to appear? [\#434](https://github.com/pwa-builder/pwa-install/issues/434)
+- PWABuilder build App not obey the Screen Orientation as per the Manifest defined [\#433](https://github.com/pwa-builder/pwa-install/issues/433)
+- Multiple entries from the manifest file are not being processed [\#418](https://github.com/pwa-builder/pwa-install/issues/418)
+- Override Component CSS without Shadow Parts [\#406](https://github.com/pwa-builder/pwa-install/issues/406)
+- Button doesn't show and serviceworker returns 404 [\#385](https://github.com/pwa-builder/pwa-install/issues/385)
 - "Install" not working using pwa-install [\#355](https://github.com/pwa-builder/pwa-install/issues/355)
+- Install button doesnt appear on other browsers except chrome [\#345](https://github.com/pwa-builder/pwa-install/issues/345)
+- Install button not showing on Firefox [\#342](https://github.com/pwa-builder/pwa-install/issues/342)
+- Error 404 pwa-install.js.map [\#293](https://github.com/pwa-builder/pwa-install/issues/293)
+- CSS selector not working [\#247](https://github.com/pwa-builder/pwa-install/issues/247)
+- Screenshot Carousel - Safari Desktop & Mobile [\#177](https://github.com/pwa-builder/pwa-install/issues/177)
+- Support Dark Mode [\#1](https://github.com/pwa-builder/pwa-install/issues/1)
 
 **Merged pull requests:**
 
+- v1.6.7 [\#459](https://github.com/pwa-builder/pwa-install/pull/459) ([jgw96](https://github.com/jgw96))
+- build\(deps-dev\): bump typescript from 4.0.2 to 4.0.5 [\#458](https://github.com/pwa-builder/pwa-install/pull/458) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Pwabuilder issue 824 [\#404](https://github.com/pwa-builder/pwa-install/pull/404) ([lee-leonardo](https://github.com/lee-leonardo))
+- v1.6.6 [\#403](https://github.com/pwa-builder/pwa-install/pull/403) ([jgw96](https://github.com/jgw96))
+- style\(\): button container is darker in dark mode [\#402](https://github.com/pwa-builder/pwa-install/pull/402) ([jgw96](https://github.com/jgw96))
+- Dark Mode [\#401](https://github.com/pwa-builder/pwa-install/pull/401) ([lee-leonardo](https://github.com/lee-leonardo))
+- chore\(\): update packages [\#400](https://github.com/pwa-builder/pwa-install/pull/400) ([jgw96](https://github.com/jgw96))
+- build\(deps-dev\): bump rollup from 2.23.0 to 2.26.5 [\#399](https://github.com/pwa-builder/pwa-install/pull/399) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- v1.6.5 [\#379](https://github.com/pwa-builder/pwa-install/pull/379) ([jgw96](https://github.com/jgw96))
+- Source map [\#378](https://github.com/pwa-builder/pwa-install/pull/378) ([jgw96](https://github.com/jgw96))
+- chore\(\): update packages [\#377](https://github.com/pwa-builder/pwa-install/pull/377) ([jgw96](https://github.com/jgw96))
+- use this contrast ratio color [\#373](https://github.com/pwa-builder/pwa-install/pull/373) ([lee-leonardo](https://github.com/lee-leonardo))
+- chore\(\): update image [\#370](https://github.com/pwa-builder/pwa-install/pull/370) ([jgw96](https://github.com/jgw96))
+- build\(deps-dev\): bump @open-wc/testing-karma from 3.4.7 to 4.0.1 [\#369](https://github.com/pwa-builder/pwa-install/pull/369) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump es-dev-server from 1.56.1 to 1.57.1 [\#368](https://github.com/pwa-builder/pwa-install/pull/368) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump @open-wc/karma-esm from 2.16.17 to 3.0.1 [\#367](https://github.com/pwa-builder/pwa-install/pull/367) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- build\(deps-dev\): bump karma from 5.1.0 to 5.1.1 [\#366](https://github.com/pwa-builder/pwa-install/pull/366) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
+- Pwabuilder issue 861 & 859 [\#364](https://github.com/pwa-builder/pwa-install/pull/364) ([lee-leonardo](https://github.com/lee-leonardo))
 - build\(deps-dev\): bump rollup from 2.22.1 to 2.23.0 [\#360](https://github.com/pwa-builder/pwa-install/pull/360) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump rollup from 2.21.0 to 2.22.1 [\#358](https://github.com/pwa-builder/pwa-install/pull/358) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump typescript from 3.9.5 to 3.9.7 [\#357](https://github.com/pwa-builder/pwa-install/pull/357) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
@@ -60,7 +110,6 @@
 - build\(deps-dev\): bump rollup from 2.3.3 to 2.7.1 [\#254](https://github.com/pwa-builder/pwa-install/pull/254) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-karma from 3.3.11 to 3.3.15 [\#253](https://github.com/pwa-builder/pwa-install/pull/253) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-helpers from 1.7.0 to 1.7.2 [\#249](https://github.com/pwa-builder/pwa-install/pull/249) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
-- Update README.md [\#225](https://github.com/pwa-builder/pwa-install/pull/225) ([richardtaylordawson](https://github.com/richardtaylordawson))
 
 ## [1.6.2](https://github.com/pwa-builder/pwa-install/tree/1.6.2) (2020-04-20)
 
@@ -125,6 +174,7 @@
 
 **Merged pull requests:**
 
+- Update README.md [\#225](https://github.com/pwa-builder/pwa-install/pull/225) ([richardtaylordawson](https://github.com/richardtaylordawson))
 - build\(deps-dev\): bump @open-wc/karma-esm from 2.13.18 to 2.13.20 [\#219](https://github.com/pwa-builder/pwa-install/pull/219) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing-karma from 3.1.54 to 3.3.9 [\#218](https://github.com/pwa-builder/pwa-install/pull/218) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
 - build\(deps-dev\): bump @open-wc/testing from 2.5.6 to 2.5.8 [\#216](https://github.com/pwa-builder/pwa-install/pull/216) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
