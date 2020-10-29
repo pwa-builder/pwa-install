@@ -14,6 +14,7 @@
 
 **Merged pull requests:**
 
+- fix\(\): check out code first [\#466](https://github.com/pwa-builder/pwa-install/pull/466) ([jgw96](https://github.com/jgw96))
 - testing the action [\#465](https://github.com/pwa-builder/pwa-install/pull/465) ([jgw96](https://github.com/jgw96))
 - fix\(\): improve automated release [\#464](https://github.com/pwa-builder/pwa-install/pull/464) ([jgw96](https://github.com/jgw96))
 - build\(deps-dev\): bump @open-wc/testing-helpers from 1.8.9 to 1.8.12 [\#462](https://github.com/pwa-builder/pwa-install/pull/462) ([dependabot-preview[bot]](https://github.com/apps/dependabot-preview))
