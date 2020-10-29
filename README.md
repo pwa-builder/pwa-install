@@ -47,7 +47,7 @@ live demo: https://pwainstall.glitch.me
 
 | Property             | Attribute            | Description                                                                     | Type      | Default                                             |
 | -------------------- | -------------------- | ------------------------------------------------------------------------------- | --------- | --------------------------------------------------- |
-| `showopen`           | `showopen`           | Will always show the install button                                             | `boolean` | `false`                                             |
+| `openmodal`          | `openmodal`          | Controls the opening of the modal via attribute, consider using the function    | `boolean` | `false`                                             |
 | `usecustom`          | `usecustom`          | Hides default button                                                            | `boolean` | `false`                                             |
 | `manifestpath`       | `manifestpath`       | path to your web manifest                                                       | `string`  | `manifest.json`                                     |
 | `explainer`          | `explainer`          | Controls the text of the explainer text just below the titlee of the app header | `string`  | `This app can be installed on`                      |
@@ -65,6 +65,7 @@ live demo: https://pwainstall.glitch.me
 | `closePrompt()` | `Closes the install modal` |
 | `getInstalledStatus()` | `Tell if the PWA is installed or not` |
 
+Interactions with the methods requires a reference to the element itself, if using webcomponents or a library like Lit-Element or Fast-Element, this can be done easily within the  if using the component from the browser
 
 ## Styling
 
@@ -88,4 +89,106 @@ If you need to style this component more comprehensively, you can use [Shadow Pa
 pwa-install::part(openButton) {
   background: grey;
 }
+```
+
+## Advanced Examples
+
+#### Example with Component Reference (Web Components)
+```html
+<template id="example">
+  <style></style>
+  ...
+  <pwa-install></pwa-install>
+</template>
+```
+
+```javascript
+customElements.define('example',
+class Example extends HTMLElement {
+  constructor() {
+    super();
+    let template = document.getElementById("example");
+    let templateContent = template.content;
+    this.shadowRoot = this.attachShadow({mode: 'open'})
+      .appendChild(templateContent.cloneNode(true));
+    this.installComponent = document.getElementsByTagName("el-example")[0].shadowRoot.querySelector("pwa-install")
+  }
+})
+```
+
+#### Example with Component Reference (Lit-Element)
+
+```javascript
+// Using module import
+import { LitElement, html, property, query } from 'lit-element';
+import "@pwabuilder/pwainstall";
+
+class Example extends LitElement {
+  @query("installId") componentRef: HTMLElement
+
+  render() {
+    return html`
+      <body>
+        <pwa-install id="installId"></pwa-install>
+      </body>
+    `
+  }
+
+  interactionWithComponent() {
+    // See the methods section
+    this.componentRef.getInstalledStatus();
+  }
+}
+```
+
+#### Example with Component Reference (Fast-Element)
+
+```javascript
+const template = html`
+  <pwa-install ref('installComponent')></pwa-install>
+`
+
+@customElement({ ... })
+class Example extends FASTElement {
+  installComponent: HTMLElement & Interface;
+
+  interactionWithComponent() {
+    this.installComponent.getInstalledStatus();
+  }
+}
+
+```
+
+### Example of grabbing from the dom
+```html
+<head>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"
+  ></script>
+</head>
+<body>
+  <pwa-install id="installComponent"></pwa-install>
+  <script async defer>
+    const ref = document.getElementById("installComponent);
+    red.getInstalledStatus();
+  </script>
+</body>
+```
+
+### Example of programmatically creating the element
+```html
+<head>
+  <script
+    type="module"
+    src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwainstall"
+  ></script>
+</head>
+<body>
+  <script async defer>
+    var installComponent = document.createElement('pwa-install');
+    document.body.appendChild(installComponent);
+    installComponent.getInstalledStatus();
+  </script>
+</body>
 ```

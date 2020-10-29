@@ -1,5 +1,25 @@
 import { LitElement, html, customElement, property, css } from "lit-element";
 
+export interface PWAInstallAttributes {
+  openmodal?: boolean;
+  usecustom?: boolean;
+  manifestpath?: string;
+  explainer?: string;
+  featuresheader?: string;
+  descriptionheader?: string;
+  installbuttontext?: string;
+  cancelbuttontext?: string;
+  iosinstallinfotext?: string;
+}
+
+export interface PWAInstallMethods {
+  openPrompt(): void
+  closePrompt(): void
+  getInstalledStatus(): boolean
+}
+
+export type PWAInstall = PWAInstallAttributes & PWAInstallMethods;
+
 interface ManifestData {
   name: string;
   short_name: string;
@@ -10,18 +30,24 @@ interface ManifestData {
 }
 
 @customElement("pwa-install")
-export class pwainstall extends LitElement {
+export class pwainstall extends LitElement implements PWAInstall {
   @property({ type: String }) manifestpath: string = "manifest.json";
-  @property({ type: String }) iconpath: string;
-  @property({ type: Object }) manifestdata: ManifestData;
+  @property({ type: String }) iconpath: string = "";
+  @property({ type: Object }) manifestdata: ManifestData = {
+    name: "",
+    short_name: "",
+    description: "",
+    icons: [],
+    screenshots: [],
+    features: []
+  };
 
   @property({ type: Boolean }) openmodal: boolean = false;
-  @property({ type: Boolean }) showopen: boolean;
   @property({ type: Boolean }) isSupportingBrowser: boolean;
   @property({ type: Boolean }) isIOS: boolean;
   @property({ type: Boolean }) installed: boolean;
   @property({ type: Boolean }) hasprompt: boolean = false;
-  @property({ type: Boolean }) usecustom: boolean;
+  @property({ type: Boolean }) usecustom: boolean = false;
   @property({ type: Array }) relatedApps: any[] = [];
 
   @property({ type: String }) explainer: string =
@@ -597,7 +623,7 @@ export class pwainstall extends LitElement {
       navigator.userAgent.includes("iPhone") ||
       navigator.userAgent.includes("iPad") ||
       (navigator.userAgent.includes("Macintosh") &&
-        navigator.maxTouchPoints &&
+        typeof navigator.maxTouchPoints === "number" &&
         navigator.maxTouchPoints > 2);
 
     this.installed = false;
@@ -630,7 +656,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  handleInstallPromptEvent(event): void {
+  handleInstallPromptEvent(event: Event): void {
     this.deferredprompt = event;
 
     this.hasprompt = true;
@@ -640,7 +666,7 @@ export class pwainstall extends LitElement {
 
   // Check that the manifest has our 3 required properties
   // If not console an error to the user and return
-  checkManifest(manifestData): void {
+  checkManifest(manifestData: ManifestData): void {
     if (!manifestData.icons || !manifestData.icons[0]) {
       console.error("Your web manifest must have atleast one icon listed");
       return;
@@ -657,7 +683,7 @@ export class pwainstall extends LitElement {
     }
   }
 
-  async getManifestData(): Promise<ManifestData> {
+  async getManifestData(): Promise<ManifestData | null> {
     try {
       const response = await fetch(this.manifestpath);
       const data = await response.json();
@@ -670,14 +696,15 @@ export class pwainstall extends LitElement {
         return data;
       }
     } catch (err) {
-      return null;
     }
+
+    return null;
   }
 
   scrollToLeft(): void {
-    const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+    const screenshotsDiv = this.shadowRoot?.querySelector("#screenshots");
     // screenshotsDiv.scrollBy(-10, 0);
-    screenshotsDiv.scrollBy({
+    screenshotsDiv?.scrollBy({
       // left: -15,
       left: -screenshotsDiv.clientWidth,
       top: 0,
@@ -686,9 +713,9 @@ export class pwainstall extends LitElement {
   }
 
   scrollToRight(): void {
-    const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+    const screenshotsDiv = this.shadowRoot?.querySelector("#screenshots");
     // screenshotsDiv.scrollBy(10, 0);
-    screenshotsDiv.scrollBy({
+    screenshotsDiv?.scrollBy({
       // left: 15,
       left: screenshotsDiv.clientWidth,
       top: 0,
@@ -701,6 +728,9 @@ export class pwainstall extends LitElement {
 
     let event = new CustomEvent("show");
     this.dispatchEvent(event);
+    this.updateComplete.then(() => {
+      (this.shadowRoot?.querySelector("#closeButton") as HTMLElement)?.focus()
+    });
   }
 
   public closePrompt(): void {
@@ -750,12 +780,10 @@ export class pwainstall extends LitElement {
 
         let event = new CustomEvent("hide");
         this.dispatchEvent(event);
-
-        return false;
       }
-    } else {
-      // handle else case
     }
+
+    return false;
   }
 
   public getInstalledStatus(): boolean {
@@ -785,6 +813,10 @@ export class pwainstall extends LitElement {
     });
   }
 
+  focusOut() {
+    console.log("focus out");
+  }
+
   render() {
     return html`
       ${("standalone" in navigator &&
@@ -804,7 +836,7 @@ export class pwainstall extends LitElement {
         : null}
       ${this.openmodal === true
         ? html`
-          <div id="installModalWrapper">
+          <dialog id="installModalWrapper">
           ${
             this.openmodal
               ? html`<div
@@ -929,7 +961,7 @@ export class pwainstall extends LitElement {
                 </button>`
           }
         </div>
-          </div>`
+        </dialog>`
             : html`<p id="iosText">${this.iosinstallinfotext}</p>`
         }
         `
