@@ -111,7 +111,7 @@ class Example extends HTMLElement {
     let templateContent = template.content;
     this.shadowRoot = this.attachShadow({mode: 'open'})
       .appendChild(templateContent.cloneNode(true));
-    this.installComponent = document.getElementsByTagName("el-example")[0].shadowRoot.querySelector("pwa-install")
+    this.installComponent = document.getElementsByTagName("el-example")[0].shadowRoot.querySelector("pwa-install");
   }
 })
 ```
@@ -150,7 +150,12 @@ const template = html`
 
 @customElement({ ... })
 class Example extends FASTElement {
-  installComponent: HTMLElement & Interface;
+  @observable installComponent: PWAInstall | null;
+
+  @volatile
+  get installComponent() {
+    return this.shadowRoot.querySelector("pwa-install");
+  }
 
   interactionWithComponent() {
     this.installComponent.getInstalledStatus();
