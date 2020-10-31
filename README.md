@@ -99,7 +99,7 @@ pwa-install::part(openButton) {
 ```typescript
 
 import "@pwabuilder/pwainstall"; // module import, allows for use in templates.
-import { PWAInstall } from "@pwabuilder/pwainstall"; // imports only the definitions, you cannot import the component directly
+import PWAInstall from "@pwabuilder/pwainstall"; // imports only the definitions, you cannot import the component directly
 
 class YourClass extends RenderLib {
   ...
