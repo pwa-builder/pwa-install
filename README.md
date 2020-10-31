@@ -95,6 +95,7 @@ pwa-install::part(openButton) {
 ## Advanced Examples
 
 #### Usage with typescript
+
 ```typescript
 
 import "@pwabuilder/pwainstall"; // module import, allows for use in templates.
@@ -175,7 +176,7 @@ const template = html`
 
 @customElement({ ... })
 class Example extends FASTElement {
-  @observable installComponent: PWAInstall | null;
+  @observable installComponent: PWAInstall | undefined;
 
   @volatile
   get installComponent() {
