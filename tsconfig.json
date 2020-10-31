@@ -11,16 +11,16 @@
     "target": "es2017",
     "outDir": "build",
     "declaration": true,
+    "declarationDir": "dist/",
     "esModuleInterop": true,
     "sourceMap": false,
     "rootDir": "src",
     "strict": true
   },
-
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "src"
+    "src", "index.d.ts"
   ]
 }
