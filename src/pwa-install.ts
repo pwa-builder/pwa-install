@@ -1,24 +1,5 @@
+/// <reference path="../index.d.ts" />
 import { LitElement, html, customElement, property, css } from "lit-element";
-
-export interface PWAInstallAttributes {
-  openmodal?: boolean;
-  usecustom?: boolean;
-  manifestpath?: string;
-  explainer?: string;
-  featuresheader?: string;
-  descriptionheader?: string;
-  installbuttontext?: string;
-  cancelbuttontext?: string;
-  iosinstallinfotext?: string;
-}
-
-export interface PWAInstallMethods {
-  openPrompt(): void
-  closePrompt(): void
-  getInstalledStatus(): boolean
-}
-
-export type PWAInstall = PWAInstallAttributes & PWAInstallMethods;
 
 interface ManifestData {
   name: string;
@@ -30,7 +11,7 @@ interface ManifestData {
 }
 
 @customElement("pwa-install")
-export class pwainstall extends LitElement implements PWAInstall {
+export class pwainstall extends LitElement implements PWAInstall.Interface {
   @property({ type: String }) manifestpath: string = "manifest.json";
   @property({ type: String }) iconpath: string = "";
   @property({ type: Object }) manifestdata: ManifestData = {
