@@ -9,8 +9,18 @@ let pwainstall = class pwainstall extends LitElement {
     constructor() {
         super();
         this.manifestpath = "manifest.json";
+        this.iconpath = "";
+        this.manifestdata = {
+            name: "",
+            short_name: "",
+            description: "",
+            icons: [],
+            screenshots: [],
+            features: [],
+        };
         this.openmodal = false;
         this.hasprompt = false;
+        this.usecustom = false;
         this.relatedApps = [];
         this.explainer = "This app can be installed on your PC or mobile device.  This will allow this web app to look and behave like any other installed app.  You will find it in your app lists and be able to pin it to your home screen, start menus or task bars.  This installed web app will also be able to safely interact with other apps and your operating system. ";
         this.featuresheader = "Key Features";
@@ -28,7 +38,7 @@ let pwainstall = class pwainstall extends LitElement {
             navigator.userAgent.includes("iPhone") ||
                 navigator.userAgent.includes("iPad") ||
                 (navigator.userAgent.includes("Macintosh") &&
-                    navigator.maxTouchPoints &&
+                    typeof navigator.maxTouchPoints === "number" &&
                     navigator.maxTouchPoints > 2);
         this.installed = false;
         // grab an install event
@@ -628,14 +638,14 @@ let pwainstall = class pwainstall extends LitElement {
                 return data;
             }
         }
-        catch (err) {
-            return null;
-        }
+        catch (err) { }
+        return null;
     }
     scrollToLeft() {
-        const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+        var _a;
+        const screenshotsDiv = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector("#screenshots");
         // screenshotsDiv.scrollBy(-10, 0);
-        screenshotsDiv.scrollBy({
+        screenshotsDiv === null || screenshotsDiv === void 0 ? void 0 : screenshotsDiv.scrollBy({
             // left: -15,
             left: -screenshotsDiv.clientWidth,
             top: 0,
@@ -643,9 +653,10 @@ let pwainstall = class pwainstall extends LitElement {
         });
     }
     scrollToRight() {
-        const screenshotsDiv = this.shadowRoot.querySelector("#screenshots");
+        var _a;
+        const screenshotsDiv = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector("#screenshots");
         // screenshotsDiv.scrollBy(10, 0);
-        screenshotsDiv.scrollBy({
+        screenshotsDiv === null || screenshotsDiv === void 0 ? void 0 : screenshotsDiv.scrollBy({
             // left: 15,
             left: screenshotsDiv.clientWidth,
             top: 0,
@@ -656,6 +667,10 @@ let pwainstall = class pwainstall extends LitElement {
         this.openmodal = true;
         let event = new CustomEvent("show");
         this.dispatchEvent(event);
+        this.updateComplete.then(() => {
+            var _a, _b;
+            (_b = (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector("#closeButton")) === null || _b === void 0 ? void 0 : _b.focus();
+        });
     }
     closePrompt() {
         this.openmodal = false;
@@ -691,12 +706,9 @@ let pwainstall = class pwainstall extends LitElement {
                 this.installed = true;
                 let event = new CustomEvent("hide");
                 this.dispatchEvent(event);
-                return false;
             }
         }
-        else {
-            // handle else case
-        }
+        return false;
     }
     getInstalledStatus() {
         // cast to any because the typescript navigator object
@@ -722,6 +734,9 @@ let pwainstall = class pwainstall extends LitElement {
             resolve();
         });
     }
+    focusOut() {
+        console.log("focus out");
+    }
     render() {
         return html `
       ${("standalone" in navigator &&
@@ -734,46 +749,64 @@ let pwainstall = class pwainstall extends LitElement {
             id="openButton"
             @click="${() => this.openPrompt()}"
           >
-            <slot>
-              ${this.installbuttontext}
-            </slot>
+            <slot> ${this.installbuttontext} </slot>
           </button>`
             : null}
       ${this.openmodal === true
             ? html `
-          <div id="installModalWrapper">
-          ${this.openmodal
+            <dialog id="installModalWrapper">
+              ${this.openmodal
                 ? html `<div
-                  id="background"
-                  @click="${() => this.cancel()}"
-                ></div>`
+                    id="background"
+                    @click="${() => this.cancel()}"
+                  ></div>`
                 : null}
-          <div id="installModal" part="installModal">
-          <div id="headerContainer">
-          <div id="logoContainer">
-            <img src="${this.iconpath ? this.iconpath : this.manifestdata.icons[0].src}" alt="App Logo"/>
+              <div id="installModal" part="installModal">
+                <div id="headerContainer">
+                  <div id="logoContainer">
+                    <img
+                      src="${this.iconpath
+                ? this.iconpath
+                : this.manifestdata.icons[0].src}"
+                      alt="App Logo"
+                    />
 
-            <div id="installTitle">
-              <h1>${this.manifestdata.short_name || this.manifestdata.name}</h1>
+                    <div id="installTitle">
+                      <h1>
+                        ${this.manifestdata.short_name ||
+                this.manifestdata.name}
+                      </h1>
 
-              <p id="desc">
-                ${this.explainer}
-              </p>
-            </div>
-          </div>
+                      <p id="desc">${this.explainer}</p>
+                    </div>
+                  </div>
 
-          <button id="closeButton" @click="${() => this.cancel()}" aria-label="Close">
-            <svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path opacity="0.33" fill-rule="evenodd" clip-rule="evenodd" d="M1.11932 0.357981C1.59693 -0.119327 2.37129 -0.119327 2.8489 0.357981L11.7681 9.27152L20.6873 0.357981C21.165 -0.119327 21.9393 -0.119327 22.4169 0.357981C22.8945 0.835288 22.8945 1.60916 22.4169 2.08646L13.4977 11L22.4169 19.9135C22.8945 20.3908 22.8945 21.1647 22.4169 21.642C21.9393 22.1193 21.165 22.1193 20.6873 21.642L11.7681 12.7285L2.8489 21.642C2.37129 22.1193 1.59693 22.1193 1.11932 21.642C0.641705 21.1647 0.641705 20.3908 1.11932 19.9135L10.0385 11L1.11932 2.08646C0.641705 1.60916 0.641705 0.835288 1.11932 0.357981Z" fill="#60656D"/>
-            </svg>
-          </button>
-        </div>
+                  <button
+                    id="closeButton"
+                    @click="${() => this.cancel()}"
+                    aria-label="Close"
+                  >
+                    <svg
+                      width="23"
+                      height="22"
+                      viewBox="0 0 23 22"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        opacity="0.33"
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M1.11932 0.357981C1.59693 -0.119327 2.37129 -0.119327 2.8489 0.357981L11.7681 9.27152L20.6873 0.357981C21.165 -0.119327 21.9393 -0.119327 22.4169 0.357981C22.8945 0.835288 22.8945 1.60916 22.4169 2.08646L13.4977 11L22.4169 19.9135C22.8945 20.3908 22.8945 21.1647 22.4169 21.642C21.9393 22.1193 21.165 22.1193 20.6873 21.642L11.7681 12.7285L2.8489 21.642C2.37129 22.1193 1.59693 22.1193 1.11932 21.642C0.641705 21.1647 0.641705 20.3908 1.11932 19.9135L10.0385 11L1.11932 2.08646C0.641705 1.60916 0.641705 0.835288 1.11932 0.357981Z"
+                        fill="#60656D"
+                      />
+                    </svg>
+                  </button>
+                </div>
 
-        <div id="contentContainer">
-
-        <div id="featuresScreenDiv">
-
-          ${this.manifestdata.features
+                <div id="contentContainer">
+                  <div id="featuresScreenDiv">
+                    ${this.manifestdata.features
                 ? html `<div id="keyFeatures">
             <h3>${this.featuresheader}</h3>
             <ul>
@@ -786,57 +819,61 @@ let pwainstall = class pwainstall extends LitElement {
           </div>
           </div>`
                 : null}
-
-          ${this.manifestdata.screenshots
+                    ${this.manifestdata.screenshots
                 ? html `
-                  <div id="screenshotsContainer">
-                    <button
-                      @click="${() => this.scrollToLeft()}"
-                      aria-label="previous image"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                      >
-                        <path
-                          d="M401.4 224h-214l83-79.4c11.9-12.5 11.9-32.7 0-45.2s-31.2-12.5-43.2 0L89 233.4c-6 5.8-9 13.7-9 22.4v.4c0 8.7 3 16.6 9 22.4l138.1 134c12 12.5 31.3 12.5 43.2 0 11.9-12.5 11.9-32.7 0-45.2l-83-79.4h214c16.9 0 30.6-14.3 30.6-32 .1-18-13.6-32-30.5-32z"
-                        />
-                      </svg>
-                    </button>
-                    <section id="screenshots">
-                      ${this.manifestdata.screenshots.map((screen) => {
+                          <div id="screenshotsContainer">
+                            <button
+                              @click="${() => this.scrollToLeft()}"
+                              aria-label="previous image"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 512 512"
+                              >
+                                <path
+                                  d="M401.4 224h-214l83-79.4c11.9-12.5 11.9-32.7 0-45.2s-31.2-12.5-43.2 0L89 233.4c-6 5.8-9 13.7-9 22.4v.4c0 8.7 3 16.6 9 22.4l138.1 134c12 12.5 31.3 12.5 43.2 0 11.9-12.5 11.9-32.7 0-45.2l-83-79.4h214c16.9 0 30.6-14.3 30.6-32 .1-18-13.6-32-30.5-32z"
+                                />
+                              </svg>
+                            </button>
+                            <section id="screenshots">
+                              ${this.manifestdata.screenshots.map((screen) => {
                     return html `
-                          <div>
-                            <img alt="App Screenshot" src="${screen.src}" />
-                          </div>
-                        `;
+                                  <div>
+                                    <img
+                                      alt="App Screenshot"
+                                      src="${screen.src}"
+                                    />
+                                  </div>
+                                `;
                 })}
-                    </section>
-                    <button
-                      @click="${() => this.scrollToRight()}"
-                      aria-label="next image"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                      >
-                        <path
-                          d="M284.9 412.6l138.1-134c6-5.8 9-13.7 9-22.4v-.4c0-8.7-3-16.6-9-22.4l-138.1-134c-12-12.5-31.3-12.5-43.2 0-11.9 12.5-11.9 32.7 0 45.2l83 79.4h-214c-17 0-30.7 14.3-30.7 32 0 18 13.7 32 30.6 32h214l-83 79.4c-11.9 12.5-11.9 32.7 0 45.2 12 12.5 31.3 12.5 43.3 0z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                `
+                            </section>
+                            <button
+                              @click="${() => this.scrollToRight()}"
+                              aria-label="next image"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 512 512"
+                              >
+                                <path
+                                  d="M284.9 412.6l138.1-134c6-5.8 9-13.7 9-22.4v-.4c0-8.7-3-16.6-9-22.4l-138.1-134c-12-12.5-31.3-12.5-43.2 0-11.9 12.5-11.9 32.7 0 45.2l83 79.4h-214c-17 0-30.7 14.3-30.7 32 0 18 13.7 32 30.6 32h214l-83 79.4c-11.9 12.5-11.9 32.7 0 45.2 12 12.5 31.3 12.5 43.3 0z"
+                                />
+                              </svg>
+                            </button>
+                          </div>
+                        `
                 : null}
-          </div>
+                  </div>
 
-          <div id="descriptionWrapper">
-            <h3>${this.descriptionheader}</h3>
-            <p id="manifest-description">${this.manifestdata.description}</p>
-          </div>
-        </div>
+                  <div id="descriptionWrapper">
+                    <h3>${this.descriptionheader}</h3>
+                    <p id="manifest-description">
+                      ${this.manifestdata.description}
+                    </p>
+                  </div>
+                </div>
 
-        ${!this.isIOS
+                ${!this.isIOS
                 ? html `<div id="buttonsContainer">
           ${this.deferredprompt
                     ? html `<button
@@ -852,9 +889,11 @@ let pwainstall = class pwainstall extends LitElement {
                   ${this.cancelbuttontext}
                 </button>`}
         </div>
-          </div>`
+        </dialog>`
                 : html `<p id="iosText">${this.iosinstallinfotext}</p>`}
-        `
+              </div>
+            </dialog>
+          `
             : null}
     `;
     }
@@ -871,9 +910,6 @@ __decorate([
 __decorate([
     property({ type: Boolean })
 ], pwainstall.prototype, "openmodal", void 0);
-__decorate([
-    property({ type: Boolean })
-], pwainstall.prototype, "showopen", void 0);
 __decorate([
     property({ type: Boolean })
 ], pwainstall.prototype, "isSupportingBrowser", void 0);
