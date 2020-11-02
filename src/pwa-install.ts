@@ -1,4 +1,3 @@
-/// <reference path="../index.d.ts" />
 import { LitElement, html, customElement, property, css } from "lit-element";
 
 interface ManifestData {
@@ -11,7 +10,7 @@ interface ManifestData {
 }
 
 @customElement("pwa-install")
-export class pwainstall extends LitElement implements PWAInstall.Interface {
+export class pwainstall extends LitElement {
   @property({ type: String }) manifestpath: string = "manifest.json";
   @property({ type: String }) iconpath: string = "";
   @property({ type: Object }) manifestdata: ManifestData = {

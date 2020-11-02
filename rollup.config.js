@@ -3,7 +3,6 @@ import resolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import strip from '@rollup/plugin-strip';
-import typescript from "rollup-plugin-typescript2";
 
 export default {
   input: ['build/pwa-install.js'],
@@ -18,9 +17,6 @@ export default {
     terser(),
     strip({
       functions: ['console.log']
-    }),
-    typescript({
-      useTsconfigDeclarationDir: true
     })
   ]
 };
