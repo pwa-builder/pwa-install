@@ -11,6 +11,7 @@ _Built with [lit-element](https://lit-element.polymer-project.org/)_
 <img loading="lazy" alt="An image of what the component looks like" src="https://raw.githubusercontent.com/pwa-builder/pwa-install/master/assets/installsnip.png">
 
 ## Supported Browsers
+
 - Edge
 - Chrome
 - Firefox
@@ -38,7 +39,7 @@ There are two ways to use this component. For simple projects or just to get sta
 - Run `npm install @pwabuilder/pwainstall`
 - import with `import '@pwabuilder/pwainstall'`
 
-Then you can use the element `<pwa-install></pwa-install>` anywhere in your template, JSX, html etc. 
+Then you can use the element `<pwa-install></pwa-install>` anywhere in your template, JSX, html etc.
 live demo: https://pwainstall.glitch.me
 
 ## API
@@ -59,13 +60,13 @@ live demo: https://pwainstall.glitch.me
 
 ### Methods
 
-| name            | Description                |
-| --------------- | -------------------------- |
-| `openPrompt()`  | `Opens the install modal`  |
-| `closePrompt()` | `Closes the install modal` |
+| name                   | Description                           |
+| ---------------------- | ------------------------------------- |
+| `openPrompt()`         | `Opens the install modal`             |
+| `closePrompt()`        | `Closes the install modal`            |
 | `getInstalledStatus()` | `Tell if the PWA is installed or not` |
 
-Interactions with the methods requires a reference to the element itself, if using webcomponents or a library like Lit-Element or Fast-Element, this can be done easily within the  if using the component from the browser
+Interactions with the methods requires a reference to the element itself, if using webcomponents or a library like Lit-Element or Fast-Element, this can be done easily within the if using the component from the browser
 
 ## Styling
 
@@ -93,7 +94,26 @@ pwa-install::part(openButton) {
 
 ## Advanced Examples
 
+#### Usage with typescript
+
+```typescript
+
+import "@pwabuilder/pwainstall"; // module import, allows for use in templates.
+
+class YourClass extends RenderLib {
+  ...
+
+  get installComponent(): PWAInstall {
+    return this.shadowRoot?.querySelector("pwa-install");
+  }
+
+  ...
+}
+
+```
+
 #### Example with Component Reference (Web Components)
+
 ```html
 <template id="example">
   <style></style>
@@ -103,35 +123,40 @@ pwa-install::part(openButton) {
 ```
 
 ```javascript
-customElements.define('example',
-class Example extends HTMLElement {
-  constructor() {
-    super();
-    let template = document.getElementById("example");
-    let templateContent = template.content;
-    this.shadowRoot = this.attachShadow({mode: 'open'})
-      .appendChild(templateContent.cloneNode(true));
-    this.installComponent = document.getElementsByTagName("el-example")[0].shadowRoot.querySelector("pwa-install")
+customElements.define(
+  "example",
+  class Example extends HTMLElement {
+    constructor() {
+      super();
+      let template = document.getElementById("example");
+      let templateContent = template.content;
+      this.shadowRoot = this.attachShadow({ mode: "open" }).appendChild(
+        templateContent.cloneNode(true)
+      );
+      this.installComponent = document
+        .getElementsByTagName("el-example")[0]
+        .shadowRoot.querySelector("pwa-install");
+    }
   }
-})
+);
 ```
 
 #### Example with Component Reference (Lit-Element)
 
 ```javascript
 // Using module import
-import { LitElement, html, property, query } from 'lit-element';
+import { LitElement, html, property, query } from "lit-element";
 import "@pwabuilder/pwainstall";
 
 class Example extends LitElement {
-  @query("installId") componentRef: HTMLElement
+  @query("installId") componentRef: HTMLElement;
 
   render() {
     return html`
       <body>
         <pwa-install id="installId"></pwa-install>
       </body>
-    `
+    `;
   }
 
   interactionWithComponent() {
@@ -150,7 +175,12 @@ const template = html`
 
 @customElement({ ... })
 class Example extends FASTElement {
-  installComponent: HTMLElement & Interface;
+  @observable installComponent: PWAInstall | undefined;
+
+  @volatile
+  get installComponent() {
+    return this.shadowRoot.querySelector("pwa-install");
+  }
 
   interactionWithComponent() {
     this.installComponent.getInstalledStatus();
@@ -160,6 +190,7 @@ class Example extends FASTElement {
 ```
 
 ### Example of grabbing from the dom
+
 ```html
 <head>
   <script
@@ -177,6 +208,7 @@ class Example extends FASTElement {
 ```
 
 ### Example of programmatically creating the element
+
 ```html
 <head>
   <script
@@ -186,7 +218,7 @@ class Example extends FASTElement {
 </head>
 <body>
   <script async defer>
-    var installComponent = document.createElement('pwa-install');
+    var installComponent = document.createElement("pwa-install");
     document.body.appendChild(installComponent);
     installComponent.getInstalledStatus();
   </script>

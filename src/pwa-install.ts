@@ -13,9 +13,9 @@ export interface PWAInstallAttributes {
 }
 
 export interface PWAInstallMethods {
-  openPrompt(): void
-  closePrompt(): void
-  getInstalledStatus(): boolean
+  openPrompt(): void;
+  closePrompt(): void;
+  getInstalledStatus(): boolean;
 }
 
 export type PWAInstall = PWAInstallAttributes & PWAInstallMethods;
