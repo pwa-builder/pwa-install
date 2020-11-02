@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased](https://github.com/pwa-builder/pwa-install/tree/HEAD)
+## [1.6.8](https://github.com/pwa-builder/pwa-install/tree/1.6.8) (2020-11-02)
 
-[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.7...HEAD)
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.7...1.6.8)
 
 **Security fixes:**
 
@@ -14,6 +14,7 @@
 
 **Merged pull requests:**
 
+- Install update [\#467](https://github.com/pwa-builder/pwa-install/pull/467) ([lee-leonardo](https://github.com/lee-leonardo))
 - fix\(\): check out code first [\#466](https://github.com/pwa-builder/pwa-install/pull/466) ([jgw96](https://github.com/jgw96))
 - testing the action [\#465](https://github.com/pwa-builder/pwa-install/pull/465) ([jgw96](https://github.com/jgw96))
 - fix\(\): improve automated release [\#464](https://github.com/pwa-builder/pwa-install/pull/464) ([jgw96](https://github.com/jgw96))
