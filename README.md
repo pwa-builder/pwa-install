@@ -103,7 +103,7 @@ import "@pwabuilder/pwainstall"; // module import, allows for use in templates.
 class YourClass extends RenderLib {
   ...
 
-  get installComponent(): PWAInstall {
+  get installComponent(): PWAInstallComponent {
     return this.shadowRoot?.querySelector("pwa-install");
   }
 
@@ -175,7 +175,7 @@ const template = html`
 
 @customElement({ ... })
 class Example extends FASTElement {
-  @observable installComponent: PWAInstall | undefined;
+  @observable installComponent: PWAInstallComponent | undefined;
 
   @volatile
   get installComponent() {
