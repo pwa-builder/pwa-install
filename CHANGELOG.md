@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.6.9](https://github.com/pwa-builder/pwa-install/tree/1.6.9) (2020-11-05)
+
+[Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.8...1.6.9)
+
+**Closed issues:**
+
+- Improve focus styling [\#104](https://github.com/pwa-builder/pwa-install/issues/104)
+- Use a \<dialog\> element for div\#installModal? [\#5](https://github.com/pwa-builder/pwa-install/issues/5)
+
+**Merged pull requests:**
+
+- pwa-install type declaration files [\#470](https://github.com/pwa-builder/pwa-install/pull/470) ([lee-leonardo](https://github.com/lee-leonardo))
+
 ## [1.6.8](https://github.com/pwa-builder/pwa-install/tree/1.6.8) (2020-11-02)
 
 [Full Changelog](https://github.com/pwa-builder/pwa-install/compare/1.6.7...1.6.8)
