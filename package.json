@@ -28,7 +28,7 @@
     "@rollup/plugin-strip": "^2.0.0",
     "concurrently": "^5.3.0",
     "deepmerge": "^4.2.2",
-    "es-dev-server": "^1.57.3",
+    "es-dev-server": "^2.0.1",
     "karma": "^5.1.1",
     "karma-threshold-reporter": "^0.1.15",
     "rollup": "^2.26.5",
