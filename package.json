@@ -21,7 +21,7 @@
     "lit-element": "^2.4.0"
   },
   "devDependencies": {
-    "@open-wc/karma-esm": "^3.0.4",
+    "@open-wc/karma-esm": "^4.0.0",
     "@open-wc/testing": "^2.5.24",
     "@open-wc/testing-helpers": "^1.8.9",
     "@open-wc/testing-karma": "^4.0.4",
