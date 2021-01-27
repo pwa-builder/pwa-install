@@ -51,7 +51,7 @@ live demo: https://pwainstall.glitch.me
 | `openmodal`          | `openmodal`          | Controls the opening of the modal via attribute, consider using the function    | `boolean` | `false`                                             |
 | `usecustom`          | `usecustom`          | Hides default button                                                            | `boolean` | `false`                                             |
 | `manifestpath`       | `manifestpath`       | path to your web manifest                                                       | `string`  | `manifest.json`                                     |
-| `explainer`          | `explainer`          | Controls the text of the explainer text just below the titlee of the app header | `string`  | `This app can be installed on`                      |
+| `explainer`          | `explainer`          | Controls the text of the explainer text just below the title of the app header  | `string`  | `This app can be installed on`                      |
 | `featuresheader`     | `featuresheader`     | Controls the text of the features header                                        | `string`  | `Key Features`                                      |
 | `descriptionheader`  | `descriptionheader`  | Controls the text of the description header                                     | `string`  | `Description`                                       |
 | `installbuttontext`  | `installbuttontext`  | Controls the text of the install button                                         | `string`  | `Install`                                           |
