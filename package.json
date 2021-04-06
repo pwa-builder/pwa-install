@@ -26,7 +26,7 @@
     "@open-wc/testing-helpers": "^1.8.9",
     "@open-wc/testing-karma": "^4.0.4",
     "@rollup/plugin-strip": "^2.0.0",
-    "concurrently": "^5.3.0",
+    "concurrently": "^6.0.1",
     "deepmerge": "^4.2.2",
     "es-dev-server": "^1.57.3",
     "karma": "^5.1.1",
