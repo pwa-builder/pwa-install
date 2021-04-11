@@ -201,8 +201,8 @@ class Example extends FASTElement {
 <body>
   <pwa-install id="installComponent"></pwa-install>
   <script async defer>
-    const ref = document.getElementById("installComponent);
-    red.getInstalledStatus();
+    const ref = document.getElementById("installComponent");
+    ref.getInstalledStatus();
   </script>
 </body>
 ```
