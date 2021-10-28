@@ -5,6 +5,10 @@
   "main": "dist/pwa-install.js",
   "module": "dist/pwa-install.js",
   "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pwa-builder/pwa-install.git"
+  },
   "scripts": {
     "test": "./node_modules/.bin/karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
