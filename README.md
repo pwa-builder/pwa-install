@@ -1,3 +1,5 @@
+# The code for this component has moved to the main PWABuilder monorepo and this repository has been archived. Please visit our [monorepo for the latest source](https://github.com/pwa-builder/pwabuilder).
+
 # pwa-install
 
 ![CI](https://github.com/pwa-builder/pwa-install/workflows/CI/badge.svg)
