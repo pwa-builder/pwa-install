@@ -40,5 +40,13 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.0",
     "typescript": "^4.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwa-builder/pwa-install.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pwa-builder/pwa-install/issues"
+  },
+  "homepage": "https://github.com/pwa-builder/pwa-install#readme"
 }
